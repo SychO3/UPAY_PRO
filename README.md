@@ -2,6 +2,13 @@
 
 一个基于 Go 语言开发的现代化加密货币支付网关系统，支持多种数字货币支付，提供完整的订单管理和自动化支付验证功能。
 
+本项目基于原 EPUSDT 项目进行第二次重写，添加了新的功能，支持了新的支付方式，并且优化了代码结构，提高了性能。
+
+原项目地址：https://github.com/assimon/epusdt
+首次二开项目地址：https://github.com/wangegou/UPAY
+
+感谢！ 原作者 assimon，因为 epusdt 项目，我才发现 go 这个语言，才会去学习 go 开发。
+
 ## 🚀 项目特性
 
 - **多币种支持**: 支持 USDT-TRC20、TRX、USDT-Polygon 等主流数字货币
