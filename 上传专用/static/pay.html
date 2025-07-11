@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>USDT支付</title>
+    <title>{{.Currency}}支付页面</title>
     <style>
       * {
         margin: 0;
@@ -481,10 +481,7 @@
       <div class="card">
         <div class="header">
           <div class="logo">
-            <img
-              src="data:image/svg+xml,%3Csvg width='28' height='28' viewBox='0 0 28 28' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='14' cy='14' r='14' fill='%2326A17B'/%3E%3Cpath d='M14 6V22C18.4183 22 22 18.4183 22 14C22 9.58172 18.4183 6 14 6Z' fill='white'/%3E%3C/svg%3E"
-              alt="USDT"
-            />
+            <img src="{{.Logo}}" alt="{{.Currency}}" />
             <span>{{.Currency}}</span>
           </div>
         </div>
@@ -684,7 +681,7 @@
       }
 
       function clock() {
-        const timeout = new Date({{.ExpirationTime}} * 1000); // 将时间戳转换为毫秒
+        const timeout = new Date({{.ExpirationTime}}); // 数据库现在存储毫秒时间戳
         if (isNaN(timeout)) {
           showToast('无效的过期时间');
           return;
