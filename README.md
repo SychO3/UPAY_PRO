@@ -49,7 +49,7 @@
 
 异次元发卡： 参考 [ 异次元发卡插件对接文档](plugins/异次元/异次元发卡对接文档.md)
 
-v2boardpro ： 参考 [ v2boardpro 插件对接文档](plugins/v2boardpro/v2boardpro插件对接文档.md)
+v2boardpro ： 参考 [ v2boardpro 插件对接文档](plugins/v2boardpro/v2boardpro对接文档.md)
 
 #### 反馈与建议
 
