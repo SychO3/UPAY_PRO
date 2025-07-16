@@ -31,7 +31,7 @@
 
 下载编译后的文件直接启动即可
 
-视频教程：https://www.youtube.com/watch?v=gR43V3aFhk0
+视频教程：https://www.bilibili.com/video/BV1Csu4zWEVg/
 
 反向代理端口设置http://127.0.0.1:8090
 
