@@ -31,7 +31,9 @@
 
 下载编译后的文件直接启动即可
 
-视频教程：https://www.bilibili.com/video/BV1Csu4zWEVg/
+B 站视频教程：https://www.bilibili.com/video/BV1Csu4zWEVg/
+
+YouTube：https://youtu.be/FlxRrurpg88
 
 反向代理端口设置http://127.0.0.1:8090
 
