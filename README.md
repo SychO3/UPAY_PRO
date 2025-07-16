@@ -49,7 +49,7 @@
 
 异次元发卡： 参考 [ 异次元发卡插件对接文档](plugins/异次元/异次元发卡对接文档.md)
 
-v2boardpro ： 参考 [ v2boardpro 插件对接文档](plugins/v2boardpro)
+v2boardpro 和 Xboard： 参考 [ v2boardpro 插件对接文档](plugins/v2boardpro)
 
 易支付：参考 [ 易支付插件对接文档](plugins/易支付)
 
