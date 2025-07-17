@@ -138,6 +138,7 @@ const ( // 定义常量
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		mylog.Logger.Info("进入中间件")
+
 		// 获取请求体
 		var requestParams dto.RequestParams
 
