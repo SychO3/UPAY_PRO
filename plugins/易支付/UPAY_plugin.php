@@ -35,7 +35,7 @@ class UPAY_plugin {
                 'type' => 'input',
                 'note' => '输入UPAY的API Token',
             ],
-            'currency' => [ // 支付币种
+            'appid' => [ // 支付币种
                 'name' => '支付币种',
                 'type' => 'select',
                 'options' => [
@@ -60,8 +60,8 @@ class UPAY_plugin {
         global $channel;
         
         // 如果用户选择了币种，返回该币种
-        if (isset($channel['currency']) && !empty($channel['currency'])) {
-            return [$channel['currency']];
+        if (isset($channel['appid']) && !empty($channel['appid'])) {
+            return [$channel['appid']];
         }
         
         // 默认返回所有支持的币种
