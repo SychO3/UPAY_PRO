@@ -6,7 +6,7 @@
 
 ## 基础信息
 
-- **基础 URL**: `http://localhost:8080` (可通过系统设置配置)
+- **基础 URL**: `http://localhost:8090` (可通过系统设置配置)
 - **Content-Type**: `application/json`
 - **签名算法**: MD5
 
@@ -30,7 +30,7 @@
 
 ```
 原始参数：
-type=USDT
+type=USDT-TRC20
 amount=100.00
 notify_url=https://example.com/notify
 order_id=ORDER123
@@ -61,7 +61,7 @@ Content-Type: application/json
 
 ```json
 {
-  "type": "USDT",
+  "type": "USDT-TRC20",
   "order_id": "ORDER123456",
   "amount": 100.0,
   "notify_url": "https://example.com/notify",
@@ -73,7 +73,7 @@ Content-Type: application/json
 **参数说明**:
 | 参数名 | 类型 | 必填 | 说明 |
 |--------|------|------|------|
-| type | string | 是 | 货币类型，如：USDT、BTC 等 |
+| type | string | 是 | USDT-TRC20、TRX、 USDT-Polygon 等 |
 | order_id | string | 是 | 商户订单号，唯一标识 |
 | amount | float64 | 是 | 订单金额，最小 0.01 |
 | notify_url | string | 是 | 异步通知地址，必须是有效 URL |
@@ -116,173 +116,123 @@ Content-Type: application/json
 - `换算后的支付金额低于最小支付金额0.01`: 金额过小
 - `经过100次最大递增次数，仍然没有合适的金额，请稍后再试`: 系统繁忙
 
-### 2. 获取支付页面
+## 异步回调
 
-**接口地址**: `GET /pay/checkout-counter/{trade_id}`
+当订单支付成功后，系统会向创建订单时提供的 `notify_url` 发送异步回调通知。
 
-**请求参数**:
-| 参数名 | 类型 | 必填 | 说明 |
-|--------|------|------|------|
-| trade_id | string | 是 | 系统生成的交易 ID |
+### 回调机制
 
-**响应**: 返回支付页面 HTML
+- **触发时机**: 订单支付成功后自动触发
+- **请求方式**: POST
+- **Content-Type**: application/json
+- **重试机制**: 最多重试 5 次，每次间隔 5 秒
+- **成功标识**: 商户接口返回 "ok" 或 "success" 字符串
 
-**说明**: 该接口返回支付页面，包含二维码、倒计时、支付金额等信息
-
-### 3. 查询订单状态
-
-**接口地址**: `GET /pay/check-status/{trade_id}`
-
-**请求参数**:
-| 参数名 | 类型 | 必填 | 说明 |
-|--------|------|------|------|
-| trade_id | string | 是 | 系统生成的交易 ID |
-
-**成功响应**:
+### 回调参数
 
 ```json
 {
-  "data": {
-    "status": 1
-  },
-  "message": "1-待支付，2-支付成功，3-支付过期"
+  "trade_id": "202507081930299469",
+  "order_id": "ORDER123456789",
+  "amount": 10.0,
+  "actual_amount": 1.0001,
+  "token": "TQn9Y2khEsLJW1ChVWFMSMeRDow5oNDMnt",
+  "block_transaction_id": "abc123def456...",
+  "status": 2,
+  "signature": "calculated_md5_signature"
 }
 ```
 
-**状态说明**:
+### 参数说明
 
-- `1`: 待支付
-- `2`: 支付成功
-- `3`: 支付过期
+| 参数名               | 类型    | 说明                             |
+| -------------------- | ------- | -------------------------------- |
+| trade_id             | string  | 系统生成的交易订单号             |
+| order_id             | string  | 商户订单号                       |
+| amount               | float64 | 原始订单金额                     |
+| actual_amount        | float64 | 实际支付金额（含递增金额）       |
+| token                | string  | 收款钱包地址                     |
+| block_transaction_id | string  | 区块链交易哈希，如果为空则为 "0" |
+| status               | int     | 订单状态：2=支付成功             |
+| signature            | string  | 签名，用于验证回调数据完整性     |
 
-**错误响应**:
+### 签名验证
 
-```json
-{
-  "message": "获取订单信息失败"
+回调签名生成规则：
+
+1. 将回调参数按以下格式拼接（排除 signature 字段）：
+
+   ```
+   actual_amount={actual_amount}&amount={amount}&block_transaction_id={block_transaction_id}&order_id={order_id}&status={status}&token={token}&trade_id={trade_id}
+   ```
+
+2. 参数按字母顺序排序
+
+3. 拼接密钥：`{sorted_params}&{secret_key}`
+
+4. 对拼接后的字符串进行 MD5 加密
+
+### 商户响应要求
+
+商户接收到回调后，需要：
+
+1. **验证签名**: 使用相同算法验证 signature 参数
+2. **验证订单**: 检查 order_id 和 amount 是否匹配
+3. **返回成功**: 返回字符串 "ok" 或 "success"
+4. **幂等处理**: 避免重复处理同一订单
+
+### 示例代码（PHP）
+
+按你自己系统需求写，不要照搬。
+
+```php
+<?php
+// 接收回调数据
+$input = file_get_contents('php://input');
+$data = json_decode($input, true);
+
+// 验证签名
+function verifySignature($data, $secretKey) {
+    $params = [
+        'actual_amount=' . $data['actual_amount'],
+        'amount=' . $data['amount'],
+        'block_transaction_id=' . $data['block_transaction_id'],
+        'order_id=' . $data['order_id'],
+        'status=' . $data['status'],
+        'token=' . $data['token'],
+        'trade_id=' . $data['trade_id']
+    ];
+
+    sort($params);
+    $signString = implode('&', $params) . $secretKey;
+    return md5($signString) === $data['signature'];
 }
+
+// 处理回调
+if (verifySignature($data, 'your_secret_key')) {
+    // 验证订单并更新状态
+    if ($data['status'] == 2) {
+        // 订单支付成功，更新本地订单状态
+        updateOrderStatus($data['order_id'], 'paid');
+    }
+
+    // 返回成功响应
+    echo 'ok';
+} else {
+    // 签名验证失败
+    http_response_code(400);
+    echo 'signature error';
+}
+?>
 ```
 
-## 管理后台 API
+### 注意事项
 
-### 1. 手动完成订单
-
-**接口地址**: `POST /admin/api/manual-complete-order`
-
-**权限**: 需要管理员登录
-
-**请求参数**:
-
-```json
-{
-  "order_id": "ORDER123456"
-}
-```
-
-**成功响应**:
-
-```json
-{
-  "code": 0,
-  "message": "订单已手动完成"
-}
-```
-
-### 2. 获取订单列表
-
-**接口地址**: `GET /admin/api/orders`
-
-**权限**: 需要管理员登录
-
-**请求参数**:
-| 参数名 | 类型 | 必填 | 说明 |
-|--------|------|------|------|
-| page | int | 否 | 页码，默认 1 |
-| limit | int | 否 | 每页数量，默认 10，最大 100 |
-| search | string | 否 | 搜索关键词，支持订单号和交易 ID |
-
-**成功响应**:
-
-```json
-{
-  "code": 0,
-  "msg": "success",
-  "data": {
-    "orders": [
-      {
-        "ID": 1,
-        "TradeId": "202312101234561234",
-        "OrderId": "ORDER123456",
-        "Amount": 100.0,
-        "ActualAmount": 100.01,
-        "Type": "USDT",
-        "Token": "TRX_WALLET_ADDRESS",
-        "Status": 1,
-        "CreatedAt": "2023-12-10T12:34:56Z",
-        "UpdatedAt": "2023-12-10T12:34:56Z"
-      }
-    ],
-    "total": 100,
-    "page": 1,
-    "limit": 10
-  }
-}
-```
-
-## 数据结构
-
-### Orders 订单结构
-
-```go
-type Orders struct {
-    gorm.Model
-    TradeId            string  // UPAY订单号
-    OrderId            string  // 客户交易id
-    BlockTransactionId string  // 区块id
-    Amount             float64 // 订单金额，保留2位小数
-    ActualAmount       float64 // 订单实际需要支付的金额，保留4位小数
-    Type               string  // 钱包类型
-    Token              string  // 所属钱包地址
-    Status             int     // 1：等待支付，2：支付成功，3：已过期
-    NotifyUrl          string  // 异步回调地址
-    RedirectUrl        string  // 支付完成跳转地址
-    StartTime          int64   // 开始时间
-    ExpirationTime     int64   // 过期时间
-}
-```
-
-### RequestParams 请求参数结构
-
-```go
-type RequestParams struct {
-    Type        string  `json:"type" validate:"required"`
-    OrderID     string  `json:"order_id" validate:"required"`
-    Amount      float64 `json:"amount" validate:"required,gte=0.01"`
-    NotifyURL   string  `json:"notify_url" validate:"required,url"`
-    RedirectURL string  `json:"redirect_url" validate:"required,url"`
-    Signature   string  `json:"signature" validate:"required"`
-}
-```
-
-### Response 响应结构
-
-```go
-type Response struct {
-    StatusCode int
-    Message    string
-    Data       Data
-}
-
-type Data struct {
-    TradeID        string
-    OrderID        string
-    Amount         float64
-    ActualAmount   float64
-    Token          string
-    ExpirationTime int64
-    PaymentURL     string
-}
-```
+1. **安全性**: 必须验证回调签名，防止恶意请求
+2. **幂等性**: 同一订单可能收到多次回调，需要做幂等处理
+3. **超时设置**: 回调接口响应时间不应超过 10 秒
+4. **状态检查**: 只有 status=2 时表示支付成功
+5. **网络异常**: 如果回调失败，系统会自动重试最多 5 次
 
 ## 常量定义
 
