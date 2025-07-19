@@ -14,6 +14,7 @@ import (
 	"sort"
 	"strings"
 	"time"
+	"upay_pro/BSC_USD"
 	"upay_pro/USDT_Polygon"
 	"upay_pro/db/rdb"
 	"upay_pro/db/sdb"
@@ -163,6 +164,10 @@ func (j UsdtCheckJob) Run() {
 			}
 		case "USDT-Polygon":
 			if USDT_Polygon.Start(v) {
+				go ProcessCallback(v)
+			}
+		case "USDT-BSC":
+			if BSC_USD.Start(v) {
 				go ProcessCallback(v)
 			}
 		default:

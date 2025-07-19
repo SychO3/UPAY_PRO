@@ -1,9 +1,11 @@
 package web
 
 import (
+	"bytes"
 	"context"
 	"crypto/md5"
 	"fmt"
+	"io"
 	"math"
 	"math/rand"
 	"net/http"
@@ -138,6 +140,20 @@ const ( // 定义常量
 func AuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		mylog.Logger.Info("进入中间件")
+
+		// 读取原始请求体内容
+		body, err := io.ReadAll(c.Request.Body)
+		if err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": "读取请求体失败"})
+			mylog.Logger.Error("读取请求体失败", zap.Error(err))
+			c.Abort()
+			return
+		}
+		// 打印原始请求体
+		mylog.Logger.Info("原始请求体", zap.String("body", string(body)))
+
+		// 重新设置请求体，以便后续绑定使用
+		c.Request.Body = io.NopCloser(bytes.NewBuffer(body))
 
 		// 获取请求体
 		var requestParams dto.RequestParams
@@ -419,6 +435,8 @@ func CheckoutCounter(c *gin.Context) {
 		viewModel.Logo = "https://static.tronscan.org/production/logo/usdtlogo.png"
 	case "USDT-Polygon":
 		viewModel.Logo = "https://st.softgamings.com/uploads/USDT-Polygon.png"
+	case "USDT-BSC":
+		viewModel.Logo = "https://bscscan.com/token/images/busdt_32.png"
 	default:
 		viewModel.Logo = "https://static.tronscan.org/production/logo/usdtlogo.png"
 	}
