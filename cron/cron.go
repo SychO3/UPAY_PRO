@@ -186,7 +186,9 @@ func (j UsdtCheckJob) Run() {
 func Start() {
 
 	// 如果上一次任务还在运行，新的任务执行时间到了，则等待上一次任务完成后再执行
-	c := cron.New(cron.WithChain(cron.DelayIfStillRunning(cron.DefaultLogger)))
+	// c := cron.New(cron.WithChain(cron.DelayIfStillRunning(cron.DefaultLogger)))
+	// 如果上一次任务还在运行，新的任务执行时间到了，则跳过本次执行
+	c := cron.New(cron.WithChain(cron.SkipIfStillRunning(cron.DefaultLogger)))
 
 	// 每 5 秒执行一次 UsdtRateJob 任务
 	_, err := c.AddJob("@every 5s", UsdtCheckJob{})
@@ -319,6 +321,11 @@ func unlockWalletAddressAndAmount(v sdb.Orders) {
 
 // 异步回调
 func ProcessCallback(v sdb.Orders) {
+	// 先判断一下异步回调状态，如果已经回调了，则不处理
+	if v.CallBackConfirm == sdb.CallBackConfirmOk {
+		return
+	}
+
 	// 解锁钱包地址和金额|| 异步进程解锁钱包地址和金额
 	go unlockWalletAddressAndAmount(v)
 
@@ -356,7 +363,9 @@ func ProcessCallback(v sdb.Orders) {
 			} else {
 				mylog.Logger.Info("已经确认订单支付成功，并把回调CallBackConfirm设置为1")
 			}
-
+			// 异步回调成功后发送telegram、Bark通知|| 异步进程发送通知
+			go notification.Bark_Start(v)
+			go notification.StartTelegram(v)
 			break
 		}
 		if err != nil {
@@ -371,15 +380,12 @@ func ProcessCallback(v sdb.Orders) {
 			if err := sdb.DB.Model(&v).UpdateColumn("callback_num", gorm.Expr("callback_num + ?", 1)).Error; err != nil {
 				mylog.Logger.Info("更新回调失败次数失败", zap.Any("err", err))
 			}
-			// 延迟1秒
+			// 延迟5秒
 			time.Sleep(5 * time.Second)
 
 			// 进入下次循环
 			// continue
 		}
 	}
-	// 发送Bark通知|| 异步进程发送通知
-	go notification.Bark_Start(v)
-	go notification.StartTelegram(v)
 
 }
