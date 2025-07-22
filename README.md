@@ -11,7 +11,7 @@
 
 ## 🚀 项目特性
 
-- **多币种支持**: 支持 USDT-TRC20、TRX、USDT-Polygon、USDT-BSC 等主流数字货币
+- **多币种支持**: 支持 USDT-TRC20、TRX、USDT-Polygon、USDT-BSC 、USDT-ERC20 等主流数字货币
 - **自动化验证**: 实时监控区块链交易，自动验证支付状态
 - **管理后台**: 完整的 Web 管理界面，支持订单管理、用户管理、钱包配置
 - **API 接口**: RESTful API 设计，易于集成到现有系统
@@ -98,6 +98,8 @@ GET /pay/checkout-counter/{trade_id}
 - **USDT-TRC20**: 基于 TRON 网络的 USDT
 - **TRX**: TRON 原生代币
 - **USDT-Polygon**: 基于 Polygon 网络的 USDT
+- **USDT-BSC**: 基于 BSC 网络的 USDT
+- **USDT-ERC20**: 基于 ERC20 网络的 USDT
 
 ### 钱包配置
 
