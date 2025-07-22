@@ -12,6 +12,7 @@ import (
 	"sort"
 	"strconv"
 	"strings"
+	"sync"
 	"time"
 	"upay_pro/db/rdb"
 	"upay_pro/db/sdb"
@@ -35,7 +36,8 @@ type MyClaims struct {
 }
 
 var (
-	secret = sdb.GenerateSecretKey(256)
+	secret  = sdb.GenerateSecretKey(256)
+	sync_mu sync.Mutex
 )
 
 func GenerateToken() string {
@@ -256,12 +258,22 @@ func AuthMiddleware() gin.HandlerFunc {
 	}
 }
 func CreateTransaction(c *gin.Context) {
+	// 创建锁
+	sync_mu.Lock()
+	// 本函数最后释放锁
+	defer sync_mu.Unlock()
+
 	var requestParams dto.RequestParams
 	if err := c.ShouldBindBodyWith(&requestParams, binding.JSON); err != nil {
 		c.JSON(400, gin.H{"code": 1, "message": "参数错误"})
 		return
 	}
 
+	// 在进行根据钱包类型查询钱包地址之前，先判断一下传入的订单号是否已经在数据中存在，如果存在，则返回错误，提示订单号已存在，重新创建订单
+	if len(sdb.GetOrderByOrderId(requestParams.OrderID)) > 0 {
+		c.JSON(400, gin.H{"code": 1, "message": "订单号已存在,请勿重复提交"})
+		return
+	}
 	// 添加调试日志
 	mylog.Logger.Info("CreateTransaction - 接收到的Type参数", zap.String("type", requestParams.Type))
 

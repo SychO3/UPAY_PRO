@@ -242,3 +242,9 @@ func GetWalletAddress(type_ string) []WalletAddress {
 func (n WalletAddress) String() string {
 	return fmt.Sprintf("%s:%v", n.Token, n.Rate)
 }
+
+func GetOrderByOrderId(orderId string) []Orders {
+	var order []Orders
+	DB.Where("order_id = ?", orderId).Find(&order)
+	return order
+}
