@@ -148,7 +148,8 @@ func Start(order sdb.Orders) bool {
 	// 调用API获取数据
 	data, err := fetchBSCUSDTransactions(config)
 	if err != nil {
-		fmt.Printf("查询BSC-USDT交易失败: %v\n", err)
+		// fmt.Printf("查询BSC-USDT交易失败: %v\n", err)
+		mylog.Logger.Error("查询BSC-USDT交易失败", zap.Error(err))
 		return false
 	}
 	if data.Status == "1" && len(data.Result) > 0 {

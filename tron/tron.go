@@ -4,11 +4,14 @@ import (
 	"encoding/json" // 导入 JSON 编码/解码包
 	"fmt"           // 导入 fmt 包用于格式化输出
 	"io"            // 导入 io 包用于读取响应体
-	"log"           // 导入 log 包用于记录日志
+	// 导入 log 包用于记录日志
 	"math"
 	"net/http" // 导入 http 包用于发起 HTTP 请求
 	"net/url"  // 导入 url 包用于构建请求的 URL
 	"strconv"
+	"upay_pro/mylog"
+
+	"go.uber.org/zap"
 	// 用于处理时间和日期的 Go 语言库
 )
 
@@ -91,21 +94,24 @@ func GetTransactions(toAddress string, startTime int64, endTime int64) TransferD
 	// 发起 GET 请求
 	resp, err := http.Get(finalURL)
 	if err != nil { // 如果请求失败，打印错误并退出
-		log.Fatalf("Error fetching data: %v", err)
+		// log.Fatalf("Error fetching data: %v", err)
+		mylog.Logger.Error("USDT-TRC20 Error fetching data", zap.Any("error", err))
 	}
 	defer resp.Body.Close() // 确保请求结束后关闭响应体
 
 	// 读取响应数据
 	body, err := io.ReadAll(resp.Body)
 	if err != nil { // 如果读取响应失败，打印错误并退出
-		log.Fatalf("Error reading response body: %v", err)
+		// log.Fatalf("Error reading response body: %v", err)
+		mylog.Logger.Error("Error reading response body", zap.Any("error", err))
 	}
 
 	// 解析 JSON 响应到 ApiResponse 结构体
 	var response ApiResponse
 	err = json.Unmarshal(body, &response)
 	if err != nil { // 如果 JSON 解析失败，打印错误并退出
-		log.Fatalf("Error unmarshalling JSON: %v", err)
+		// log.Fatalf("Error unmarshalling JSON: %v", err)
+		mylog.Logger.Error("Error unmarshalling JSON", zap.Any("error", err))
 	}
 
 	// 打印总转账数量
@@ -142,7 +148,8 @@ func formatAmount(quant string) float64 {
 	// 直接将字符串转为 float64 类型
 	amount, err := strconv.ParseFloat(quant, 64)
 	if err != nil {
-		log.Printf("Error parsing amount: %v", err)
+		// log.Printf("Error parsing amount: %v", err)
+		mylog.Logger.Error("Error parsing amount", zap.Any("error", err))
 		return 0 // 如果转换失败，返回 0
 	}
 

@@ -4,12 +4,14 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"math"
 	"net/http"
 	"os"
 	"time"
 	"upay_pro/db/sdb"
+	"upay_pro/mylog"
+
+	"go.uber.org/zap"
 )
 
 // TronClient TRON API客户端
@@ -80,7 +82,8 @@ func Start(order sdb.Orders) bool {
 	// 获取转账记录
 	result, err := client.GetTransfers(address, toAddress, 1, 0)
 	if err != nil {
-		log.Printf("获取TRX转账记录失败: %v", err)
+		// log.Printf("获取TRX转账记录失败: %v", err)
+		mylog.Logger.Error("获取TRX转账记录失败", zap.Error(err))
 		return false
 	}
 
