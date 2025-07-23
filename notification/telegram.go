@@ -90,11 +90,13 @@ func StartTelegram(order sdb.Orders) {
 	message := fmt.Sprintf(
 		"<b>🔔 UPAY_PRO 订单通知</b>\n\n"+
 			"<b>订单号:</b> <code>%s</code>\n"+
+			"<b>币种:</b> %s\n"+
 			"<b>支付金额:</b> %.2f\n"+
 			"<b>支付状态:</b> %s\n"+
 			"<b>区块ID:</b> <code>%s</code>\n"+
 			"<b>回调状态:</b> %s",
 		order.TradeId,
+		order.Type,
 		order.ActualAmount,
 		status,
 		order.BlockTransactionId,
