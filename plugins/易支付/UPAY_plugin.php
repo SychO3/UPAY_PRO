@@ -41,7 +41,9 @@ class UPAY_plugin {
                 'options' => [
                     'USDT-TRC20' => 'USDT-TRC20',
                     'TRX' => 'TRX',
-                    'USDT-Polygon' => 'USDT-Polygon'
+                    'USDT-Polygon' => 'USDT-Polygon',
+                    'USDT-BSC' => 'USDT-BSC',
+                    'USDT-ERC20' => 'USDT-ERC20',
                 ],
                 'note' => '选择支持的支付币种',
             ],
