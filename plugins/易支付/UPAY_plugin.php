@@ -67,7 +67,7 @@ class UPAY_plugin {
         }
         
         // 默认返回所有支持的币种
-        return ['USDT-TRC20', 'TRX', 'USDT-Polygon'];
+        return ['USDT-TRC20', 'TRX', 'USDT-Polygon','USDT-BSC','USDT-ERC20'];
     }
 
     /**
@@ -191,7 +191,7 @@ class UPAY_plugin {
             throw new Exception('支付币种类型不能为空');
         }
         
-        if (!in_array($order['typename'], ['USDT-TRC20', 'TRX', 'USDT-Polygon'])) {
+        if (!in_array($order['typename'], ['USDT-TRC20', 'TRX', 'USDT-Polygon', 'USDT-BSC', 'USDT-ERC20'])) {
             throw new Exception('不支持的币种类型: ' . $order['typename']);
         }
 
