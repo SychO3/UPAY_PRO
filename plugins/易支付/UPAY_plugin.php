@@ -23,7 +23,7 @@ class UPAY_plugin {
         'showname'    => 'UPAY', // 展示名称
         'author'      => 'UPAY', // 作者
         'link'        => 'https://github.com/wangegou/UPAY_PRO', // 官方链接
-        'types'       => ['USDT-TRC20', 'TRX', 'USDT-Polygon'], // 支持的支付类型
+        'types'       => ['USDT-TRC20', 'TRX', 'USDT-Polygon', 'USDT-BSC', 'USDT-ERC20'], // 支持的支付类型
         'inputs' => [ // 插件需要的输入参数
             'appurl' => [ // API 接口地址
                 'name' => 'API接口地址',
