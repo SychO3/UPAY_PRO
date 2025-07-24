@@ -523,6 +523,8 @@ func Start() {
 			c.JSON(200, gin.H{"code": 0, "message": "保存成功"})
 		})
 
+		// 手动补单
+
 		admin.POST("/api/manual-complete-order", func(ctx *gin.Context) {
 			var req struct {
 				OrderID string `json:"order_id" validate:"required"`

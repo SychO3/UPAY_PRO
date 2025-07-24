@@ -69,6 +69,8 @@ func (c *TronClient) GetTransfers(address, toAddress string, limit, start int) (
 }
 
 func Start(order sdb.Orders) bool {
+	mylog.Logger.Info("第一个API开始查询TRX转账记录", zap.String("order_id", order.TradeId))
+
 	// 从环境变量获取API密钥，如果没有则使用默认值
 	apiKey := os.Getenv("TRON_API_KEY")
 	if apiKey == "" {
@@ -88,6 +90,7 @@ func Start(order sdb.Orders) bool {
 	}
 
 	if len(result.Data) == 0 {
+		mylog.Logger.Info("TRX请求API查询返回0条,转账记录不存在", zap.String("order_id", order.TradeId))
 		// 检查是否存在转账记录
 		return false
 	}
@@ -100,11 +103,15 @@ func Start(order sdb.Orders) bool {
 		// 更新数据库订单记录
 		re := sdb.DB.Save(&order)
 		if re.Error == nil {
+			mylog.Logger.Info("TRX更新数据库订单记录成功", zap.String("order_id", order.TradeId))
 			return true
 		}
+		mylog.Logger.Error("TRX更新数据库订单记录失败", zap.Error(re.Error))
+		return false
 		// go cron.ProcessCallback(order)
 
 	}
+	mylog.Logger.Info("已经查询到转账记录，但是不符合要求")
 	return false
 
 }

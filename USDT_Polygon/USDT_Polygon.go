@@ -10,6 +10,9 @@ import (
 	"strconv"
 	"time"
 	"upay_pro/db/sdb"
+	"upay_pro/mylog"
+
+	"go.uber.org/zap"
 )
 
 // POLYGONClient Polygon API客户端
@@ -64,7 +67,8 @@ func Start(order sdb.Orders) bool {
 	polygonClient := NewPOLYGONClient(apiKey)
 	txs, err := polygonClient.GetTransfers(contractAddress, walletAddress)
 	if err != nil {
-		log.Printf("查询USDT交易失败: %v", err)
+		// log.Printf("查询USDT交易失败: %v", err)
+		mylog.Logger.Error("查询USDT-Polygon交易失败", zap.Error(err))
 		return false
 	}
 
