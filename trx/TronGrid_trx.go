@@ -102,6 +102,9 @@ func buildAPIURL(config QueryConfig) string {
 }
 
 func Start2(order sdb.Orders) bool {
+
+	mylog.Logger.Info("第二个TRX_TronGrid开始查询", zap.String("order_id", order.TradeId))
+
 	// 配置API查询参数
 	config := QueryConfig{
 		Account:       order.Token,
@@ -122,11 +125,20 @@ func Start2(order sdb.Orders) bool {
 		Timeout: DefaultTimeout,
 	}
 
-	// 发送GET请求
-	resp, err := client.Get(apiURL)
+	// 创建请求并设置请求头
+	req, err := http.NewRequest("GET", apiURL, nil)
+	if err != nil {
+		mylog.Logger.Error("TRX_TronGrid创建请求失败", zap.Error(err))
+		return false
+	}
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("TRON-PRO-API-KEY", "0232af66-3f6f-42a3-bd90-f184b38fba27")
+
+	// 发送请求
+	resp, err := client.Do(req)
 	if err != nil {
 		// log.Fatalf("请求失败: %v", err)
-		mylog.Logger.Error("TRX_TronGrid请求失败", zap.Error(err))
+		mylog.Logger.Error("TRX_TronGrid发送请求失败", zap.Error(err))
 		return false
 	}
 	defer resp.Body.Close()
@@ -134,7 +146,7 @@ func Start2(order sdb.Orders) bool {
 	// 检查响应状态
 	if resp.StatusCode != http.StatusOK {
 		// log.Fatalf("API请求失败，状态码: %d", resp.StatusCode)
-		mylog.Logger.Error("TRX_TronGrid请求失败", zap.Int("status_code", resp.StatusCode))
+		mylog.Logger.Error("TRX_TronGrid返回状态码不是200", zap.Int("status_code", resp.StatusCode))
 		return false
 	}
 
@@ -163,7 +175,7 @@ func Start2(order sdb.Orders) bool {
 
 		// 检查 API 响应的 Success 字段
 		if tx.Ret[0].ContractRet != "SUCCESS" {
-			mylog.Logger.Error("TRX_TronGrid 交易失败", zap.String("contractRet", tx.Ret[0].ContractRet))
+			mylog.Logger.Error("TRX_TronGrid 没有返回SUCCESS", zap.String("contractRet", tx.Ret[0].ContractRet))
 			return false
 		}
 
@@ -179,11 +191,13 @@ func Start2(order sdb.Orders) bool {
 				// 更新数据库订单记录
 				re := sdb.DB.Save(&order)
 				if re.Error == nil {
+					mylog.Logger.Info("TRX_TronGrid更新数据库订单记录成功", zap.String("order_id", order.TradeId))
 					return true
 				}
 				mylog.Logger.Error("TRX_TronGrid更新数据库订单记录失败", zap.Error(re.Error))
 				return false
 			}
+			mylog.Logger.Info("TRX_TronGrid已经查询到转账记录，但是金额不符合要求")
 			return false
 		}
 		return false

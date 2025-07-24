@@ -5,6 +5,10 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"time"
+	"upay_pro/mylog"
+
+	"go.uber.org/zap"
 )
 
 /* type TransferDetails struct {
@@ -65,9 +69,23 @@ func GetTransactionsGrid(toAddress string, startTime int64, endTime int64) (Tran
 	apiURL := fmt.Sprintf("https://api.trongrid.io/v1/accounts/%s/transactions/trc20?contract_address=%s&limit=%d&only_confirmed=true&min_block_timestamp=%v&max_block_timestamp=%v",
 		toAddress, contractAddress, limit, min_timestamp, max_timestamp)
 
-	// 2. 发送 HTTP GET 请求
-	resp, err := http.Get(apiURL)
+	// 创建HTTP客户端
+	client := &http.Client{
+		Timeout: 30 * time.Second,
+	}
+	// 创建请求并设置请求头
+	req, err := http.NewRequest("GET", apiURL, nil)
 	if err != nil {
+		mylog.Logger.Error("USDT_TronGrid创建请求失败", zap.Error(err))
+		return details, fmt.Errorf("创建请求失败: %w", err)
+	}
+	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("TRON-PRO-API-KEY", "0232af66-3f6f-42a3-bd90-f184b38fba27")
+
+	// 2. 发送 HTTP GET 请求
+	resp, err := client.Do(req)
+	if err != nil {
+		mylog.Logger.Error("USDT_TronGrid发送请求失败", zap.Error(err))
 		return details, fmt.Errorf("请求 API 失败: %w", err)
 	}
 	defer resp.Body.Close()
