@@ -79,8 +79,16 @@ class UPAY_plugin {
 
         // 检查订单支付类型是否在支持的币种中
         if (in_array($order['typename'], self::getSupportedTypes())) {
+            // 获取订单号
+            $trade_no = '';
+            if (isset($order['trade_no'])) {
+                $trade_no = $order['trade_no'];
+            } elseif (defined('TRADE_NO')) {
+                $trade_no = constant('TRADE_NO');
+            }
+            
             // 返回跳转类型的支付 URL
-            return ['type' => 'jump', 'url' => '/pay/UPAY/' . TRADE_NO . '/?sitename=' . $sitename];
+            return ['type' => 'jump', 'url' => '/pay/UPAY/' . $trade_no . '/?sitename=' . $sitename];
         }
     }
 
@@ -133,7 +141,24 @@ class UPAY_plugin {
         error_log('UPAY请求数据: ' . $post);
         
         // 发送 HTTP 请求
-        $response = get_curl($fullUrl, $post, 0, 0, 0, 0, 0, ['Content-Type: application/json']);
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $fullUrl);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+        $response = curl_exec($ch);
+        
+        // 检查curl错误
+        if (curl_error($ch)) {
+            $error = curl_error($ch);
+            curl_close($ch);
+            throw new Exception('HTTP请求失败: ' . $error);
+        }
+        curl_close($ch);
         
         // 检查响应是否为空
         if (empty($response)) {
@@ -195,13 +220,21 @@ class UPAY_plugin {
             throw new Exception('不支持的币种类型: ' . $order['typename']);
         }
 
+        // 获取订单号
+        $trade_no = '';
+        if (isset($order['trade_no'])) {
+            $trade_no = $order['trade_no'];
+        } elseif (defined('TRADE_NO')) {
+            $trade_no = constant('TRADE_NO');
+        }
+        
         // 构造请求参数
         $param = [
-            'order_id' => TRADE_NO, // 订单号
+            'order_id' => $trade_no, // 订单号
             'amount' => floatval($order['realmoney']), // 订单金额
             'type' => $order['typename'], // 支付币种类型
-            'notify_url' => $conf['localurl'] . 'pay/notify/' . TRADE_NO . '/', // 异步通知 URL
-            'redirect_url' => $siteurl . 'pay/return/' . TRADE_NO . '/', // 同步跳转 URL
+            'notify_url' => $conf['localurl'] . 'pay/notify/' . $trade_no . '/', // 异步通知 URL
+            'redirect_url' => $siteurl . 'pay/return/' . $trade_no . '/', // 同步跳转 URL
         ];
 
         // 生成签名
@@ -218,7 +251,10 @@ class UPAY_plugin {
 
         // 处理响应数据
         if (isset($result["status_code"]) && $result["status_code"] == 200) {
-            \lib\Payment::updateOrder(TRADE_NO, $result['data']);
+            // 更新订单信息（如果相关类存在）
+            if (class_exists('\lib\Payment')) {
+                call_user_func(['\lib\Payment', 'updateOrder'], $trade_no, $result['data']);
+            }
             return $result['data']['payment_url'];
         } else {
             $errorMsg = $result["message"] ?? '返回数据解析失败';
@@ -251,6 +287,12 @@ class UPAY_plugin {
         $resultJson = file_get_contents("php://input");
         $resultArr = json_decode($resultJson, true);
 
+        // 检查通知数据是否有效
+        if (empty($resultArr) || !isset($resultArr['signature'])) {
+            error_log('UPAY通知失败: 通知数据格式错误或缺少签名');
+            return ['type' => 'html', 'data' => 'fail: 通知数据格式错误或缺少签名'];
+        }
+
         // 获取签名并移除签名字段
         $Signature = $resultArr["signature"];
         unset($resultArr['signature']);
@@ -261,13 +303,39 @@ class UPAY_plugin {
         // 校验签名是否正确
         if ($sign === $Signature) {
             $out_trade_no = $resultArr['order_id'];
-            if ($out_trade_no == TRADE_NO && $resultArr['status'] == 2) {
-                // 处理回调通知（订单支付成功）
-                processNotify($order, $out_trade_no);
-                return ['type' => 'html', 'data' => 'ok'];
+            // 获取期望的订单号，优先使用$order['trade_no']，其次检查TRADE_NO常量
+            $expected_trade_no = '';
+            if (isset($order['trade_no'])) {
+                $expected_trade_no = $order['trade_no'];
+            } elseif (defined('TRADE_NO')) {
+                $expected_trade_no = constant('TRADE_NO');
             }
+            
+            if ($out_trade_no == $expected_trade_no && $resultArr['status'] == 2) {
+                // 处理回调通知（订单支付成功）
+                if (function_exists('processNotify')) {
+                    call_user_func('processNotify', $order, $out_trade_no);
+                } else {
+                    // 如果processNotify函数不存在，记录日志
+                    error_log('UPAY通知: processNotify函数不存在，订单号: ' . $out_trade_no);
+                }
+                return ['type' => 'html', 'data' => 'ok'];
+            } else {
+                // 订单号不匹配或状态不正确
+                $errorMsg = '';
+                if ($out_trade_no != $expected_trade_no) {
+                    $errorMsg = '订单号不匹配: 期望' . $expected_trade_no . ', 收到' . $out_trade_no;
+                } elseif ($resultArr['status'] != 2) {
+                    $errorMsg = '订单状态不正确: 期望状态2, 收到状态' . $resultArr['status'];
+                }
+                error_log('UPAY通知失败: ' . $errorMsg);
+                return ['type' => 'html', 'data' => 'fail: ' . $errorMsg];
+            }
+        } else {
+            // 签名验证失败
+            error_log('UPAY通知失败: 签名验证失败, 期望签名: ' . $sign . ', 收到签名: ' . $Signature);
+            return ['type' => 'html', 'data' => 'fail: 签名验证失败'];
         }
-        return ['type' => 'html', 'data' => 'fail'];
     }
 
     /**
