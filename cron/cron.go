@@ -162,6 +162,8 @@ func (j UsdtCheckJob) Run() {
 		case "TRX":
 			if trx.Start(v) {
 				go ProcessCallback(v)
+			} else if trx.Start2(v) {
+				go ProcessCallback(v)
 			}
 		case "USDT-Polygon":
 			if USDT_Polygon.Start(v) {
