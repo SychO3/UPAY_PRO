@@ -197,8 +197,8 @@ func Start() {
 	// 如果上一次任务还在运行，新的任务执行时间到了，则跳过本次执行
 	c := cron.New(cron.WithChain(cron.SkipIfStillRunning(cron.DefaultLogger)))
 
-	// 每 5 秒执行一次 UsdtRateJob 任务
-	_, err := c.AddJob("@every 5s", UsdtCheckJob{})
+	// 每 2 秒执行一次 UsdtRateJob 任务
+	_, err := c.AddJob("@every 2s", UsdtCheckJob{})
 	if err != nil {
 		mylog.Logger.Info("未支付订单检测任务添加失败")
 	}
@@ -336,16 +336,25 @@ func ProcessCallback(v sdb.Orders) {
 	// 解锁钱包地址和金额|| 异步进程解锁钱包地址和金额
 	go unlockWalletAddressAndAmount(v)
 
+	// 获取一下最新的订单记录
+	v1 := sdb.GetOrderByOrderId(v.OrderId)
+
+	// 判断一下是否已经支付，没有支付，直接返回，不处理
+	if v1.Status != sdb.StatusPaySuccess {
+		mylog.Logger.Info("订单未支付，不需要异步回调", zap.Any("订单号：%s", v1.TradeId))
+		return
+	}
+
 	// 异步回调
 
 	paymentNotification := dto.PaymentNotification_request{
-		TradeID:            v.TradeId,
-		OrderID:            v.OrderId,
-		Amount:             v.Amount,
-		ActualAmount:       v.ActualAmount,
-		Token:              v.Token,
-		BlockTransactionID: v.BlockTransactionId,
-		Status:             v.Status,
+		TradeID:            v1.TradeId,
+		OrderID:            v1.OrderId,
+		Amount:             v1.Amount,
+		ActualAmount:       v1.ActualAmount,
+		Token:              v1.Token,
+		BlockTransactionID: v1.BlockTransactionId,
+		Status:             v1.Status,
 	}
 	// 这里要判断一下BlockTransactionID的值paymentNotification.BlockTransactionId是否为空，如果为空，就给赋值一个默认值0
 	if paymentNotification.BlockTransactionID == "" {
@@ -359,11 +368,11 @@ func ProcessCallback(v sdb.Orders) {
 	// 使用事务简化回调确认
 
 	for i := 0; i < 5; i++ {
-		ok, err := sendAsyncPost(v.NotifyUrl, paymentNotification)
+		ok, err := sendAsyncPost(v1.NotifyUrl, paymentNotification)
 		if ok == "ok" && err == nil {
 			err = sdb.DB.Transaction(func(tx *gorm.DB) error {
-				v.CallBackConfirm = sdb.CallBackConfirmOk
-				return tx.Save(&v).Error
+				v1.CallBackConfirm = sdb.CallBackConfirmOk
+				return tx.Save(v1).Error
 			})
 			if err != nil {
 				mylog.Logger.Info("更新回调确认状态失败", zap.Any("err", err))
@@ -371,8 +380,8 @@ func ProcessCallback(v sdb.Orders) {
 				mylog.Logger.Info("已经确认订单支付成功，并把回调CallBackConfirm设置为1")
 			}
 			// 异步回调成功后发送telegram、Bark通知|| 异步进程发送通知
-			go notification.Bark_Start(v)
-			go notification.StartTelegram(v)
+			go notification.Bark_Start(v1)
+			go notification.StartTelegram(v1)
 			break
 		}
 		if err != nil {
@@ -384,7 +393,7 @@ func ProcessCallback(v sdb.Orders) {
 			// if err := sdb.DB.Model(&v).UpdateColumn("callback_num", gorm.Expr("callback_num + ?", 1)).Error; err != nil {
 			// 	mylog.Logger.Info("更新回调失败次数失败", zap.Any("err", err))
 			// }
-			if err := sdb.DB.Model(&v).UpdateColumn("callback_num", gorm.Expr("callback_num + ?", 1)).Error; err != nil {
+			if err := sdb.DB.Model(v).UpdateColumn("callback_num", gorm.Expr("callback_num + ?", 1)).Error; err != nil {
 				mylog.Logger.Info("更新回调失败次数失败", zap.Any("err", err))
 			}
 			// 延迟5秒
