@@ -87,10 +87,10 @@ func Start(order sdb.Orders) bool {
 		Action:          "tokentx",                                    // 查询代币交易
 		Address:         order.Token,                                  // 查询的地址
 		ContractAddress: "0xdac17f958d2ee523a2206206994597c13d831ec7", // USDT合约地址
-		APIKey:          "UPCN5AHEA1383NW5DUYZ3REE8V38TSS94N",         // 你的API密钥
-		Page:            1,                                            // 分页参数
-		Offset:          1,                                            // 返回记录数
-		Sort:            "desc",                                       // 排序方式,desc 降序 最新的在最前面,asc 升序 最旧的在最前面
+		APIKey:          sdb.GetApiKey().Etherscan,
+		Page:            1,      // 分页参数
+		Offset:          1,      // 返回记录数
+		Sort:            "desc", // 排序方式,desc 降序 最新的在最前面,asc 升序 最旧的在最前面
 	}
 
 	client := &http.Client{
@@ -126,8 +126,8 @@ func Start(order sdb.Orders) bool {
 		return false
 	}
 
-	if etherscanResp.Message != "ok" || len(etherscanResp.Result) == 0 {
-		mylog.Logger.Error("API返回消息错误")
+	if etherscanResp.Message != "OK" || len(etherscanResp.Result) == 0 {
+		mylog.Logger.Error("API返回消息错误", zap.String("message", etherscanResp.Message), zap.Int("结果切片", len(etherscanResp.Result)))
 		return false
 	}
 

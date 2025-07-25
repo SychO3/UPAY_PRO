@@ -132,7 +132,7 @@ func Start2(order sdb.Orders) bool {
 		return false
 	}
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("TRON-PRO-API-KEY", "0232af66-3f6f-42a3-bd90-f184b38fba27")
+	req.Header.Set("TRON-PRO-API-KEY", sdb.GetApiKey().Trongrid)
 
 	// 发送请求
 	resp, err := client.Do(req)

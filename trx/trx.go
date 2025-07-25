@@ -6,7 +6,6 @@ import (
 	"io"
 	"math"
 	"net/http"
-	"os"
 	"time"
 	"upay_pro/db/sdb"
 	"upay_pro/mylog"
@@ -72,10 +71,7 @@ func Start(order sdb.Orders) bool {
 	mylog.Logger.Info("第一个API开始查询TRX转账记录", zap.String("order_id", order.TradeId))
 
 	// 从环境变量获取API密钥，如果没有则使用默认值
-	apiKey := os.Getenv("TRON_API_KEY")
-	if apiKey == "" {
-		apiKey = "28b6e96a-4630-442e-8f2b-35f80c8b54d6"
-	}
+	apiKey := sdb.GetApiKey().Tronscan
 
 	client := NewTronClient(apiKey)
 	address := order.Token

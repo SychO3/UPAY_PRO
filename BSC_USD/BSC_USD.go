@@ -71,7 +71,7 @@ func NewDefaultConfig() *APIConfig {
 		Action:  "tokentx",
 		// Address:         "0xb52cc871c8f15579d9c10fef36ff95e9da3fde69",
 		ContractAddress: "0x55d398326f99059ff775485246999027b3197955",
-		APIKey:          "UPCN5AHEA1383NW5DUYZ3REE8V38TSS94N",
+		APIKey:          sdb.GetApiKey().Etherscan,
 		Page:            "1",
 		Offset:          "1",
 		Sort:            "desc",

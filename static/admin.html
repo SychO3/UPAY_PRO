@@ -1831,6 +1831,57 @@
                 </button>
               </div>
             </div>
+
+            <!-- API密钥设置 -->
+            <div class="settings-section">
+              <h3 class="settings-section-title">API密钥设置</h3>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="tronscan">Tronscan API Key:</label>
+                  <input
+                    type="text"
+                    id="tronscan"
+                    name="tronscan"
+                    class="form-control"
+                    placeholder="Tronscan API密钥"
+                  />
+                  <small class="form-text">用于查询波场网络交易记录</small>
+                </div>
+                <div class="form-group">
+                  <label for="trongrid">Trongrid API Key:</label>
+                  <input
+                    type="text"
+                    id="trongrid"
+                    name="trongrid"
+                    class="form-control"
+                    placeholder="Trongrid API密钥"
+                  />
+                  <small class="form-text">用于查询波场网络交易记录</small>
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group">
+                  <label for="etherscan">Etherscan API Key:</label>
+                  <input
+                    type="text"
+                    id="etherscan"
+                    name="etherscan"
+                    class="form-control"
+                    placeholder="Etherscan API密钥"
+                  />
+                  <small class="form-text">用于查询以太坊网络交易记录</small>
+                </div>
+              </div>
+              <div class="section-actions">
+                <button
+                  type="button"
+                  class="btn btn-success"
+                  onclick="saveApiKeySettings()"
+                >
+                  <i class="icon-save"></i> 保存API密钥设置
+                </button>
+              </div>
+            </div>
           </div>
         </form>
       </div>
@@ -3161,6 +3212,45 @@
         }
       }
 
+      // 保存API密钥设置
+      async function saveApiKeySettings() {
+        const tronscan = document.getElementById("tronscan").value || "";
+        const trongrid = document.getElementById("trongrid").value || "";
+        const etherscan = document.getElementById("etherscan").value || "";
+
+        const apiKeyData = {
+          tronscan: tronscan,
+          trongrid: trongrid,
+          etherscan: etherscan,
+        };
+
+        try {
+          const response = await fetch("/admin/api/apikeys", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(apiKeyData),
+          });
+
+          const result = await response.json();
+
+          if (result.code === 0) {
+            showToast("API密钥设置保存成功！", "success");
+          } else {
+            // 显示后端返回的具体错误信息
+            showCustomAlert(result.message || "保存失败，请重试", "error");
+          }
+        } catch (error) {
+          console.error("保存API密钥设置失败:", error);
+          if (error.name === "TypeError" && error.message.includes("fetch")) {
+            showCustomAlert("网络连接失败，请检查网络", "error");
+          } else {
+            showCustomAlert("保存失败，请重试！", "error");
+          }
+        }
+      }
+
       // 加载系统设置
       async function loadSettings() {
         try {
@@ -3221,6 +3311,30 @@
           } else {
             showToast("加载系统设置失败，请刷新页面重试", "error");
           }
+        }
+
+        // 加载API密钥设置
+        await loadApiKeySettings();
+      }
+
+      // 加载API密钥设置
+      async function loadApiKeySettings() {
+        try {
+          const response = await fetch("/admin/api/apikeys");
+          const result = await response.json();
+
+          if (result.code === 0) {
+            const apiKeys = result.data;
+            document.getElementById("tronscan").value = apiKeys.Tronscan || "";
+            document.getElementById("trongrid").value = apiKeys.Trongrid || "";
+            document.getElementById("etherscan").value =
+              apiKeys.Etherscan || "";
+          } else {
+            // 显示后端返回的具体错误信息
+            console.log("加载API密钥设置失败:", result.message);
+          }
+        } catch (error) {
+          console.error("加载API密钥设置失败:", error);
         }
       }
 

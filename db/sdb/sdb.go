@@ -95,6 +95,13 @@ type Setting struct {
 	CustomerServiceContact string //客户服务联系方式
 }
 
+type ApiKey struct {
+	gorm.Model
+	Tronscan  string
+	Trongrid  string
+	Etherscan string
+}
+
 func Start() {
 	mylog.Logger.Info("开始初始化数据库")
 	mylog.Logger.Info("开始迁移数据库")
@@ -131,11 +138,12 @@ func Start() {
 	DB.AutoMigrate(&WalletAddress{})
 	// 迁移设置表
 	DB.AutoMigrate(&Setting{})
-
+	//迁移apikey表
+	DB.AutoMigrate(&ApiKey{})
 	// 检查设置表是否为空，如果为空则插入默认设置
 	var settingCount int64
 	DB.Model(&Setting{}).Count(&settingCount)
-
+	// 给设置表设置默认值
 	if settingCount == 0 {
 		mylog.Logger.Info("设置表为空，创建默认设置")
 		result := DB.Create(&Setting{
@@ -159,6 +167,25 @@ func Start() {
 			mylog.Logger.Info("默认设置创建成功")
 		}
 	}
+
+	// 给APIKEY表设置默认值
+	var apikeyCount int64
+	// 检查APIKEY表是否为空，如果为空则插入默认值
+	DB.Model(&ApiKey{}).Count(&apikeyCount)
+	if apikeyCount == 0 {
+		mylog.Logger.Info("APIKEY表为空，创建默认设置")
+		result := DB.Create(&ApiKey{
+			Tronscan:  "28b6e96a-4630-442e-8f2b-35f80c8b54d6",
+			Trongrid:  "0232af66-3f6f-42a3-bd90-f184b38fba27",
+			Etherscan: "UPCN5AHEA1383NW5DUYZ3REE8V38TSS94N",
+		})
+		if result.Error != nil {
+			mylog.Logger.Error("APIKEY表创建默认设置失败", zap.Error(result.Error))
+		} else {
+			mylog.Logger.Info("APIKEY表默认设置创建成功")
+		}
+	}
+
 }
 
 const (
@@ -247,4 +274,10 @@ func GetOrderByOrderId(orderId string) Orders {
 	var order Orders
 	DB.Where("order_id = ?", orderId).First(&order)
 	return order
+}
+
+func GetApiKey() ApiKey {
+	var apikey ApiKey
+	DB.First(&apikey)
+	return apikey
 }

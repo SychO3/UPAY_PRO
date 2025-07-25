@@ -6,6 +6,7 @@ import (
 	"io"
 	"net/http"
 	"time"
+	"upay_pro/db/sdb"
 	"upay_pro/mylog"
 
 	"go.uber.org/zap"
@@ -80,7 +81,7 @@ func GetTransactionsGrid(toAddress string, startTime int64, endTime int64) (Tran
 		return details, fmt.Errorf("创建请求失败: %w", err)
 	}
 	req.Header.Set("Content-Type", "application/json")
-	req.Header.Set("TRON-PRO-API-KEY", "0232af66-3f6f-42a3-bd90-f184b38fba27")
+	req.Header.Set("TRON-PRO-API-KEY", sdb.GetApiKey().Trongrid)
 
 	// 2. 发送 HTTP GET 请求
 	resp, err := client.Do(req)

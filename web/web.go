@@ -258,6 +258,7 @@ func Start() {
 
 		// 添加钱包地址
 		admin.POST("/api/wallets", func(c *gin.Context) {
+			// 传入的币种和钱包地址和汇率和状态
 			var wallet sdb.WalletAddress
 
 			if err := c.ShouldBindJSON(&wallet); err != nil {
@@ -274,6 +275,7 @@ func Start() {
 				c.JSON(400, gin.H{"code": 1, "message": "汇率必须大于0"})
 				return
 			}
+			// 查询数据库中的钱包记录
 			var existingWallet sdb.WalletAddress
 			// 检查输入的币种的汇率是否存在，如果存在验证输入的汇率和数据库中的汇率是否一致，如果能找到，说明已经存在了，返回错误要求为汇率必须输入为一致；
 			if err := sdb.DB.Where("currency = ? ", wallet.Currency).First(&existingWallet).Error; err == nil {
@@ -288,26 +290,38 @@ func Start() {
 				}
 
 			}
-			if wallet.Currency != "USDT-TRC20" && wallet.Currency != "TRX" {
-				if err := sdb.DB.Where("token = ?", wallet.Token).First(&existingWallet).Error; err == nil {
-					c.JSON(400, gin.H{"code": 1, "message": "钱包地址在其他币种中已存在"})
-					return
-				}
 
-			} else {
-				var existingWallets []sdb.WalletAddress
-				if err := sdb.DB.Where("token = ?", wallet.Token).Find(&existingWallets).Error; err != nil {
-					mylog.Logger.Info("添加钱包地址时，查询钱包地址失败", zap.Any("err", err))
-				}
-				mylog.Logger.Info("钱包数量:", zap.Any("existingWallets", len(existingWallets)))
-
-				if len(existingWallets) >= 2 {
-					c.JSON(400, gin.H{"code": 1, "message": "钱包地址数量已经在USDT-TRC20币种和TRX中超过了2个,请更换钱包地址"})
-					return
-				}
-
-				// 如果是USDT-TRC20或者TRX，则检查是否已经存在了该币种的钱包地址记录
+			// 检查是否已经存在了该币种和地址都存在的记录，如果存在，返回错误，提示钱包地址在该币种下已经存在
+			if err := sdb.DB.Where("currency = ? AND token = ?", wallet.Currency, wallet.Token).First(&existingWallet).Error; err == nil {
+				c.JSON(400, gin.H{"code": 1, "message": "钱包地址在当前币种中已存在"})
+				return
 			}
+
+			/*	if wallet.Currency == "USDT-TRC20" || wallet.Currency == "TRX" {
+					var existingWallets []sdb.WalletAddress
+					if err := sdb.DB.Where("token = ?", wallet.Token).Find(&existingWallets).Error; err != nil {
+						mylog.Logger.Info("添加钱包地址时，查询钱包地址失败", zap.Any("err", err))
+					}
+					mylog.Logger.Info("钱包数量:", zap.Any("existingWallets", len(existingWallets)))
+
+					if len(existingWallets) >= 2 {
+						c.JSON(400, gin.H{"code": 1, "message": "钱包地址数量已经在USDT-TRC20币种和TRX中超过了2个,请更换钱包地址"})
+						return
+					}
+
+					// 如果是USDT-TRC20或者TRX，则检查是否已经存在了该币种的钱包地址记录
+				}   else {
+					var existingWallets []sdb.WalletAddress
+					if err := sdb.DB.Where("token = ?", wallet.Token).Find(&existingWallets).Error; err != nil {
+						mylog.Logger.Info("添加钱包地址时，查询钱包地址失败", zap.Any("err", err))
+					}
+					mylog.Logger.Info("钱包数量:", zap.Any("existingWallets", len(existingWallets)))
+
+					if len(existingWallets) >= 3 {
+						c.JSON(400, gin.H{"code": 1, "message": "钱包地址数量已经在USDT-TRC20币种和TRX中超过了3个,请更换钱包地址"})
+						return
+					}
+				} */
 			// 检查钱包地址是否已存在
 
 			// 创建钱包地址
@@ -339,12 +353,12 @@ func Start() {
 				return
 			}
 
-			// 检查钱包地址是否已存在（排除当前记录）
+			/* 	// 检查钱包地址是否已存在（排除当前记录）
 			var existingWallet sdb.WalletAddress
 			if err := sdb.DB.Where("token = ? AND id != ?", wallet.Token, walletId).First(&existingWallet).Error; err == nil {
 				c.JSON(400, gin.H{"code": 1, "message": "钱包地址已存在"})
 				return
-			}
+			} */
 
 			// 更新钱包地址
 			result := sdb.DB.Model(&sdb.WalletAddress{}).Where("id = ?", walletId).Updates(map[string]interface{}{
@@ -524,7 +538,6 @@ func Start() {
 		})
 
 		// 手动补单
-
 		admin.POST("/api/manual-complete-order", func(ctx *gin.Context) {
 			var req struct {
 				OrderID string `json:"order_id" validate:"required"`
@@ -555,6 +568,80 @@ func Start() {
 			// 异步回调
 			go cron.ProcessCallback(order)
 			ctx.JSON(200, gin.H{"code": 0, "message": "订单已手动完成"})
+		})
+
+		// API密钥管理API
+		// 获取API密钥
+		admin.GET("/api/apikeys", func(c *gin.Context) {
+			var apiKey sdb.ApiKey
+			result := sdb.DB.First(&apiKey)
+			if result.Error != nil {
+				c.JSON(500, gin.H{
+					"code": -1,
+					"msg":  "获取API密钥失败",
+				})
+				return
+			}
+			if result.RowsAffected == 0 {
+				c.JSON(500, gin.H{
+					"code": -1,
+					"msg":  "API密钥不存在",
+				})
+				return
+			}
+			c.JSON(http.StatusOK, gin.H{
+				"code": 0,
+				"msg":  "success",
+				"data": apiKey,
+			})
+		})
+
+		// 保存API密钥
+		admin.POST("/api/apikeys", func(c *gin.Context) {
+			var req map[string]interface{}
+			if err := c.ShouldBindJSON(&req); err != nil {
+				c.JSON(400, gin.H{"code": 1, "message": "参数错误"})
+				return
+			}
+
+			// 获取当前API密钥
+			var apiKey sdb.ApiKey
+			result := sdb.DB.First(&apiKey)
+			if result.Error != nil {
+				c.JSON(500, gin.H{"code": 1, "message": "获取当前API密钥失败"})
+				return
+			}
+
+			// 更新字段（只更新传入的字段）
+			updates := make(map[string]interface{})
+
+			// API密钥设置
+			if tronscan, ok := req["tronscan"]; ok {
+				updates["Tronscan"] = tronscan
+			}
+			if trongrid, ok := req["trongrid"]; ok {
+				updates["Trongrid"] = trongrid
+			}
+			if etherscan, ok := req["etherscan"]; ok {
+				updates["Etherscan"] = etherscan
+			}
+
+			// 执行更新（更新获取到的apiKey记录）
+			if len(updates) > 0 {
+				// 更新获取到的apiKey变量对应的记录
+				result := sdb.DB.Model(&apiKey).Updates(updates)
+				if result.Error != nil {
+					c.JSON(500, gin.H{"code": 1, "message": "保存失败"})
+					return
+				}
+				// 检查是否有记录被更新
+				if result.RowsAffected == 0 {
+					c.JSON(500, gin.H{"code": 1, "message": "没有找到要更新的记录"})
+					return
+				}
+			}
+
+			c.JSON(200, gin.H{"code": 0, "message": "保存成功"})
 		})
 
 	}
