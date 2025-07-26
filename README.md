@@ -53,6 +53,12 @@ v2boardpro 和 Xboard： 参考 [ v2boardpro 插件对接文档](plugins/v2board
 
 易支付：参考 [ 易支付插件对接文档](plugins/易支付)
 
+#### APIkey 申请(系统已经自带，高频交易用户请自行申请 APIkey，在后台替换即可)
+
+1. tronscan： https://tronscan.org/
+2. TronGrid： https://www.trongrid.io/
+3. etherscan： https://etherscan.io/
+
 #### 反馈与建议
 
 欢迎反馈问题，请在 GitHub 上提交问题，或者在项目中提交 PR。
