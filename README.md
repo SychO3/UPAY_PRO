@@ -59,6 +59,31 @@ v2boardpro 和 Xboard： 参考 [ v2boardpro 插件对接文档](plugins/v2board
 2. TronGrid： https://www.trongrid.io/
 3. etherscan： https://etherscan.io/
 
+### Docker 傻瓜操作
+
+```bash
+docker run -d \
+  --name upay_pro \
+  -p 8090:8090 \
+  -v upay_logs:/app/logs \
+  --restart always \
+wangergou111/upay:v1.1.1
+```
+
+默认日志挂载路径为：
+
+```
+/var/lib/docker/volumes/upay_logs/\_data
+```
+
+反向代理设置：http://127.0.0.1:8090
+
+#### Docker 高手 拉取镜像，自定义启动参数
+
+```bash
+docker pull wangergou111/upay:v1.1.1
+```
+
 #### 反馈与建议
 
 欢迎反馈问题，请在 GitHub 上提交问题，或者在项目中提交 PR。
