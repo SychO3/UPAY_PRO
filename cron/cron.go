@@ -45,7 +45,7 @@ type UsdtCheckJob struct{}
 
 // ExpiredOrdersJob 处理过期订单的任务结构体
 // 负责定期检查并处理已过期的未支付订单
-type ExpiredOrdersJob struct{}
+/* type ExpiredOrdersJob struct{}
 
 // Run 实现 cron.Job 接口的 Run 方法，处理过期订单
 func (j ExpiredOrdersJob) Run() {
@@ -79,7 +79,7 @@ func (j ExpiredOrdersJob) Run() {
 
 		mylog.Logger.Info("订单已删除", zap.String("trade_id", order.TradeId))
 	}
-}
+} */
 
 // 定义一个异步请求参数的结构体
 
@@ -116,48 +116,10 @@ func (j UsdtCheckJob) Run() {
 		fmt.Printf("订单ID: %s, 正在查询API\n", v.TradeId)
 		switch v.Type {
 		case "USDT-TRC20":
-			{
-				var td tron.TransferDetails
-				var err error
-				// 调用TRON API查询指定时间范围内的转账交易
-				td = tron.GetTransactions(v.Token, v.StartTime, v.ExpirationTime)
-				if td.TransactionID == "" {
-					// 记录第一次查询结果为空
-					mylog.Logger.Info("第一个API未查询到交易记录，尝试第二个API")
-					// 调用第二个API查询指定时间范围内的转账交易
-					td, err = tron.GetTransactionsGrid(v.Token, v.StartTime, v.ExpirationTime)
-					if err != nil {
-						mylog.Logger.Error("第二个API查询失败", zap.Error(err))
-						// 记录第二个API查询失败
-						// 跳过本次循环，进入下次循环，也就是对下一个订单进行处理
-						continue
-					}
-
-				}
-				// 验证转账金额是否匹配订单金额且交易ID不为空
-				if v.ActualAmount == td.Quant && td.TransactionID != "" {
-					// 使用事务更新订单状态
-					err := sdb.DB.Transaction(func(tx *gorm.DB) error {
-						// 更新订单状态为支付成功
-						v.Status = sdb.StatusPaySuccess
-						// 记录区块链交易ID
-						v.BlockTransactionId = td.TransactionID
-
-						// 保存更新到数据库
-						if err := tx.Save(&v).Error; err != nil {
-							mylog.Logger.Info("更新数据库表失败", zap.Any("err", err))
-							return err
-						}
-						return nil
-					})
-
-					// 事务成功后，异步处理回调通知
-					if err == nil {
-						go ProcessCallback(v)
-					} else {
-						mylog.Logger.Info("已经检查到了支付金额，但更新数据库表失败", zap.Any("err", err))
-					}
-				}
+			if tron.GetTransactions(v) {
+				go ProcessCallback(v)
+			} else if tron.GetTransactionsGrid(v) {
+				go ProcessCallback(v)
 			}
 		case "TRX":
 			if trx.Start(v) {
@@ -203,10 +165,10 @@ func Start() {
 		mylog.Logger.Info("未支付订单检测任务添加失败")
 	}
 	// 每天凌晨3点执行过期订单清理任务
-	_, err = c.AddJob("0 5 * * *", ExpiredOrdersJob{})
-	if err != nil {
-		mylog.Logger.Info("订单清理任务添加失败")
-	}
+	/* 	_, err = c.AddJob("0 5 * * *", ExpiredOrdersJob{})
+	   	if err != nil {
+	   		mylog.Logger.Info("订单清理任务添加失败")
+	   	} */
 	// mylog.Logger.Info("订单清理任务已完成")
 	// 启动 Cron 调度器
 	c.Start()

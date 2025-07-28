@@ -4,11 +4,14 @@ import (
 	"encoding/json" // 导入 JSON 编码/解码包
 	"fmt"           // 导入 fmt 包用于格式化输出
 	"io"            // 导入 io 包用于读取响应体
+	"time"
+
 	// 导入 log 包用于记录日志
 	"math"
 	"net/http" // 导入 http 包用于发起 HTTP 请求
 	"net/url"  // 导入 url 包用于构建请求的 URL
 	"strconv"
+	"upay_pro/db/sdb"
 	"upay_pro/mylog"
 
 	"go.uber.org/zap"
@@ -67,7 +70,7 @@ type TransferDetails struct {
 }
 
 // 传入钱包地址
-func GetTransactions(toAddress string, startTime int64, endTime int64) TransferDetails {
+func GetTransactions(order sdb.Orders) bool {
 
 	/* 	// 获取当前时间戳（毫秒）
 	   	endTime := carbon.Now().TimestampMilli()
@@ -80,11 +83,11 @@ func GetTransactions(toAddress string, startTime int64, endTime int64) TransferD
 	baseURL := "https://apilist.tronscan.org/api/token_trc20/transfers"
 	params := url.Values{}
 	// 要查询的钱包地址
-	params.Add("toAddress", toAddress)
+	params.Add("toAddress", order.Token)
 	params.Add("limit", "1") // 修改 limit 参数为 1，获取两条转账记录
 	params.Add("confirm", "true")
-	params.Add("start_timestamp", fmt.Sprintf("%d", startTime))
-	params.Add("end_timestamp", fmt.Sprintf("%d", endTime))
+	params.Add("start_timestamp", fmt.Sprintf("%d", order.StartTime))
+	params.Add("end_timestamp", fmt.Sprintf("%d", order.ExpirationTime))
 	// 增加合约地址
 	params.Add("contract_address", "TR7NHqjeKQxGTCi8q8ZY4pL8otSzgjLj6t")
 
@@ -92,10 +95,19 @@ func GetTransactions(toAddress string, startTime int64, endTime int64) TransferD
 	finalURL := fmt.Sprintf("%s?%s", baseURL, params.Encode())
 
 	// 发起 GET 请求
-	resp, err := http.Get(finalURL)
+	req, _ := http.NewRequest("GET", finalURL, nil)
+	req.Header.Set("TRON-PRO-API-KEY", sdb.GetApiKey().Tronscan)
+	req.Header.Set("Content-Type", "application/json")
+	client := http.Client{
+		Timeout: 30 * time.Second,
+	}
+
+	resp, err := client.Do(req)
+
 	if err != nil { // 如果请求失败，打印错误并退出
 		// log.Fatalf("Error fetching data: %v", err)
 		mylog.Logger.Error("USDT-TRC20 Error fetching data", zap.Any("error", err))
+		return false
 	}
 	defer resp.Body.Close() // 确保请求结束后关闭响应体
 
@@ -104,6 +116,7 @@ func GetTransactions(toAddress string, startTime int64, endTime int64) TransferD
 	if err != nil { // 如果读取响应失败，打印错误并退出
 		// log.Fatalf("Error reading response body: %v", err)
 		mylog.Logger.Error("Error reading response body", zap.Any("error", err))
+		return false
 	}
 
 	// 解析 JSON 响应到 ApiResponse 结构体
@@ -112,35 +125,36 @@ func GetTransactions(toAddress string, startTime int64, endTime int64) TransferD
 	if err != nil { // 如果 JSON 解析失败，打印错误并退出
 		// log.Fatalf("Error unmarshalling JSON: %v", err)
 		mylog.Logger.Error("Error unmarshalling JSON", zap.Any("error", err))
+		return false
 	}
 
-	// 打印总转账数量
-	// fmt.Printf("Total transfers: %d\n", response.Total)
-	// 定义一个结构体对象来存储转账信息
-	TD := TransferDetails{}
-	// 如果有转账记录，遍历打印每条转账记录的关键信息
-	for _, transfer := range response.TokenTransfers {
-		if transfer.FinalResult == "SUCCESS" {
-			/* fmt.Printf("代币:%s\n", transfer.TokenInfo.TokenAbbr)
+	// 判断是否返回转账即可
 
-			fmt.Printf("交易哈希值：%s\n", transfer.TransactionID)
-			// 确保输出格式正确，保留2位小数
-			fmt.Println("金额：", formatAmount(transfer.Quant))
-			fmt.Println("付款地址：", transfer.FromAddress)
-			fmt.Println("收款地址：", transfer.ToAddress)
-			fmt.Println("交易结果", transfer.FinalResult) */
-			TD.TokenAbbr = transfer.TokenInfo.TokenAbbr
-			TD.TransactionID = transfer.TransactionID
-			TD.Quant = formatAmount(transfer.Quant)
+	if len(response.TokenTransfers) > 0 {
 
-			TD.FromAddress = transfer.FromAddress
-			TD.ToAddress = transfer.ToAddress
-			TD.FinalResult = transfer.FinalResult
+		// 对返回的交易金额进行转换
 
+		amount := formatAmount(response.TokenTransfers[0].Quant)
+
+		if amount == order.ActualAmount && response.TokenTransfers[0].ToAddress == order.Token && response.TokenTransfers[0].TokenInfo.TokenAbbr == "USDT" && response.TokenTransfers[0].TransactionID != "" {
+			// 如果满足条件，则说明已经查到转账记录，并且金额和数据库转换后的金额，则就可以更新数据库中
+			order.BlockTransactionId = response.TokenTransfers[0].TransactionID
+			order.Status = sdb.StatusPaySuccess
+			re := sdb.DB.Save(&order)
+			if re.Error == nil {
+				mylog.Logger.Info("USDT-TRC20 更新数据库订单记录成功", zap.String("order_id", order.TradeId))
+				return true
+			}
+			mylog.Logger.Error("USDT-TRC20 更新数据库订单记录失败", zap.Error(re.Error))
+			return false
 		}
+		mylog.Logger.Info("已经查询到转账记录，但是不符合要求")
+		return false
 
 	}
-	return TD
+	mylog.Logger.Info("没有查询到转账记录")
+
+	return false
 }
 
 // formatAmount 格式化金额为指定的小数位数，返回浮动数值（保留2位小数）
