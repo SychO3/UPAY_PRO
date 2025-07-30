@@ -67,7 +67,7 @@ docker run -d \
   -p 8090:8090 \
   -v upay_logs:/app/logs \
   --restart always \
-wangergou111/upay:v1.1.1
+wangergou111/upay:latest
 ```
 
 默认日志挂载路径为：
@@ -81,7 +81,7 @@ wangergou111/upay:v1.1.1
 #### Docker 高手 拉取镜像，自定义启动参数
 
 ```bash
-docker pull wangergou111/upay:v1.1.1
+docker pull wangergou111/upay:latest
 ```
 
 #### 反馈与建议
