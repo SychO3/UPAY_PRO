@@ -553,7 +553,8 @@ func Start() {
 				return
 			}
 			var order sdb.Orders
-			sdb.DB.Where("order_id = ?", req.OrderID).Or("trade_id = ?", req.OrderID).First(&order)
+			// 通过订单号或者商城订单号查询最新的那条记录
+			sdb.DB.Where("order_id = ?", req.OrderID).Or("trade_id = ?", req.OrderID).Order("id DESC").First(&order)
 			if order.ID == 0 {
 				ctx.JSON(400, gin.H{"code": 1, "message": "订单不存在"})
 				return
