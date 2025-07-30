@@ -269,9 +269,9 @@ func CreateTransaction(c *gin.Context) {
 		return
 	}
 
-	// 在进行根据钱包类型查询钱包地址之前，先判断一下传入的订单号是否已经在数据中存在，如果存在，则返回错误，提示订单号已存在，重新创建订单
-	if sdb.GetOrderByOrderId(requestParams.OrderID).OrderId != "" {
-		c.JSON(400, gin.H{"code": 1, "message": "订单号已存在,请勿重复提交"})
+	// 检查传入的商城交易订单号是否存在且状态为已过期
+	if sdb.GetOrderByOrderId(requestParams.OrderID).OrderId != "" && sdb.GetOrderByOrderId(requestParams.OrderID).Status == sdb.StatusExpired {
+		c.JSON(400, gin.H{"code": 1, "message": "订单已过期,请重新下单提交"})
 		return
 	}
 	// 添加调试日志
