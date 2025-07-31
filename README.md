@@ -11,7 +11,7 @@
 
 ## 🚀 项目特性
 
-- **多币种支持**: 支持 USDT-TRC20、TRX、USDT-Polygon、USDT-BSC 、USDT-ERC20 等主流数字货币
+- **多币种支持**: 支持 USDT-TRC20、TRX、USDT-Polygon、USDT-BSC 、USDT-ERC20 、USDT-ArbitrumOne、USDC-ERC20、USDC-Polygon、USDC-BSC、USDC-ArbitrumOne 等主流数字货币
 - **自动化验证**: 实时监控区块链交易，自动验证支付状态
 - **管理后台**: 完整的 Web 管理界面，支持订单管理、用户管理、钱包配置
 - **API 接口**: RESTful API 设计，易于集成到现有系统
