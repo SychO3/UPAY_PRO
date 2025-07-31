@@ -69,7 +69,7 @@ func NewDefaultConfig() *APIConfig {
 		ChainID: "56",
 		Module:  "account",
 		Action:  "tokentx",
-		// Address:         "0xb52cc871c8f15579d9c10fef36ff95e9da3fde69",
+		// USDT合约地址:0x55d398326f99059ff775485246999027b3197955
 		ContractAddress: "0x55d398326f99059ff775485246999027b3197955",
 		APIKey:          sdb.GetApiKey().Etherscan,
 		Page:            "1",
@@ -176,8 +176,11 @@ func Start(order sdb.Orders) bool {
 			// 更新数据库订单记录
 			re := sdb.DB.Save(&order)
 			if re.Error == nil {
+				mylog.Logger.Info("USDT_BSC 订单入账成功")
 				return true
 			}
+			mylog.Logger.Error("USDT_BSC 订单入账失败", zap.Error(re.Error))
+			return false
 		}
 		return false
 

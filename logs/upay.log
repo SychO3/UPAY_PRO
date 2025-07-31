@@ -240,3 +240,1385 @@
 2025-07-25T20:36:27.403+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
 2025-07-25T20:36:27.403+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
 2025-07-25T20:36:27.414+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-26T08:24:15.608+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-26T08:24:15.608+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-26T08:24:15.608+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-26T08:24:15.639+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-26T08:24:21.913+0800	[34mINFO[0m	mq/mq.go:62	订单查询失败
+2025-07-26T08:24:21.914+0800	[34mINFO[0m	mq/mq.go:62	订单查询失败
+2025-07-27T17:14:13.938+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-27T17:14:13.938+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-27T17:14:13.938+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-27T17:14:14.022+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-27T17:18:55.240+0800	[34mINFO[0m	web/function.go:144	进入中间件
+2025-07-27T17:18:55.240+0800	[34mINFO[0m	web/function.go:155	原始请求体	{"body": "{\"order_id\":\"2025072717185524619\",\"amount\":1,\"type\":\"USDT-BSC\",\"notify_url\":\"http:\\/\\/192.168.31.200\\/pay\\/notify\\/2025072717185524619\\/\",\"redirect_url\":\"http:\\/\\/192.168.31.200\\/pay\\/return\\/2025072717185524619\\/\",\"signature\":\"1569a13b86cac25c6abbc27257c685af\"}"}
+2025-07-27T17:18:55.240+0800	[34mINFO[0m	web/function.go:171	请求体参数绑定成功
+2025-07-27T17:18:55.240+0800	[34mINFO[0m	web/function.go:183	请求体参数验证成功
+2025-07-27T17:18:55.240+0800	[34mINFO[0m	web/function.go:205	拼接的参数	{"params": ["type=USDT-BSC", "amount=1", "notify_url=http://192.168.31.200/pay/notify/2025072717185524619/", "order_id=2025072717185524619", "redirect_url=http://192.168.31.200/pay/return/2025072717185524619/"]}
+2025-07-27T17:18:55.240+0800	[34mINFO[0m	web/function.go:235	拼接的查询字符串	{"queryString": "amount=1&notify_url=http://192.168.31.200/pay/notify/2025072717185524619/&order_id=2025072717185524619&redirect_url=http://192.168.31.200/pay/return/2025072717185524619/&type=USDT-BSCtVY3VcOlP6RdAHwXl7SxcIc40pVPAqwDQix3liEDKHkR9iRS"}
+2025-07-27T17:18:55.240+0800	[34mINFO[0m	web/function.go:241	传入的签名	{"signature": "1569a13b86cac25c6abbc27257c685af"}
+2025-07-27T17:18:55.240+0800	[34mINFO[0m	web/function.go:245	计算的签名	{"Signature": "1569a13b86cac25c6abbc27257c685af"}
+2025-07-27T17:18:55.240+0800	[34mINFO[0m	web/function.go:254	签名验证成功
+2025-07-27T17:18:55.241+0800	[34mINFO[0m	web/function.go:278	CreateTransaction - 接收到的Type参数	{"type": "USDT-BSC"}
+2025-07-27T17:18:55.241+0800	[34mINFO[0m	web/function.go:319	获取钱包地址成功	{"address": "94556313"}
+2025-07-27T17:18:55.242+0800	[34mINFO[0m	web/function.go:383	创建订单成功
+2025-07-27T17:18:55.285+0800	[34mINFO[0m	mq/mq.go:37	任务已加入队列:	{"info": {"ID":"99e71090-b577-42c3-b60b-6d9f6593aebe","Queue":"default","Type":"order:expiration","Payload":"MjAyNTA3MjcxNzE4NTU5MTgx","State":3,"MaxRetry":25,"Retried":0,"LastErr":"","LastFailedAt":"0001-01-01T00:00:00Z","Timeout":1800000000000,"Deadline":"0001-01-01T00:00:00Z","Group":"","NextProcessAt":"2025-07-27T17:28:55.243179+08:00","IsOrphaned":false,"Retention":0,"CompletedAt":"0001-01-01T00:00:00Z","Result":null}}
+2025-07-27T17:19:26.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:19:58.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:20:30.000+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:21:02.000+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:21:34.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:22:06.002+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:22:38.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:23:10.002+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:23:42.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:24:14.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:24:46.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:25:18.000+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:25:50.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:26:22.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:26:54.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:27:26.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:27:58.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:28:30.000+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:28:59.289+0800	[34mINFO[0m	mq/mq.go:69	订单202507271718559181已设置为过期
+2025-07-27T17:29:00.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:37:19.571+0800	[34mINFO[0m	web/function.go:144	进入中间件
+2025-07-27T17:37:19.571+0800	[34mINFO[0m	web/function.go:155	原始请求体	{"body": "{\"order_id\":\"2025072717371923712\",\"amount\":100,\"type\":\"USDT-TRC20\",\"notify_url\":\"http:\\/\\/192.168.31.200\\/pay\\/notify\\/2025072717371923712\\/\",\"redirect_url\":\"http:\\/\\/192.168.31.200\\/pay\\/return\\/2025072717371923712\\/\",\"signature\":\"8281e958b47fc8c81457c1b3491869a6\"}"}
+2025-07-27T17:37:19.572+0800	[34mINFO[0m	web/function.go:171	请求体参数绑定成功
+2025-07-27T17:37:19.572+0800	[34mINFO[0m	web/function.go:183	请求体参数验证成功
+2025-07-27T17:37:19.572+0800	[34mINFO[0m	web/function.go:205	拼接的参数	{"params": ["type=USDT-TRC20", "amount=100", "notify_url=http://192.168.31.200/pay/notify/2025072717371923712/", "order_id=2025072717371923712", "redirect_url=http://192.168.31.200/pay/return/2025072717371923712/"]}
+2025-07-27T17:37:19.572+0800	[34mINFO[0m	web/function.go:235	拼接的查询字符串	{"queryString": "amount=100&notify_url=http://192.168.31.200/pay/notify/2025072717371923712/&order_id=2025072717371923712&redirect_url=http://192.168.31.200/pay/return/2025072717371923712/&type=USDT-TRC20tVY3VcOlP6RdAHwXl7SxcIc40pVPAqwDQix3liEDKHkR9iRS"}
+2025-07-27T17:37:19.572+0800	[34mINFO[0m	web/function.go:241	传入的签名	{"signature": "8281e958b47fc8c81457c1b3491869a6"}
+2025-07-27T17:37:19.572+0800	[34mINFO[0m	web/function.go:245	计算的签名	{"Signature": "8281e958b47fc8c81457c1b3491869a6"}
+2025-07-27T17:37:19.572+0800	[34mINFO[0m	web/function.go:254	签名验证成功
+2025-07-27T17:37:19.572+0800	[34mINFO[0m	web/function.go:278	CreateTransaction - 接收到的Type参数	{"type": "USDT-TRC20"}
+2025-07-27T17:37:19.572+0800	[34mINFO[0m	web/function.go:319	获取钱包地址成功	{"address": "123"}
+2025-07-27T17:37:19.574+0800	[34mINFO[0m	web/function.go:383	创建订单成功
+2025-07-27T17:37:19.574+0800	[34mINFO[0m	mq/mq.go:37	任务已加入队列:	{"info": {"ID":"0817a528-656c-417a-9bbd-b92840be63f0","Queue":"default","Type":"order:expiration","Payload":"MjAyNTA3MjcxNzM3MTk1Mzg5","State":3,"MaxRetry":25,"Retried":0,"LastErr":"","LastFailedAt":"0001-01-01T00:00:00Z","Timeout":1800000000000,"Deadline":"0001-01-01T00:00:00Z","Group":"","NextProcessAt":"2025-07-27T17:47:19.574701+08:00","IsOrphaned":false,"Retention":0,"CompletedAt":"0001-01-01T00:00:00Z","Result":null}}
+2025-07-27T17:37:21.313+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:21.313+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:22.305+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:24.450+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:24.450+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:24.642+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:26.444+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:26.444+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:26.637+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:28.448+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:28.448+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:28.643+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:30.434+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:30.434+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:30.622+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:32.439+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:32.440+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:32.636+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:34.436+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:34.436+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:34.621+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:36.444+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:36.444+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:36.640+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:38.448+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:38.448+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:38.636+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:40.450+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:40.451+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:40.639+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:42.435+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:42.435+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:42.619+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:44.443+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:44.443+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:44.637+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:46.446+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:46.446+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:46.633+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:48.448+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:48.448+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:48.643+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:50.441+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:50.441+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:50.633+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:52.440+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:52.440+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:52.630+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:54.438+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:54.438+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:54.634+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:56.442+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:56.442+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:56.629+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:37:58.447+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:37:58.447+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:37:58.638+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:00.435+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:00.435+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:00.626+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:02.435+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:02.436+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:02.626+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:04.440+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:04.440+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:04.626+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:06.445+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:06.445+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:06.630+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:07.925+0800	[34mINFO[0m	web/function.go:144	进入中间件
+2025-07-27T17:38:07.925+0800	[34mINFO[0m	web/function.go:155	原始请求体	{"body": "{\"order_id\":\"2025072717380771520\",\"amount\":100,\"type\":\"TRX\",\"notify_url\":\"http:\\/\\/192.168.31.200\\/pay\\/notify\\/2025072717380771520\\/\",\"redirect_url\":\"http:\\/\\/192.168.31.200\\/pay\\/return\\/2025072717380771520\\/\",\"signature\":\"05203ab239c171d6f18eb25fb5fd9b8e\"}"}
+2025-07-27T17:38:07.925+0800	[34mINFO[0m	web/function.go:171	请求体参数绑定成功
+2025-07-27T17:38:07.925+0800	[34mINFO[0m	web/function.go:183	请求体参数验证成功
+2025-07-27T17:38:07.925+0800	[34mINFO[0m	web/function.go:205	拼接的参数	{"params": ["type=TRX", "amount=100", "notify_url=http://192.168.31.200/pay/notify/2025072717380771520/", "order_id=2025072717380771520", "redirect_url=http://192.168.31.200/pay/return/2025072717380771520/"]}
+2025-07-27T17:38:07.925+0800	[34mINFO[0m	web/function.go:235	拼接的查询字符串	{"queryString": "amount=100&notify_url=http://192.168.31.200/pay/notify/2025072717380771520/&order_id=2025072717380771520&redirect_url=http://192.168.31.200/pay/return/2025072717380771520/&type=TRXtVY3VcOlP6RdAHwXl7SxcIc40pVPAqwDQix3liEDKHkR9iRS"}
+2025-07-27T17:38:07.925+0800	[34mINFO[0m	web/function.go:241	传入的签名	{"signature": "05203ab239c171d6f18eb25fb5fd9b8e"}
+2025-07-27T17:38:07.925+0800	[34mINFO[0m	web/function.go:245	计算的签名	{"Signature": "05203ab239c171d6f18eb25fb5fd9b8e"}
+2025-07-27T17:38:07.925+0800	[34mINFO[0m	web/function.go:254	签名验证成功
+2025-07-27T17:38:07.926+0800	[34mINFO[0m	web/function.go:278	CreateTransaction - 接收到的Type参数	{"type": "TRX"}
+2025-07-27T17:38:07.926+0800	[34mINFO[0m	web/function.go:319	获取钱包地址成功	{"address": "123"}
+2025-07-27T17:38:07.926+0800	[34mINFO[0m	web/function.go:319	获取钱包地址成功	{"address": "1234"}
+2025-07-27T17:38:07.927+0800	[34mINFO[0m	web/function.go:383	创建订单成功
+2025-07-27T17:38:07.928+0800	[34mINFO[0m	mq/mq.go:37	任务已加入队列:	{"info": {"ID":"86c67b4c-0d82-4006-b0a1-742e602e6713","Queue":"default","Type":"order:expiration","Payload":"MjAyNTA3MjcxNzM4MDc5MDc5","State":3,"MaxRetry":25,"Retried":0,"LastErr":"","LastFailedAt":"0001-01-01T00:00:00Z","Timeout":1800000000000,"Deadline":"0001-01-01T00:00:00Z","Group":"","NextProcessAt":"2025-07-27T17:48:07.927885+08:00","IsOrphaned":false,"Retention":0,"CompletedAt":"0001-01-01T00:00:00Z","Result":null}}
+2025-07-27T17:38:08.444+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:08.444+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:08.637+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:08.637+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:09.650+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:09.650+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:09.839+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:10.448+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:10.448+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:10.641+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:10.641+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:11.095+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:11.095+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:11.285+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:12.441+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:12.441+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:12.637+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:12.637+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:13.091+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:13.091+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:13.275+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:14.449+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:14.449+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:14.636+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:14.636+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:15.102+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:15.102+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:15.288+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:16.438+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:16.438+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:16.631+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:16.631+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:17.086+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:17.086+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:17.270+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:18.436+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:18.437+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:18.640+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:18.640+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:19.104+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:19.104+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:19.312+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:20.436+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:20.436+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:20.622+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:20.622+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:21.090+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:21.090+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:21.283+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:22.447+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:22.447+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:22.642+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:22.642+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:23.112+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:23.112+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:23.302+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:24.444+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:24.444+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:24.630+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:24.630+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:25.388+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:25.388+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:25.578+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:26.443+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:26.443+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:26.635+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:26.635+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:27.393+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:27.393+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:27.580+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:28.441+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:28.441+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:28.631+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:28.631+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:29.096+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:29.097+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:29.292+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:30.453+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:30.453+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:30.637+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:30.637+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:31.098+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:31.098+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:31.288+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:32.443+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:32.443+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:32.629+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:32.629+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:33.088+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:33.088+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:33.276+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:34.444+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:34.444+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:34.635+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:34.635+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:35.092+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:35.092+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:35.280+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:36.452+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:36.452+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:36.641+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:36.641+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:37.094+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:37.094+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:37.297+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:38.443+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:38.443+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:38.634+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:38.634+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:39.091+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:39.091+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:39.283+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:40.448+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:40.448+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:40.640+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:40.640+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:41.100+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:41.100+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:41.286+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:42.439+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:42.440+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:42.627+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:42.627+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:43.090+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:43.090+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:43.284+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:44.447+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:44.447+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:44.634+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:44.634+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:45.098+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:45.098+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:45.289+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:46.454+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:46.454+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:46.645+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:46.645+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:47.109+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:47.109+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:47.320+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:48.441+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:48.441+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:48.631+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:48.631+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:49.097+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:49.097+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:49.286+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:50.435+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:50.435+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:50.624+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:50.624+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:51.088+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:51.088+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:51.280+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:52.434+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:52.434+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:52.620+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:52.620+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:53.087+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:53.087+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:53.285+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:54.440+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:54.440+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:54.635+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:54.635+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:55.099+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:55.099+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:55.284+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:56.442+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:56.442+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:56.632+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:56.632+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:57.097+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:57.097+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:57.286+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:38:58.437+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:38:58.437+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:38:58.628+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:38:58.628+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:38:59.087+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:38:59.087+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:38:59.279+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:00.444+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:00.444+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:00.630+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:00.630+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:01.090+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:01.090+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:01.276+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:02.435+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:02.435+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:02.628+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:02.629+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:03.087+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:03.087+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:03.277+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:04.447+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:04.447+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:04.634+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:04.634+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:05.095+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:05.095+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:05.287+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:06.438+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:06.438+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:06.631+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:06.631+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:07.084+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:07.084+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:07.271+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:08.445+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:08.445+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:08.631+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:08.631+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:09.085+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:09.085+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:09.270+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:10.451+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:10.451+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:10.637+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:10.637+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:11.098+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:11.098+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:11.289+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:12.439+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:12.439+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:12.624+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:12.624+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:13.089+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:13.089+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:13.277+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:14.440+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:14.440+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:14.643+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:14.643+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:15.107+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:15.107+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:15.296+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:16.448+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:16.448+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:16.643+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:16.643+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:17.111+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:17.111+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:17.296+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:18.444+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:18.444+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:18.630+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:18.630+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:19.772+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:19.772+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:19.963+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:20.438+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:20.438+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:20.623+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:20.623+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:21.095+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:21.096+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:21.284+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:22.444+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:22.445+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:22.632+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:22.632+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:23.105+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:23.105+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:23.300+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:24.449+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:24.449+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:24.636+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:24.636+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:25.107+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:25.107+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:25.303+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:26.435+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:26.435+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:26.629+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:26.629+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:27.098+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:27.098+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:27.284+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:28.445+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:28.446+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:28.667+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:28.667+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:29.131+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:29.131+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:29.316+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:30.445+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:30.445+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:30.633+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:30.633+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:31.091+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:31.091+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:31.280+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:32.444+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:32.444+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:32.630+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:32.630+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:33.102+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:33.102+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:33.286+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:34.438+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:34.439+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:34.624+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:34.625+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:35.082+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:35.082+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:35.266+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:36.452+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:36.452+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:36.639+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:36.639+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:37.104+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:37.104+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:37.295+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:38.434+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:38.435+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:38.635+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:38.635+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:39.098+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:39.098+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:39.285+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:40.437+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:40.437+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:40.632+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:40.632+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:41.100+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:41.100+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:41.288+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:42.447+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:42.447+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:42.633+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:42.633+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:43.105+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:43.105+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:43.292+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:44.439+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:44.439+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:44.624+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:44.624+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:45.087+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:45.087+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:45.279+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:46.444+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:46.444+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:46.633+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:46.633+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:47.085+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:47.086+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:47.285+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:48.445+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:48.445+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:48.635+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:48.635+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:49.089+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:49.089+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:49.282+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:50.438+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:50.438+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:50.628+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:50.628+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:51.083+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:51.083+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:51.270+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:52.436+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:52.436+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:52.627+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:52.628+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:53.079+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:53.079+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:53.283+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:54.443+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:54.444+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:54.638+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:54.638+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:55.091+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:55.091+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:55.287+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:56.439+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:56.439+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:56.627+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:56.627+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:57.081+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:57.081+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:57.271+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:39:58.446+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:39:58.446+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:39:58.631+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:39:58.631+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:39:59.086+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:39:59.086+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:39:59.275+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:40:00.438+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:40:00.438+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:40:00.634+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:40:00.634+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:40:01.092+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:40:01.092+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:40:01.279+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:40:02.451+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:40:02.451+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:40:02.640+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:40:02.640+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:40:03.109+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:40:03.109+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:40:03.304+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:40:04.436+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:40:04.436+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:40:04.621+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:40:04.621+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:40:05.092+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:40:05.092+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:40:05.277+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:40:06.452+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:40:06.452+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:40:06.645+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:40:06.645+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:40:07.105+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:40:07.105+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:40:07.294+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:40:08.447+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:40:08.447+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:40:08.642+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:40:08.643+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:40:09.095+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:40:09.095+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:40:09.282+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:40:10.440+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:40:10.440+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:40:10.634+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:40:10.634+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:40:11.091+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:40:11.091+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:40:11.278+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:40:12.434+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:40:12.434+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:40:12.620+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:40:12.620+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:40:13.072+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:40:13.072+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:40:13.268+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:40:14.442+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:40:14.443+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:40:14.635+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:40:14.635+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:40:15.089+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:40:15.089+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:40:15.281+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:40:16.440+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:40:16.440+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:40:16.632+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:40:16.632+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:40:17.092+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:40:17.092+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:40:17.279+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:40:18.448+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:40:18.448+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:40:18.631+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:40:18.631+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:40:19.104+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:40:19.104+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:40:19.297+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:40:19.857+0800	[34mINFO[0m	web/function.go:144	进入中间件
+2025-07-27T17:40:19.857+0800	[34mINFO[0m	web/function.go:155	原始请求体	{"body": "{\"order_id\":\"2025072717401939390\",\"amount\":100,\"type\":\"USDT-Polygon\",\"notify_url\":\"http:\\/\\/192.168.31.200\\/pay\\/notify\\/2025072717401939390\\/\",\"redirect_url\":\"http:\\/\\/192.168.31.200\\/pay\\/return\\/2025072717401939390\\/\",\"signature\":\"f5ba55f357d3d96922268b60111ed1c9\"}"}
+2025-07-27T17:40:19.857+0800	[34mINFO[0m	web/function.go:171	请求体参数绑定成功
+2025-07-27T17:40:19.857+0800	[34mINFO[0m	web/function.go:183	请求体参数验证成功
+2025-07-27T17:40:19.857+0800	[34mINFO[0m	web/function.go:205	拼接的参数	{"params": ["type=USDT-Polygon", "amount=100", "notify_url=http://192.168.31.200/pay/notify/2025072717401939390/", "order_id=2025072717401939390", "redirect_url=http://192.168.31.200/pay/return/2025072717401939390/"]}
+2025-07-27T17:40:19.858+0800	[34mINFO[0m	web/function.go:235	拼接的查询字符串	{"queryString": "amount=100&notify_url=http://192.168.31.200/pay/notify/2025072717401939390/&order_id=2025072717401939390&redirect_url=http://192.168.31.200/pay/return/2025072717401939390/&type=USDT-PolygontVY3VcOlP6RdAHwXl7SxcIc40pVPAqwDQix3liEDKHkR9iRS"}
+2025-07-27T17:40:19.858+0800	[34mINFO[0m	web/function.go:241	传入的签名	{"signature": "f5ba55f357d3d96922268b60111ed1c9"}
+2025-07-27T17:40:19.858+0800	[34mINFO[0m	web/function.go:245	计算的签名	{"Signature": "f5ba55f357d3d96922268b60111ed1c9"}
+2025-07-27T17:40:19.858+0800	[34mINFO[0m	web/function.go:254	签名验证成功
+2025-07-27T17:40:19.858+0800	[34mINFO[0m	web/function.go:278	CreateTransaction - 接收到的Type参数	{"type": "USDT-Polygon"}
+2025-07-27T17:40:19.858+0800	[34mINFO[0m	web/function.go:319	获取钱包地址成功	{"address": "562163"}
+2025-07-27T17:40:19.860+0800	[34mINFO[0m	web/function.go:383	创建订单成功
+2025-07-27T17:40:19.899+0800	[34mINFO[0m	mq/mq.go:37	任务已加入队列:	{"info": {"ID":"f91b352f-a4eb-4380-9b38-df76858c54d9","Queue":"default","Type":"order:expiration","Payload":"MjAyNTA3MjcxNzQwMTkzNTQ5","State":3,"MaxRetry":25,"Retried":0,"LastErr":"","LastFailedAt":"0001-01-01T00:00:00Z","Timeout":1800000000000,"Deadline":"0001-01-01T00:00:00Z","Group":"","NextProcessAt":"2025-07-27T17:50:19.860344+08:00","IsOrphaned":false,"Retention":0,"CompletedAt":"0001-01-01T00:00:00Z","Result":null}}
+2025-07-27T17:40:20.439+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:40:20.439+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:40:20.642+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:40:20.642+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:40:21.109+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:40:21.109+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:40:21.292+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:40:27.269+0800	[34mINFO[0m	web/function.go:144	进入中间件
+2025-07-27T17:40:27.269+0800	[34mINFO[0m	web/function.go:155	原始请求体	{"body": "{\"order_id\":\"2025072717402786837\",\"amount\":10,\"type\":\"USDT-Polygon\",\"notify_url\":\"http:\\/\\/192.168.31.200\\/pay\\/notify\\/2025072717402786837\\/\",\"redirect_url\":\"http:\\/\\/192.168.31.200\\/pay\\/return\\/2025072717402786837\\/\",\"signature\":\"5bd58265e04dde24ae2cfb3e9f62039b\"}"}
+2025-07-27T17:40:27.269+0800	[34mINFO[0m	web/function.go:171	请求体参数绑定成功
+2025-07-27T17:40:27.269+0800	[34mINFO[0m	web/function.go:183	请求体参数验证成功
+2025-07-27T17:40:27.269+0800	[34mINFO[0m	web/function.go:205	拼接的参数	{"params": ["type=USDT-Polygon", "amount=10", "notify_url=http://192.168.31.200/pay/notify/2025072717402786837/", "order_id=2025072717402786837", "redirect_url=http://192.168.31.200/pay/return/2025072717402786837/"]}
+2025-07-27T17:40:27.269+0800	[34mINFO[0m	web/function.go:235	拼接的查询字符串	{"queryString": "amount=10&notify_url=http://192.168.31.200/pay/notify/2025072717402786837/&order_id=2025072717402786837&redirect_url=http://192.168.31.200/pay/return/2025072717402786837/&type=USDT-PolygontVY3VcOlP6RdAHwXl7SxcIc40pVPAqwDQix3liEDKHkR9iRS"}
+2025-07-27T17:40:27.269+0800	[34mINFO[0m	web/function.go:241	传入的签名	{"signature": "5bd58265e04dde24ae2cfb3e9f62039b"}
+2025-07-27T17:40:27.269+0800	[34mINFO[0m	web/function.go:245	计算的签名	{"Signature": "5bd58265e04dde24ae2cfb3e9f62039b"}
+2025-07-27T17:40:27.269+0800	[34mINFO[0m	web/function.go:254	签名验证成功
+2025-07-27T17:40:27.269+0800	[34mINFO[0m	web/function.go:278	CreateTransaction - 接收到的Type参数	{"type": "USDT-Polygon"}
+2025-07-27T17:40:27.269+0800	[34mINFO[0m	web/function.go:319	获取钱包地址成功	{"address": "562163"}
+2025-07-27T17:40:27.270+0800	[34mINFO[0m	web/function.go:383	创建订单成功
+2025-07-27T17:40:27.271+0800	[34mINFO[0m	mq/mq.go:37	任务已加入队列:	{"info": {"ID":"1e70d83a-210a-4d3c-91ea-7fb2e8110cd0","Queue":"default","Type":"order:expiration","Payload":"MjAyNTA3MjcxNzQwMjc1NjQ1","State":3,"MaxRetry":25,"Retried":0,"LastErr":"","LastFailedAt":"0001-01-01T00:00:00Z","Timeout":1800000000000,"Deadline":"0001-01-01T00:00:00Z","Group":"","NextProcessAt":"2025-07-27T17:50:27.271144+08:00","IsOrphaned":false,"Retention":0,"CompletedAt":"0001-01-01T00:00:00Z","Result":null}}
+2025-07-27T17:40:51.293+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 108.160.167.165:443: i/o timeout"}
+2025-07-27T17:40:52.437+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:40:52.438+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:40:52.625+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:40:52.625+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:40:53.096+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:40:53.096+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:40:53.289+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:41:10.795+0800	[34mINFO[0m	web/function.go:144	进入中间件
+2025-07-27T17:41:10.795+0800	[34mINFO[0m	web/function.go:155	原始请求体	{"body": "{\"order_id\":\"2025072717411085814\",\"amount\":1,\"type\":\"USDT-BSC\",\"notify_url\":\"http:\\/\\/192.168.31.200\\/pay\\/notify\\/2025072717411085814\\/\",\"redirect_url\":\"http:\\/\\/192.168.31.200\\/pay\\/return\\/2025072717411085814\\/\",\"signature\":\"e87febc23c3b37a0f05bd78a0d731b47\"}"}
+2025-07-27T17:41:10.795+0800	[34mINFO[0m	web/function.go:171	请求体参数绑定成功
+2025-07-27T17:41:10.795+0800	[34mINFO[0m	web/function.go:183	请求体参数验证成功
+2025-07-27T17:41:10.795+0800	[34mINFO[0m	web/function.go:205	拼接的参数	{"params": ["type=USDT-BSC", "amount=1", "notify_url=http://192.168.31.200/pay/notify/2025072717411085814/", "order_id=2025072717411085814", "redirect_url=http://192.168.31.200/pay/return/2025072717411085814/"]}
+2025-07-27T17:41:10.795+0800	[34mINFO[0m	web/function.go:235	拼接的查询字符串	{"queryString": "amount=1&notify_url=http://192.168.31.200/pay/notify/2025072717411085814/&order_id=2025072717411085814&redirect_url=http://192.168.31.200/pay/return/2025072717411085814/&type=USDT-BSCtVY3VcOlP6RdAHwXl7SxcIc40pVPAqwDQix3liEDKHkR9iRS"}
+2025-07-27T17:41:10.795+0800	[34mINFO[0m	web/function.go:241	传入的签名	{"signature": "e87febc23c3b37a0f05bd78a0d731b47"}
+2025-07-27T17:41:10.795+0800	[34mINFO[0m	web/function.go:245	计算的签名	{"Signature": "e87febc23c3b37a0f05bd78a0d731b47"}
+2025-07-27T17:41:10.795+0800	[34mINFO[0m	web/function.go:254	签名验证成功
+2025-07-27T17:41:10.795+0800	[34mINFO[0m	web/function.go:278	CreateTransaction - 接收到的Type参数	{"type": "USDT-BSC"}
+2025-07-27T17:41:10.795+0800	[34mINFO[0m	web/function.go:319	获取钱包地址成功	{"address": "94556313"}
+2025-07-27T17:41:10.797+0800	[34mINFO[0m	web/function.go:383	创建订单成功
+2025-07-27T17:41:10.834+0800	[34mINFO[0m	mq/mq.go:37	任务已加入队列:	{"info": {"ID":"c437c9cc-0a46-4fe9-a8a4-8517c823c38e","Queue":"default","Type":"order:expiration","Payload":"MjAyNTA3MjcxNzQxMTAwMDk3","State":3,"MaxRetry":25,"Retried":0,"LastErr":"","LastFailedAt":"0001-01-01T00:00:00Z","Timeout":1800000000000,"Deadline":"0001-01-01T00:00:00Z","Group":"","NextProcessAt":"2025-07-27T17:51:10.797237+08:00","IsOrphaned":false,"Retention":0,"CompletedAt":"0001-01-01T00:00:00Z","Result":null}}
+2025-07-27T17:41:23.290+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 108.160.167.165:443: i/o timeout"}
+2025-07-27T17:41:53.290+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 108.160.167.165:443: i/o timeout"}
+2025-07-27T17:41:55.007+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:41:55.007+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:41:55.934+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:41:55.934+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:41:56.935+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:41:56.935+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:41:57.126+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:42:27.126+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 108.160.167.165:443: i/o timeout"}
+2025-07-27T17:42:57.127+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 108.160.167.165:443: i/o timeout"}
+2025-07-27T17:43:27.127+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:43:28.997+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:43:28.997+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:43:29.917+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:43:29.917+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:43:32.406+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:43:32.406+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:43:32.600+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:44:02.601+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 199.16.158.190:443: i/o timeout"}
+2025-07-27T17:44:32.602+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 199.16.158.190:443: i/o timeout"}
+2025-07-27T17:45:02.603+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:45:05.435+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:45:05.435+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:45:06.421+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:45:06.421+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:45:07.369+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:45:07.369+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:45:07.561+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:45:37.561+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 199.16.158.190:443: i/o timeout"}
+2025-07-27T17:46:07.563+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 108.160.167.165:443: i/o timeout"}
+2025-07-27T17:46:37.563+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:46:38.981+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T17:46:38.981+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T17:46:39.852+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T17:46:39.852+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271738079079"}
+2025-07-27T17:46:40.818+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T17:46:40.818+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271738079079"}
+2025-07-27T17:46:41.016+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T17:47:11.016+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 210.209.84.142:443: i/o timeout"}
+2025-07-27T17:47:19.698+0800	[34mINFO[0m	mq/mq.go:69	订单202507271737195389已设置为过期
+2025-07-27T17:47:41.017+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 210.209.84.142:443: i/o timeout"}
+2025-07-27T17:48:09.592+0800	[34mINFO[0m	mq/mq.go:69	订单202507271738079079已设置为过期
+2025-07-27T17:48:11.017+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:48:42.002+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 210.209.84.142:443: i/o timeout"}
+2025-07-27T17:49:12.002+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 210.209.84.142:443: i/o timeout"}
+2025-07-27T17:49:42.001+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:50:14.001+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 43.226.16.8:443: i/o timeout"}
+2025-07-27T17:50:19.903+0800	[34mINFO[0m	mq/mq.go:69	订单202507271740193549已设置为过期
+2025-07-27T17:50:29.480+0800	[34mINFO[0m	mq/mq.go:69	订单202507271740275645已设置为过期
+2025-07-27T17:50:44.002+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 43.226.16.8:443: i/o timeout"}
+2025-07-27T17:51:14.002+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T17:51:14.815+0800	[34mINFO[0m	mq/mq.go:69	订单202507271741100097已设置为过期
+2025-07-27T18:47:56.700+0800	[34mINFO[0m	web/function.go:144	进入中间件
+2025-07-27T18:47:56.701+0800	[34mINFO[0m	web/function.go:155	原始请求体	{"body": "{\"order_id\":\"2025072718475616917\",\"amount\":1,\"type\":\"USDT-TRC20\",\"notify_url\":\"http:\\/\\/192.168.31.200\\/pay\\/notify\\/2025072718475616917\\/\",\"redirect_url\":\"http:\\/\\/192.168.31.200\\/pay\\/return\\/2025072718475616917\\/\",\"signature\":\"819ac724273244305574cfc85cdcc88a\"}"}
+2025-07-27T18:47:56.701+0800	[34mINFO[0m	web/function.go:171	请求体参数绑定成功
+2025-07-27T18:47:56.701+0800	[34mINFO[0m	web/function.go:183	请求体参数验证成功
+2025-07-27T18:47:56.701+0800	[34mINFO[0m	web/function.go:205	拼接的参数	{"params": ["type=USDT-TRC20", "amount=1", "notify_url=http://192.168.31.200/pay/notify/2025072718475616917/", "order_id=2025072718475616917", "redirect_url=http://192.168.31.200/pay/return/2025072718475616917/"]}
+2025-07-27T18:47:56.701+0800	[34mINFO[0m	web/function.go:235	拼接的查询字符串	{"queryString": "amount=1&notify_url=http://192.168.31.200/pay/notify/2025072718475616917/&order_id=2025072718475616917&redirect_url=http://192.168.31.200/pay/return/2025072718475616917/&type=USDT-TRC20tVY3VcOlP6RdAHwXl7SxcIc40pVPAqwDQix3liEDKHkR9iRS"}
+2025-07-27T18:47:56.701+0800	[34mINFO[0m	web/function.go:241	传入的签名	{"signature": "819ac724273244305574cfc85cdcc88a"}
+2025-07-27T18:47:56.701+0800	[34mINFO[0m	web/function.go:245	计算的签名	{"Signature": "819ac724273244305574cfc85cdcc88a"}
+2025-07-27T18:47:56.701+0800	[34mINFO[0m	web/function.go:254	签名验证成功
+2025-07-27T18:47:56.702+0800	[34mINFO[0m	web/function.go:278	CreateTransaction - 接收到的Type参数	{"type": "USDT-TRC20"}
+2025-07-27T18:47:56.704+0800	[34mINFO[0m	web/function.go:319	获取钱包地址成功	{"address": "123"}
+2025-07-27T18:47:56.750+0800	[34mINFO[0m	web/function.go:383	创建订单成功
+2025-07-27T18:47:56.751+0800	[34mINFO[0m	mq/mq.go:37	任务已加入队列:	{"info": {"ID":"288a59fa-1435-4354-ae3f-f4e58f1f50e2","Queue":"default","Type":"order:expiration","Payload":"MjAyNTA3MjcxODQ3NTYwNzAx","State":3,"MaxRetry":25,"Retried":0,"LastErr":"","LastFailedAt":"0001-01-01T00:00:00Z","Timeout":1800000000000,"Deadline":"0001-01-01T00:00:00Z","Group":"","NextProcessAt":"2025-07-27T18:57:56.750567+08:00","IsOrphaned":false,"Retention":0,"CompletedAt":"0001-01-01T00:00:00Z","Result":null}}
+2025-07-27T18:47:59.347+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:47:59.348+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:00.329+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:02.476+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:02.476+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:02.669+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:04.466+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:04.466+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:04.661+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:06.469+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:06.469+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:06.663+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:08.466+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:08.466+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:08.664+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:10.468+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:10.468+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:10.672+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:12.485+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:12.485+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:12.672+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:14.477+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:14.477+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:14.673+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:16.466+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:16.466+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:16.658+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:18.467+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:18.467+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:18.664+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:20.478+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:20.478+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:20.677+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:22.482+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:22.482+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:22.668+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:24.480+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:24.480+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:24.668+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:26.483+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:26.483+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:26.698+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:28.465+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:28.465+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:28.752+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:30.465+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:30.465+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:30.660+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:32.479+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:32.479+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:32.672+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:34.469+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:34.469+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:34.658+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:36.466+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:36.466+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:36.656+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:38.471+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:38.471+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:38.660+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:40.480+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:40.480+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:40.677+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:42.485+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:42.485+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:42.678+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:42.994+0800	[34mINFO[0m	web/function.go:144	进入中间件
+2025-07-27T18:48:42.994+0800	[34mINFO[0m	web/function.go:155	原始请求体	{"body": "{\"order_id\":\"2025072718484246437\",\"amount\":1,\"type\":\"TRX\",\"notify_url\":\"http:\\/\\/192.168.31.200\\/pay\\/notify\\/2025072718484246437\\/\",\"redirect_url\":\"http:\\/\\/192.168.31.200\\/pay\\/return\\/2025072718484246437\\/\",\"signature\":\"d0d80b099e543b8e217d1e75da15b63e\"}"}
+2025-07-27T18:48:42.994+0800	[34mINFO[0m	web/function.go:171	请求体参数绑定成功
+2025-07-27T18:48:42.995+0800	[34mINFO[0m	web/function.go:183	请求体参数验证成功
+2025-07-27T18:48:42.995+0800	[34mINFO[0m	web/function.go:205	拼接的参数	{"params": ["type=TRX", "amount=1", "notify_url=http://192.168.31.200/pay/notify/2025072718484246437/", "order_id=2025072718484246437", "redirect_url=http://192.168.31.200/pay/return/2025072718484246437/"]}
+2025-07-27T18:48:42.996+0800	[34mINFO[0m	web/function.go:235	拼接的查询字符串	{"queryString": "amount=1&notify_url=http://192.168.31.200/pay/notify/2025072718484246437/&order_id=2025072718484246437&redirect_url=http://192.168.31.200/pay/return/2025072718484246437/&type=TRXtVY3VcOlP6RdAHwXl7SxcIc40pVPAqwDQix3liEDKHkR9iRS"}
+2025-07-27T18:48:42.996+0800	[34mINFO[0m	web/function.go:241	传入的签名	{"signature": "d0d80b099e543b8e217d1e75da15b63e"}
+2025-07-27T18:48:42.996+0800	[34mINFO[0m	web/function.go:245	计算的签名	{"Signature": "d0d80b099e543b8e217d1e75da15b63e"}
+2025-07-27T18:48:42.996+0800	[34mINFO[0m	web/function.go:254	签名验证成功
+2025-07-27T18:48:42.996+0800	[34mINFO[0m	web/function.go:278	CreateTransaction - 接收到的Type参数	{"type": "TRX"}
+2025-07-27T18:48:42.996+0800	[34mINFO[0m	web/function.go:319	获取钱包地址成功	{"address": "123"}
+2025-07-27T18:48:42.996+0800	[34mINFO[0m	web/function.go:319	获取钱包地址成功	{"address": "123"}
+2025-07-27T18:48:42.997+0800	[34mINFO[0m	web/function.go:383	创建订单成功
+2025-07-27T18:48:42.997+0800	[34mINFO[0m	mq/mq.go:37	任务已加入队列:	{"info": {"ID":"4481a199-cfe4-46cd-b5cd-4196194f459a","Queue":"default","Type":"order:expiration","Payload":"MjAyNTA3MjcxODQ4NDIxOTYx","State":3,"MaxRetry":25,"Retried":0,"LastErr":"","LastFailedAt":"0001-01-01T00:00:00Z","Timeout":1800000000000,"Deadline":"0001-01-01T00:00:00Z","Group":"","NextProcessAt":"2025-07-27T18:58:42.997662+08:00","IsOrphaned":false,"Retention":0,"CompletedAt":"0001-01-01T00:00:00Z","Result":null}}
+2025-07-27T18:48:44.466+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:44.466+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:44.659+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:44.659+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:48:45.629+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:48:45.629+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:48:45.829+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:48:46.477+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:46.477+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:46.666+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:46.666+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:48:47.108+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:48:47.108+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:48:47.304+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:48:48.465+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:48.465+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:48.655+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:48.655+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:48:49.097+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:48:49.097+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:48:49.292+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:48:50.483+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:50.483+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:50.673+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:50.673+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:48:51.114+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:48:51.114+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:48:51.309+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:48:52.468+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:52.469+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:52.660+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:52.660+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:48:53.103+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:48:53.103+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:48:53.301+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:48:54.484+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:54.484+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:54.677+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:54.677+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:48:55.119+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:48:55.119+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:48:55.317+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:48:56.476+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:56.476+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:56.671+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:56.671+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:48:57.112+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:48:57.113+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:48:57.304+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:48:58.476+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:48:58.476+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:48:58.665+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:48:58.665+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:48:59.108+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:48:59.108+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:48:59.301+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:00.471+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:00.471+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:00.667+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:00.667+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:01.110+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:01.110+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:01.301+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:02.476+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:02.476+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:02.665+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:02.665+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:03.108+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:03.109+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:03.302+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:04.472+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:04.472+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:04.664+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:04.664+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:05.122+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:05.122+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:05.322+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:06.483+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:06.483+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:06.682+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:06.682+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:07.127+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:07.127+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:07.330+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:08.465+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:08.465+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:08.666+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:08.667+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:09.108+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:09.108+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:09.297+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:10.484+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:10.484+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:10.677+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:10.677+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:11.120+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:11.120+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:11.313+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:12.483+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:12.483+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:12.676+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:12.676+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:13.118+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:13.118+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:13.314+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:14.465+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:14.465+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:14.685+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:14.685+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:15.127+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:15.127+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:15.335+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:16.483+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:16.483+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:16.682+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:16.683+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:17.125+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:17.125+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:17.314+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:18.481+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:18.481+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:18.676+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:18.676+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:19.118+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:19.118+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:19.309+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:20.476+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:20.476+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:20.675+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:20.675+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:21.118+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:21.118+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:21.308+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:22.481+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:22.481+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:22.671+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:22.671+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:23.118+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:23.118+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:23.311+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:24.473+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:24.473+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:24.672+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:24.672+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:25.114+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:25.114+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:25.305+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:26.475+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:26.475+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:26.675+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:26.676+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:27.119+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:27.119+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:27.310+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:28.476+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:28.476+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:28.665+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:28.665+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:29.112+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:29.112+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:29.309+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:30.470+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:30.470+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:30.676+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:30.676+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:31.123+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:31.123+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:31.312+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:32.479+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:32.479+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:32.678+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:32.678+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:33.122+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:33.122+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:33.312+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:34.469+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:34.469+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:34.668+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:34.668+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:35.113+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:35.113+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:35.304+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:49:35.962+0800	[34mINFO[0m	web/function.go:144	进入中间件
+2025-07-27T18:49:35.962+0800	[34mINFO[0m	web/function.go:155	原始请求体	{"body": "{\"order_id\":\"2025072718493524341\",\"amount\":1,\"type\":\"USDT-Polygon\",\"notify_url\":\"http:\\/\\/192.168.31.200\\/pay\\/notify\\/2025072718493524341\\/\",\"redirect_url\":\"http:\\/\\/192.168.31.200\\/pay\\/return\\/2025072718493524341\\/\",\"signature\":\"4f6219bdb8bb2cb8517bd67d23c27246\"}"}
+2025-07-27T18:49:35.962+0800	[34mINFO[0m	web/function.go:171	请求体参数绑定成功
+2025-07-27T18:49:35.962+0800	[34mINFO[0m	web/function.go:183	请求体参数验证成功
+2025-07-27T18:49:35.962+0800	[34mINFO[0m	web/function.go:205	拼接的参数	{"params": ["type=USDT-Polygon", "amount=1", "notify_url=http://192.168.31.200/pay/notify/2025072718493524341/", "order_id=2025072718493524341", "redirect_url=http://192.168.31.200/pay/return/2025072718493524341/"]}
+2025-07-27T18:49:35.963+0800	[34mINFO[0m	web/function.go:235	拼接的查询字符串	{"queryString": "amount=1&notify_url=http://192.168.31.200/pay/notify/2025072718493524341/&order_id=2025072718493524341&redirect_url=http://192.168.31.200/pay/return/2025072718493524341/&type=USDT-PolygontVY3VcOlP6RdAHwXl7SxcIc40pVPAqwDQix3liEDKHkR9iRS"}
+2025-07-27T18:49:35.963+0800	[34mINFO[0m	web/function.go:241	传入的签名	{"signature": "4f6219bdb8bb2cb8517bd67d23c27246"}
+2025-07-27T18:49:35.963+0800	[34mINFO[0m	web/function.go:245	计算的签名	{"Signature": "4f6219bdb8bb2cb8517bd67d23c27246"}
+2025-07-27T18:49:35.963+0800	[34mINFO[0m	web/function.go:254	签名验证成功
+2025-07-27T18:49:35.963+0800	[34mINFO[0m	web/function.go:278	CreateTransaction - 接收到的Type参数	{"type": "USDT-Polygon"}
+2025-07-27T18:49:35.963+0800	[34mINFO[0m	web/function.go:319	获取钱包地址成功	{"address": "562163"}
+2025-07-27T18:49:35.965+0800	[34mINFO[0m	web/function.go:383	创建订单成功
+2025-07-27T18:49:35.965+0800	[34mINFO[0m	mq/mq.go:37	任务已加入队列:	{"info": {"ID":"657583fb-04c7-406e-8dae-d54d699236f8","Queue":"default","Type":"order:expiration","Payload":"MjAyNTA3MjcxODQ5MzUxODEy","State":3,"MaxRetry":25,"Retried":0,"LastErr":"","LastFailedAt":"0001-01-01T00:00:00Z","Timeout":1800000000000,"Deadline":"0001-01-01T00:00:00Z","Group":"","NextProcessAt":"2025-07-27T18:59:35.965275+08:00","IsOrphaned":false,"Retention":0,"CompletedAt":"0001-01-01T00:00:00Z","Result":null}}
+2025-07-27T18:49:36.474+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:49:36.475+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:49:36.665+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:49:36.665+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:49:37.107+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:49:37.108+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:49:37.306+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:50:07.307+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 199.59.149.237:443: i/o timeout"}
+2025-07-27T18:50:08.770+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:50:08.770+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:50:08.959+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:50:08.959+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:50:09.406+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:50:09.406+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:50:09.603+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:50:30.580+0800	[34mINFO[0m	web/function.go:144	进入中间件
+2025-07-27T18:50:30.580+0800	[34mINFO[0m	web/function.go:155	原始请求体	{"body": "{\"order_id\":\"2025072718503044150\",\"amount\":1,\"type\":\"USDT-BSC\",\"notify_url\":\"http:\\/\\/192.168.31.200\\/pay\\/notify\\/2025072718503044150\\/\",\"redirect_url\":\"http:\\/\\/192.168.31.200\\/pay\\/return\\/2025072718503044150\\/\",\"signature\":\"e6d92a4c5ed5db48627d87b515b5b208\"}"}
+2025-07-27T18:50:30.580+0800	[34mINFO[0m	web/function.go:171	请求体参数绑定成功
+2025-07-27T18:50:30.580+0800	[34mINFO[0m	web/function.go:183	请求体参数验证成功
+2025-07-27T18:50:30.580+0800	[34mINFO[0m	web/function.go:205	拼接的参数	{"params": ["type=USDT-BSC", "amount=1", "notify_url=http://192.168.31.200/pay/notify/2025072718503044150/", "order_id=2025072718503044150", "redirect_url=http://192.168.31.200/pay/return/2025072718503044150/"]}
+2025-07-27T18:50:30.581+0800	[34mINFO[0m	web/function.go:235	拼接的查询字符串	{"queryString": "amount=1&notify_url=http://192.168.31.200/pay/notify/2025072718503044150/&order_id=2025072718503044150&redirect_url=http://192.168.31.200/pay/return/2025072718503044150/&type=USDT-BSCtVY3VcOlP6RdAHwXl7SxcIc40pVPAqwDQix3liEDKHkR9iRS"}
+2025-07-27T18:50:30.581+0800	[34mINFO[0m	web/function.go:241	传入的签名	{"signature": "e6d92a4c5ed5db48627d87b515b5b208"}
+2025-07-27T18:50:30.581+0800	[34mINFO[0m	web/function.go:245	计算的签名	{"Signature": "e6d92a4c5ed5db48627d87b515b5b208"}
+2025-07-27T18:50:30.581+0800	[34mINFO[0m	web/function.go:254	签名验证成功
+2025-07-27T18:50:30.582+0800	[34mINFO[0m	web/function.go:278	CreateTransaction - 接收到的Type参数	{"type": "USDT-BSC"}
+2025-07-27T18:50:30.583+0800	[34mINFO[0m	web/function.go:319	获取钱包地址成功	{"address": "94556313"}
+2025-07-27T18:50:30.584+0800	[34mINFO[0m	web/function.go:383	创建订单成功
+2025-07-27T18:50:30.584+0800	[34mINFO[0m	mq/mq.go:37	任务已加入队列:	{"info": {"ID":"f19bc868-736e-473b-9fa2-180a9590730a","Queue":"default","Type":"order:expiration","Payload":"MjAyNTA3MjcxODUwMzA2MjEw","State":3,"MaxRetry":25,"Retried":0,"LastErr":"","LastFailedAt":"0001-01-01T00:00:00Z","Timeout":1800000000000,"Deadline":"0001-01-01T00:00:00Z","Group":"","NextProcessAt":"2025-07-27T19:00:30.584362+08:00","IsOrphaned":false,"Retention":0,"CompletedAt":"0001-01-01T00:00:00Z","Result":null}}
+2025-07-27T18:50:39.604+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 199.59.149.237:443: i/o timeout"}
+2025-07-27T18:50:40.480+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:50:40.480+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:50:40.669+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:50:40.669+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:50:41.113+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:50:41.113+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:50:41.305+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:50:47.965+0800	[34mINFO[0m	web/web.go:567	订单已手动完成	{"order_id": "2025072718503044150"}
+2025-07-27T18:50:47.966+0800	[34mINFO[0m	cron/cron.go:310	异步回调的拼接的参数	{"signatureString": "actual_amount=1&amount=1&block_transaction_id=0&order_id=2025072718503044150&status=2&token=94556313&trade_id=202507271850306210tVY3VcOlP6RdAHwXl7SxcIc40pVPAqwDQix3liEDKHkR9iRS"}
+2025-07-27T18:50:47.966+0800	[34mINFO[0m	cron/cron.go:367	异步回调的参数	{"参数": {"trade_id":"202507271850306210","order_id":"2025072718503044150","amount":1,"actual_amount":1,"token":"94556313","block_transaction_id":"0","signature":"9e7ab982bfb18c45de5784767de5e6d3","status":2}}
+2025-07-27T18:50:47.966+0800	[34mINFO[0m	cron/cron.go:227	发送异步请求，参数序列化为JSON:	{"url": "http://192.168.31.200/pay/notify/2025072718503044150/", "body": "{\"trade_id\":\"202507271850306210\",\"order_id\":\"2025072718503044150\",\"amount\":1,\"actual_amount\":1,\"token\":\"94556313\",\"block_transaction_id\":\"0\",\"signature\":\"9e7ab982bfb18c45de5784767de5e6d3\",\"status\":2}"}
+2025-07-27T18:50:47.988+0800	[34mINFO[0m	cron/cron.go:380	已经确认订单支付成功，并把回调CallBackConfirm设置为1
+2025-07-27T18:50:47.990+0800	[34mINFO[0m	notification/telegram.go:60	Tgbotkey为空，不能发送电报通知
+2025-07-27T18:50:47.990+0800	[34mINFO[0m	notification/bark.go:45	Barkkey为空，不能发送通知
+2025-07-27T18:51:11.305+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 199.59.149.237:443: i/o timeout"}
+2025-07-27T18:51:41.306+0800	[31mERROR[0m	BSC_USD/BSC_USD.go:152	查询BSC-USDT交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=56&module=account&action=tokentx&address=94556313&contractAddress=0x55d398326f99059ff775485246999027b3197955&apikey=5&page=1&offset=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T18:51:43.012+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:51:43.012+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:51:43.917+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:51:43.917+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:51:44.527+0800	[34mINFO[0m	web/function.go:144	进入中间件
+2025-07-27T18:51:44.527+0800	[34mINFO[0m	web/function.go:155	原始请求体	{"body": "{\"order_id\":\"2025072718514484564\",\"amount\":1,\"type\":\"USDT-ERC20\",\"notify_url\":\"http:\\/\\/192.168.31.200\\/pay\\/notify\\/2025072718514484564\\/\",\"redirect_url\":\"http:\\/\\/192.168.31.200\\/pay\\/return\\/2025072718514484564\\/\",\"signature\":\"538405e82f0feb85f122f23c78b45c11\"}"}
+2025-07-27T18:51:44.527+0800	[34mINFO[0m	web/function.go:171	请求体参数绑定成功
+2025-07-27T18:51:44.527+0800	[34mINFO[0m	web/function.go:183	请求体参数验证成功
+2025-07-27T18:51:44.527+0800	[34mINFO[0m	web/function.go:205	拼接的参数	{"params": ["type=USDT-ERC20", "amount=1", "notify_url=http://192.168.31.200/pay/notify/2025072718514484564/", "order_id=2025072718514484564", "redirect_url=http://192.168.31.200/pay/return/2025072718514484564/"]}
+2025-07-27T18:51:44.527+0800	[34mINFO[0m	web/function.go:235	拼接的查询字符串	{"queryString": "amount=1&notify_url=http://192.168.31.200/pay/notify/2025072718514484564/&order_id=2025072718514484564&redirect_url=http://192.168.31.200/pay/return/2025072718514484564/&type=USDT-ERC20tVY3VcOlP6RdAHwXl7SxcIc40pVPAqwDQix3liEDKHkR9iRS"}
+2025-07-27T18:51:44.527+0800	[34mINFO[0m	web/function.go:241	传入的签名	{"signature": "538405e82f0feb85f122f23c78b45c11"}
+2025-07-27T18:51:44.527+0800	[34mINFO[0m	web/function.go:245	计算的签名	{"Signature": "538405e82f0feb85f122f23c78b45c11"}
+2025-07-27T18:51:44.527+0800	[34mINFO[0m	web/function.go:254	签名验证成功
+2025-07-27T18:51:44.527+0800	[34mINFO[0m	web/function.go:278	CreateTransaction - 接收到的Type参数	{"type": "USDT-ERC20"}
+2025-07-27T18:51:44.527+0800	[34mINFO[0m	web/function.go:319	获取钱包地址成功	{"address": "1231023"}
+2025-07-27T18:51:44.530+0800	[34mINFO[0m	web/function.go:383	创建订单成功
+2025-07-27T18:51:44.572+0800	[34mINFO[0m	mq/mq.go:37	任务已加入队列:	{"info": {"ID":"06244559-a016-4681-a7eb-123c7d0edfc1","Queue":"default","Type":"order:expiration","Payload":"MjAyNTA3MjcxODUxNDQ0NzA0","State":3,"MaxRetry":25,"Retried":0,"LastErr":"","LastFailedAt":"0001-01-01T00:00:00Z","Timeout":1800000000000,"Deadline":"0001-01-01T00:00:00Z","Group":"","NextProcessAt":"2025-07-27T19:01:44.53081+08:00","IsOrphaned":false,"Retention":0,"CompletedAt":"0001-01-01T00:00:00Z","Result":null}}
+2025-07-27T18:51:44.823+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:51:44.823+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:51:45.010+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:52:15.055+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 199.59.149.237:443: i/o timeout"}
+2025-07-27T18:52:16.471+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:52:16.471+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:52:16.658+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:52:16.658+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:52:17.097+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:52:17.097+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:52:17.284+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:52:47.285+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 199.59.149.237:443: i/o timeout"}
+2025-07-27T18:53:17.286+0800	[31mERROR[0m	ERC20_USDT/ERC20_USDT.go:107	ERC20-USDT请求失败	{"error": "Get \"https://api.etherscan.io/v2/api?action=tokentx&address=1231023&apikey=5&chainid=1&contractAddress=0xdac17f958d2ee523a2206206994597c13d831ec7&module=account&offset=1&page=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T18:53:19.012+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:53:19.012+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:53:19.857+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:53:19.857+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:53:20.782+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:53:20.783+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:53:20.993+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:53:50.995+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 199.59.149.237:443: i/o timeout"}
+2025-07-27T18:54:20.996+0800	[31mERROR[0m	ERC20_USDT/ERC20_USDT.go:107	ERC20-USDT请求失败	{"error": "Get \"https://api.etherscan.io/v2/api?action=tokentx&address=1231023&apikey=5&chainid=1&contractAddress=0xdac17f958d2ee523a2206206994597c13d831ec7&module=account&offset=1&page=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T18:54:23.033+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:54:23.033+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:54:23.878+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:54:23.878+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:54:24.878+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:54:24.878+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:54:25.067+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:54:55.068+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 148.163.48.215:443: i/o timeout"}
+2025-07-27T18:55:25.069+0800	[31mERROR[0m	ERC20_USDT/ERC20_USDT.go:107	ERC20-USDT请求失败	{"error": "Get \"https://api.etherscan.io/v2/api?action=tokentx&address=1231023&apikey=5&chainid=1&contractAddress=0xdac17f958d2ee523a2206206994597c13d831ec7&module=account&offset=1&page=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T18:55:26.915+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:55:26.915+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:55:27.782+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:55:27.782+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:55:28.753+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:55:28.753+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:55:28.954+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:55:58.956+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 148.163.48.215:443: i/o timeout"}
+2025-07-27T18:56:28.956+0800	[31mERROR[0m	ERC20_USDT/ERC20_USDT.go:107	ERC20-USDT请求失败	{"error": "Get \"https://api.etherscan.io/v2/api?action=tokentx&address=1231023&apikey=5&chainid=1&contractAddress=0xdac17f958d2ee523a2206206994597c13d831ec7&module=account&offset=1&page=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T18:56:30.972+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:56:30.972+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:56:31.770+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:56:31.770+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:56:32.743+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:56:32.744+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:56:32.930+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:57:02.932+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 154.83.15.20:443: i/o timeout"}
+2025-07-27T18:57:32.933+0800	[31mERROR[0m	ERC20_USDT/ERC20_USDT.go:107	ERC20-USDT请求失败	{"error": "Get \"https://api.etherscan.io/v2/api?action=tokentx&address=1231023&apikey=5&chainid=1&contractAddress=0xdac17f958d2ee523a2206206994597c13d831ec7&module=account&offset=1&page=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T18:57:34.960+0800	[31mERROR[0m	tron/tron.go:114	Error unmarshalling JSON	{"error": "invalid character '<' looking for beginning of value"}
+2025-07-27T18:57:34.960+0800	[34mINFO[0m	cron/cron.go:126	第一个API未查询到交易记录，尝试第二个API
+2025-07-27T18:57:35.834+0800	[31mERROR[0m	cron/cron.go:130	第二个API查询失败	{"error": "API 返回错误状态码 401: {\"Error\":\"ApiKey not exists\"}\n"}
+2025-07-27T18:57:35.834+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:57:36.854+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:57:36.854+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:57:37.051+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:58:01.370+0800	[34mINFO[0m	mq/mq.go:69	订单202507271847560701已设置为过期
+2025-07-27T18:58:07.051+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 154.83.15.20:443: i/o timeout"}
+2025-07-27T18:58:37.052+0800	[31mERROR[0m	ERC20_USDT/ERC20_USDT.go:107	ERC20-USDT请求失败	{"error": "Get \"https://api.etherscan.io/v2/api?action=tokentx&address=1231023&apikey=5&chainid=1&contractAddress=0xdac17f958d2ee523a2206206994597c13d831ec7&module=account&offset=1&page=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T18:58:38.001+0800	[34mINFO[0m	trx/trx.go:71	第一个API开始查询TRX转账记录	{"order_id": "202507271848421961"}
+2025-07-27T18:58:39.011+0800	[31mERROR[0m	trx/trx.go:84	获取TRX转账记录失败	{"error": "API返回错误状态码: 401"}
+2025-07-27T18:58:39.011+0800	[34mINFO[0m	trx/TronGrid_trx.go:106	第二个TRX_TronGrid开始查询	{"order_id": "202507271848421961"}
+2025-07-27T18:58:39.863+0800	[31mERROR[0m	trx/TronGrid_trx.go:149	TRX_TronGrid返回状态码不是200	{"status_code": 401}
+2025-07-27T18:58:46.051+0800	[34mINFO[0m	mq/mq.go:69	订单202507271848421961已设置为过期
+2025-07-27T18:59:09.864+0800	[31mERROR[0m	USDT_Polygon/USDT_Polygon.go:71	查询USDT-Polygon交易失败	{"error": "请求失败: Get \"https://api.etherscan.io/v2/api?chainid=137&module=account&action=tokentx&page=1&sort=desc&contractaddress=0xc2132D05D31c914a87C6611C10748AEb04B58e8F&address=562163&offset=1&apikey=5\": dial tcp 208.43.237.140:443: i/o timeout"}
+2025-07-27T18:59:35.654+0800	[34mINFO[0m	mq/mq.go:69	订单202507271849351812已设置为过期
+2025-07-27T18:59:39.865+0800	[31mERROR[0m	ERC20_USDT/ERC20_USDT.go:107	ERC20-USDT请求失败	{"error": "Get \"https://api.etherscan.io/v2/api?action=tokentx&address=1231023&apikey=5&chainid=1&contractAddress=0xdac17f958d2ee523a2206206994597c13d831ec7&module=account&offset=1&page=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T19:00:10.044+0800	[31mERROR[0m	ERC20_USDT/ERC20_USDT.go:107	ERC20-USDT请求失败	{"error": "Get \"https://api.etherscan.io/v2/api?action=tokentx&address=1231023&apikey=5&chainid=1&contractAddress=0xdac17f958d2ee523a2206206994597c13d831ec7&module=account&offset=1&page=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T19:00:42.001+0800	[31mERROR[0m	ERC20_USDT/ERC20_USDT.go:107	ERC20-USDT请求失败	{"error": "Get \"https://api.etherscan.io/v2/api?action=tokentx&address=1231023&apikey=5&chainid=1&contractAddress=0xdac17f958d2ee523a2206206994597c13d831ec7&module=account&offset=1&page=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T19:01:14.001+0800	[31mERROR[0m	ERC20_USDT/ERC20_USDT.go:107	ERC20-USDT请求失败	{"error": "Get \"https://api.etherscan.io/v2/api?action=tokentx&address=1231023&apikey=5&chainid=1&contractAddress=0xdac17f958d2ee523a2206206994597c13d831ec7&module=account&offset=1&page=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T19:01:46.001+0800	[31mERROR[0m	ERC20_USDT/ERC20_USDT.go:107	ERC20-USDT请求失败	{"error": "Get \"https://api.etherscan.io/v2/api?action=tokentx&address=1231023&apikey=5&chainid=1&contractAddress=0xdac17f958d2ee523a2206206994597c13d831ec7&module=account&offset=1&page=1&sort=desc\": context deadline exceeded (Client.Timeout exceeded while awaiting headers)"}
+2025-07-27T19:01:46.472+0800	[34mINFO[0m	mq/mq.go:69	订单202507271851444704已设置为过期
+2025-07-28T15:55:03.223+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-28T15:55:03.224+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-28T15:55:03.224+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-28T15:55:03.316+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-28T15:55:08.996+0800	[34mINFO[0m	mq/mq.go:62	订单查询失败
+2025-07-28T15:55:08.997+0800	[34mINFO[0m	mq/mq.go:62	订单查询失败
+2025-07-30T18:19:39.085+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:19:39.085+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T18:19:39.085+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T18:19:39.090+0800	[34mINFO[0m	sdb/sdb.go:201	主题设置表为空，创建默认设置
+2025-07-30T18:19:39.091+0800	[34mINFO[0m	sdb/sdb.go:208	主题设置表默认设置创建成功
+2025-07-30T18:19:39.193+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:19:44.427+0800	[34mINFO[0m	mq/mq.go:62	订单查询失败
+2025-07-30T18:19:44.427+0800	[34mINFO[0m	mq/mq.go:62	订单查询失败
+2025-07-30T18:19:53.076+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:19:53.077+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T18:19:53.077+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T18:19:53.086+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:20:34.736+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:20:34.737+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T18:20:34.737+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T18:20:34.742+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:22:43.496+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:22:43.496+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T18:22:43.496+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T18:22:43.502+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:26:47.193+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:26:47.193+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T18:26:47.193+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T18:26:47.198+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:27:04.614+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:27:04.614+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T18:27:04.614+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T18:27:04.620+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:27:20.493+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:27:20.493+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T18:27:20.493+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T18:27:20.499+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:32:01.095+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:32:01.096+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T18:32:01.096+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T18:32:01.101+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:32:50.534+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:32:50.534+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T18:32:50.534+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T18:32:50.539+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:33:23.827+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:33:23.828+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T18:33:23.828+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T18:33:23.834+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:36:58.493+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:36:58.493+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T18:36:58.493+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T18:36:58.497+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:36:59.542+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:36:59.542+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T18:36:59.542+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T18:36:59.547+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:37:35.615+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:37:35.615+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T18:37:35.615+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T18:37:35.620+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:45:54.529+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:45:54.530+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T18:45:54.530+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T18:45:54.543+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:46:09.245+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:46:09.246+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T18:46:09.246+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T18:46:09.250+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:46:43.462+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:46:43.463+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T18:46:43.463+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T18:46:43.466+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:48:23.986+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:48:23.986+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T18:48:23.986+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T18:48:23.995+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:49:06.825+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:49:06.825+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T18:49:06.825+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T18:49:06.830+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:50:00.747+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:50:00.747+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T18:50:00.747+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T18:50:00.752+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:50:30.937+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:50:30.937+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T18:50:30.937+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T18:50:30.943+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:51:01.383+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:51:01.383+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T18:51:01.383+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T18:51:01.388+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:51:52.958+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:51:52.958+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T18:51:52.958+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T18:51:52.964+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:52:45.017+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:52:45.017+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T18:52:45.017+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T18:52:45.022+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:54:22.216+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:54:22.217+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T18:54:22.217+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T18:54:22.227+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T18:59:15.812+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T18:59:15.812+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T18:59:15.812+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T18:59:15.817+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:02:11.732+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:02:11.732+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T19:02:11.733+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T19:02:11.737+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:39:32.765+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:39:32.766+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T19:39:32.766+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T19:39:32.773+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:43:48.328+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:43:48.328+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T19:43:48.328+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T19:43:48.332+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:47:22.506+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:47:22.506+0800	[34mINFO[0m	sdb/sdb.go:107	开始初始化数据库
+2025-07-30T19:47:22.506+0800	[34mINFO[0m	sdb/sdb.go:108	开始迁移数据库
+2025-07-30T19:47:22.512+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:47:58.611+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:47:58.612+0800	[34mINFO[0m	sdb/sdb.go:107	开始初始化数据库
+2025-07-30T19:47:58.613+0800	[34mINFO[0m	sdb/sdb.go:108	开始迁移数据库
+2025-07-30T19:47:58.639+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:48:00.092+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:48:00.093+0800	[34mINFO[0m	sdb/sdb.go:107	开始初始化数据库
+2025-07-30T19:48:00.093+0800	[34mINFO[0m	sdb/sdb.go:108	开始迁移数据库
+2025-07-30T19:48:00.098+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:48:11.225+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:48:11.225+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:48:11.225+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:48:11.229+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:48:27.569+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:48:27.570+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:48:27.570+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:48:27.576+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:48:44.383+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:48:44.383+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:48:44.383+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:48:44.386+0800	[34mINFO[0m	sdb/sdb.go:201	主题表为空，创建默认主题
+2025-07-30T19:48:44.387+0800	[34mINFO[0m	sdb/sdb.go:210	默认主题创建成功
+2025-07-30T19:48:44.389+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:48:55.952+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:48:55.952+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:48:55.952+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:48:55.957+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:49:16.489+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:49:16.489+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:49:16.490+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:49:16.494+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:49:27.476+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:49:27.476+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:49:27.476+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:49:27.481+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:49:52.745+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:49:52.745+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:49:52.745+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:49:52.750+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:52:48.719+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:52:48.719+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:52:48.719+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:52:48.728+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:52:55.536+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:52:55.536+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:52:55.536+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:52:55.541+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:53:00.322+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:53:00.322+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:53:00.322+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:53:00.326+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:53:07.182+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:53:07.182+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:53:07.182+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:53:07.187+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:53:13.959+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:53:13.960+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:53:13.960+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:53:13.964+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:53:15.113+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:53:15.113+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:53:15.113+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:53:15.118+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:54:24.008+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:54:24.008+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:54:24.008+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:54:24.014+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:54:40.065+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:54:40.065+0800	[34mINFO[0m	sdb/sdb.go:112	开始初始化数据库
+2025-07-30T19:54:40.065+0800	[34mINFO[0m	sdb/sdb.go:113	开始迁移数据库
+2025-07-30T19:54:40.070+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T19:55:42.608+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T19:55:42.609+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T19:55:42.609+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T19:55:42.619+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T20:32:54.849+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T20:32:54.850+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T20:32:54.850+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T20:32:54.855+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T20:33:07.558+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T20:33:07.558+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T20:33:07.558+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T20:33:07.567+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T20:33:20.115+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T20:33:20.115+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T20:33:20.115+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T20:33:20.123+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T20:33:31.572+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T20:33:31.572+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T20:33:31.572+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T20:33:31.657+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T20:33:51.950+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T20:33:51.951+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T20:33:51.951+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T20:33:51.955+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T20:34:04.864+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T20:34:04.865+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T20:34:04.865+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T20:34:04.877+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T20:34:18.478+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T20:34:18.478+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T20:34:18.478+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T20:34:18.524+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T20:34:30.590+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T20:34:30.591+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T20:34:30.591+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T20:34:30.597+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T20:34:46.749+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T20:34:46.750+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T20:34:46.750+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T20:34:46.795+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T20:35:01.664+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T20:35:01.665+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T20:35:01.665+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T20:35:01.711+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T20:35:37.977+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T20:35:37.977+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T20:35:37.977+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T20:35:38.025+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-30T20:36:33.692+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-30T20:36:33.692+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-30T20:36:33.692+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-30T20:36:33.696+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功
+2025-07-31T14:15:18.816+0800	[34mINFO[0m	sdb/sdb.go:25	数据库链接成功
+2025-07-31T14:15:18.817+0800	[34mINFO[0m	sdb/sdb.go:106	开始初始化数据库
+2025-07-31T14:15:18.817+0800	[34mINFO[0m	sdb/sdb.go:107	开始迁移数据库
+2025-07-31T14:15:18.962+0800	[34mINFO[0m	rdb/rdb.go:54	redis 连接成功

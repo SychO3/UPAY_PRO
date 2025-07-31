@@ -93,8 +93,8 @@ type Setting struct {
 	ExpirationDate         time.Duration
 	AppName                string //应用名称
 	CustomerServiceContact string //客户服务联系方式
-}
 
+}
 type ApiKey struct {
 	gorm.Model
 	Tronscan  string

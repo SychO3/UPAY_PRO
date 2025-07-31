@@ -29,7 +29,7 @@ class UpayPro {
                  'type' => 'input',
              ],
              'type' => [
-                'label' => '支付通道可选|USDT-TRC20|TRX|USDT-Polygon|USDT-BSC|USDT-ERC20',
+                'label' => '支付通道可选|USDT-TRC20|TRX|USDT-Polygon|USDT-BSC|USDT-ERC20|USDT-ArbitrumOne|USDC-ERC20|USDC-Polygon|USDC-BSC|USDC-ArbitrumOne',
                 'description' => '',
                 'type' => 'input',
             ]

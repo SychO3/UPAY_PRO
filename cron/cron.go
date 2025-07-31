@@ -16,6 +16,11 @@ import (
 	"time"
 	"upay_pro/BSC_USD"
 	"upay_pro/ERC20_USDT"
+	"upay_pro/USDC_ArbitrumOne"
+	"upay_pro/USDC_BSC"
+	"upay_pro/USDC_ERC20"
+	"upay_pro/USDC_Polygon"
+	"upay_pro/USDT_ArbitrumOne"
 	"upay_pro/USDT_Polygon"
 	"upay_pro/db/rdb"
 	"upay_pro/db/sdb"
@@ -137,6 +142,26 @@ func (j UsdtCheckJob) Run() {
 			}
 		case "USDT-ERC20":
 			if ERC20_USDT.Start(v) {
+				go ProcessCallback(v)
+			}
+		case "USDT-ArbitrumOne":
+			if USDT_ArbitrumOne.Start(v) {
+				go ProcessCallback(v)
+			}
+		case "USDC-ERC20":
+			if USDC_ERC20.Start(v) {
+				go ProcessCallback(v)
+			}
+		case "USDC-Polygon":
+			if USDC_Polygon.Start(v) {
+				go ProcessCallback(v)
+			}
+		case "USDC-BSC":
+			if USDC_BSC.Start(v) {
+				go ProcessCallback(v)
+			}
+		case "USDC-ArbitrumOne":
+			if USDC_ArbitrumOne.Start(v) {
 				go ProcessCallback(v)
 			}
 		default:

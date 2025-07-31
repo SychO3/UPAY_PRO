@@ -451,6 +451,16 @@ func CheckoutCounter(c *gin.Context) {
 		viewModel.Logo = "https://bscscan.com/token/images/busdt_32.png"
 	case "USDT-ERC20":
 		viewModel.Logo = "https://static.tronscan.org/production/logo/usdtlogo.png"
+	case "USDT-ArbitrumOne":
+		viewModel.Logo = "https://bscscan.com/token/images/centre-usdc_28.png"
+	case "USDC-ERC20":
+		viewModel.Logo = "https://bscscan.com/token/images/centre-usdc_28.png"
+	case "USDC-Polygon":
+		viewModel.Logo = "https://bscscan.com/token/images/centre-usdc_28.png"
+	case "USDC-BSC":
+		viewModel.Logo = "https://bscscan.com/token/images/centre-usdc_28.png"
+	case "USDC-ArbitrumOne":
+		viewModel.Logo = "https://bscscan.com/token/images/centre-usdc_28.png"
 	default:
 		viewModel.Logo = "https://static.tronscan.org/production/logo/usdtlogo.png"
 	}

@@ -23,7 +23,7 @@ class UPAY_plugin {
         'showname'    => 'UPAY', // 展示名称
         'author'      => 'UPAY', // 作者
         'link'        => 'https://github.com/wangegou/UPAY_PRO', // 官方链接
-        'types'       => [1,2,3,4,5], // 支持的支付类型（数字编号）
+        'types'       => [1,2,3,4,5,6,7,8,9,10], // 支持的支付类型（数字编号）
         'inputs' => [ // 插件需要的输入参数
             'appurl' => [ // API 接口地址
                 'name' => 'API接口地址',
@@ -44,6 +44,11 @@ class UPAY_plugin {
                     3 => 'USDT-Polygon',
                     4 => 'USDT-BSC',
                     5 => 'USDT-ERC20',
+                    6 => 'USDT-ArbitrumOne',
+                    7 => 'USDC-ERC20',
+                    8 => 'USDC-Polygon',
+                    9 => 'USDC-BSC',
+                    10 => 'USDC-ArbitrumOne',
                 ],
                 'note' => '选择支持的支付币种',
             ],
@@ -67,7 +72,7 @@ class UPAY_plugin {
         }
         
         // 默认返回所有支持的币种（数字编号）
-        return [1,2,3,4,5];
+        return [1,2,3,4,5,6,7,8,9,10];
     }
 
     /**
@@ -190,7 +195,12 @@ class UPAY_plugin {
             2 => 'TRX',
             3 => 'USDT-Polygon',
             4 => 'USDT-BSC',
-            5 => 'USDT-ERC20'
+            5 => 'USDT-ERC20',
+            6 => 'USDT-ArbitrumOne',
+            7 => 'USDC-ERC20',
+            8 => 'USDC-Polygon',
+            9 => 'USDC-BSC',
+            10 => 'USDC-ArbitrumOne',
         ];
         
         if (isset($typeMapping[$typeNumber])) {
@@ -238,7 +248,7 @@ class UPAY_plugin {
             throw new Exception('支付币种类型不能为空');
         }
         
-        if (!in_array($order['typename'], [1,2,3,4,5])) {
+        if (!in_array($order['typename'], [1,2,3,4,5,6,7,8,9,10])) {
             throw new Exception('不支持的币种类型: ' . $order['typename']);
         }
 

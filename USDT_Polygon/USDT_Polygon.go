@@ -61,6 +61,7 @@ func (c *POLYGONClient) GetTransfers(contractAddress, walletAddress string) (*Ap
 
 func Start(order sdb.Orders) bool {
 	apiKey := sdb.GetApiKey().Etherscan
+	// USDT的合约地址：0xc2132D05D31c914a87C6611C10748AEb04B58e8F
 	contractAddress := "0xc2132D05D31c914a87C6611C10748AEb04B58e8F"
 	walletAddress := order.Token // 使用订单中的钱包地址
 
@@ -112,8 +113,11 @@ func Start(order sdb.Orders) bool {
 		// 更新数据库订单记录
 		re := sdb.DB.Save(&order)
 		if re.Error == nil {
+			mylog.Logger.Info("USDT_Polygon: 订单入账成功")
 			return true
 		}
+		mylog.Logger.Error("USDT_Polygon: 订单入账失败", zap.Error(re.Error))
+		return false
 	}
 
 	return false
