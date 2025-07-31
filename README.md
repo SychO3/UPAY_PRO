@@ -66,6 +66,7 @@ docker run -d \
   --name upay_pro \
   -p 8090:8090 \
   -v upay_logs:/app/logs \
+  -v upay_db:/app/DBS \
   --restart always \
 wangergou111/upay:latest
 ```
@@ -76,6 +77,12 @@ wangergou111/upay:latest
 /var/lib/docker/volumes/upay_logs/\_data
 ```
 
+默认数据库挂载路径为：
+
+```
+/var/lib/docker/volumes/upay_db/\_data
+```
+
 反向代理设置：http://127.0.0.1:8090
 
 #### Docker 高手 拉取镜像，自定义启动参数
@@ -83,6 +90,17 @@ wangergou111/upay:latest
 ```bash
 docker pull wangergou111/upay:latest
 ```
+
+### Docker 更新
+
+1. 停止容器
+2. 删除容器
+3. 删除镜像
+4. 拉取最新镜像
+5. 启动容器
+   关于数据：
+   1 、因为之前你的日志和数据库是以卷方式挂载的，所以更新镜像后，数据不会丢失。
+   2 、如果你之前是自定义挂载的，请重新挂载即可
 
 #### 反馈与建议
 
