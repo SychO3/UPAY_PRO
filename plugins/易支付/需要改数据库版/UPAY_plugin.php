@@ -23,7 +23,7 @@ class UPAY_plugin {
         'showname'    => 'UPAY', // 展示名称
         'author'      => 'UPAY', // 作者
         'link'        => 'https://github.com/wangegou/UPAY_PRO', // 官方链接
-        'types'       => ['USDT-TRC20', 'TRX', 'USDT-Polygon', 'USDT-BSC', 'USDT-ERC20'], // 支持的支付类型
+        'types'       => ['USDT-TRC20', 'TRX', 'USDT-Polygon', 'USDT-BSC', 'USDT-ERC20', 'USDT-ArbitrumOne', 'USDC-ERC20', 'USDC-Polygon', 'USDC-BSC', 'USDC-ArbitrumOne'], // 支持的支付类型
         'inputs' => [ // 插件需要的输入参数
             'appurl' => [ // API 接口地址
                 'name' => 'API接口地址',
@@ -44,6 +44,11 @@ class UPAY_plugin {
                     'USDT-Polygon' => 'USDT-Polygon',
                     'USDT-BSC' => 'USDT-BSC',
                     'USDT-ERC20' => 'USDT-ERC20',
+                    'USDT-ArbitrumOne' => 'USDT-ArbitrumOne',
+                    'USDC-ERC20' => 'USDC-ERC20',
+                    'USDC-Polygon' => 'USDC-Polygon',
+                    'USDC-BSC' => 'USDC-BSC',
+                    'USDC-ArbitrumOne' => 'USDC-ArbitrumOne',
                 ],
                 'note' => '选择支持的支付币种',
             ],
@@ -67,7 +72,7 @@ class UPAY_plugin {
         }
         
         // 默认返回所有支持的币种
-        return ['USDT-TRC20', 'TRX', 'USDT-Polygon','USDT-BSC','USDT-ERC20'];
+        return ['USDT-TRC20', 'TRX', 'USDT-Polygon','USDT-BSC','USDT-ERC20','USDT-ArbitrumOne','USDC-ERC20','USDC-Polygon','USDC-BSC','USDC-ArbitrumOne'];
     }
 
     /**
@@ -216,7 +221,7 @@ class UPAY_plugin {
             throw new Exception('支付币种类型不能为空');
         }
         
-        if (!in_array($order['typename'], ['USDT-TRC20', 'TRX', 'USDT-Polygon', 'USDT-BSC', 'USDT-ERC20'])) {
+        if (!in_array($order['typename'], ['USDT-TRC20', 'TRX', 'USDT-Polygon', 'USDT-BSC', 'USDT-ERC20','USDT-ArbitrumOne','USDC-ERC20','USDC-Polygon','USDC-BSC','USDC-ArbitrumOne'])) {
             throw new Exception('不支持的币种类型: ' . $order['typename']);
         }
 
