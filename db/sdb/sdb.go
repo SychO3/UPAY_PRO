@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"math/rand"
+	"os"
 	"time"
 	"upay_pro/mylog"
 
@@ -17,7 +18,10 @@ import (
 var DB *gorm.DB
 
 func init() {
-	db, err := gorm.Open(sqlite.Open("upay_pro.db"), &gorm.Config{})
+	// 确保目录存在
+	// 创建目录
+	os.MkdirAll("DBS", 0755)
+	db, err := gorm.Open(sqlite.Open("DBS/upay_pro.db"), &gorm.Config{})
 	if err != nil {
 		mylog.Logger.Error("open db error", zap.Error(err))
 		mylog.Logger.Sync()
