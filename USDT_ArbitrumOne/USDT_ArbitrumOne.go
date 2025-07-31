@@ -50,12 +50,12 @@ type APIResponse struct {
 var Client = &http.Client{
 	Timeout: time.Second * 30,
 	// 设置代理
-	Transport: &http.Transport{
+	/* 	Transport: &http.Transport{
 		Proxy: http.ProxyURL(&url.URL{
 			Scheme: "http",
 			Host:   "127.0.0.1:7890",
 		}),
-	},
+	}, */
 }
 
 func GETHTTP(order sdb.Orders) (APIResponse, error) {
