@@ -7,7 +7,7 @@
 原项目地址：https://github.com/assimon/epusdt
 首次二开项目地址：https://github.com/wangegou/UPAY
 
-感谢！ 原作者 assimon，因为 epusdt 项目，我才发现 go 这个语言，才会去学习 go 开发。
+感谢原作者 assimon，因为 epusdt 项目，我才发现 go 这个语言，才会去学习 go 开发。
 
 ## 🚀 项目特性
 
@@ -35,7 +35,7 @@ YouTube：https://youtu.be/-jsk6_KKUy4
 
 反向代理端口设置http://127.0.0.1:8090
 
-反向代理设置：
+尝鲜预览 [UPAY Pro 预览](预览.md)
 
 ### . 访问系统
 
