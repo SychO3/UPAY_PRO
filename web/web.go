@@ -36,9 +36,11 @@ func Start() {
 	   	})) */
 	// 加载模版
 	r.LoadHTMLGlob("static/*.html")
+	// 加载静态资源并把原始目录重定向
+
 	r.Static("/css", "./static/css")
 	r.Static("/js", "./static/js")
-
+	// 首页路由
 	r.GET("/", func(c *gin.Context) {
 		c.HTML(200, "index.html", gin.H{})
 	})
@@ -232,6 +234,7 @@ func Start() {
 				c.JSON(400, gin.H{"code": 1, "message": "新密码不能为空"})
 				return
 			} */
+			//  验证参数是否符合要求
 			err := validate.Struct(req)
 			if err != nil {
 				c.JSON(400, gin.H{"code": 1, "message": err.Error()})
@@ -239,7 +242,7 @@ func Start() {
 			}
 
 			// 对密码加密
-			hash, err := sdb.HashPassword(req.NewPassword)
+			hash, _ := sdb.HashPassword(req.NewPassword)
 
 			// 更新用户密码
 			result := sdb.DB.Model(&sdb.User{}).Where("id = ?", req.UserId).Update("PassWord", hash)
@@ -278,7 +281,8 @@ func Start() {
 			// 查询数据库中的钱包记录
 			var existingWallet sdb.WalletAddress
 			// 检查输入的币种的汇率是否存在，如果存在验证输入的汇率和数据库中的汇率是否一致，如果能找到，说明已经存在了，返回错误要求为汇率必须输入为一致；
-			if err := sdb.DB.Where("currency = ? ", wallet.Currency).First(&existingWallet).Error; err == nil {
+			// 这里使用Last是为了获取最新的一条记录，因为如果有两条记录，说明之前有过修改，所以需要验证最新的一条记录的汇率是否一致
+			if err := sdb.DB.Where("currency = ? ", wallet.Currency).Last(&existingWallet).Error; err == nil {
 
 				fmt.Println("existingWallet.Rate:", existingWallet.Rate)
 				fmt.Println("wallet.Rate:", wallet.Rate)
@@ -538,41 +542,42 @@ func Start() {
 		})
 
 		// 手动补单
-		admin.POST("/api/manual-complete-order", func(ctx *gin.Context) {
+		admin.POST("/api/manual-complete-order", func(c *gin.Context) {
 			var req struct {
 				OrderID string `json:"order_id" validate:"required"`
 			}
-			if err := ctx.ShouldBindJSON(&req); err != nil {
-				ctx.JSON(400, gin.H{"code": 1, "message": "参数绑定错误"})
+			if err := c.ShouldBindJSON(&req); err != nil {
+				c.JSON(400, gin.H{"code": 1, "message": "参数绑定错误"})
 				return
 			}
-			validate := validator.New()
+			// validate := validator.New()
+			// 验证参数是否符合要求
 			err := validate.Struct(req)
 			if err != nil {
-				ctx.JSON(400, gin.H{"code": 1, "message": "参数验证错误"})
+				c.JSON(400, gin.H{"code": 1, "message": "参数验证错误"})
 				return
 			}
 			var order sdb.Orders
 			// 通过订单号或者商城订单号查询最新的那条记录
 			sdb.DB.Where("order_id = ?", req.OrderID).Or("trade_id = ?", req.OrderID).Order("id DESC").First(&order)
 			if order.ID == 0 {
-				ctx.JSON(400, gin.H{"code": 1, "message": "订单不存在"})
+				c.JSON(400, gin.H{"code": 1, "message": "订单不存在"})
 				return
 			}
 			order.Status = sdb.StatusPaySuccess
 			result := sdb.DB.Save(&order)
 			if result.Error != nil {
-				ctx.JSON(500, gin.H{"code": 1, "message": "保存失败"})
+				c.JSON(500, gin.H{"code": 1, "message": "保存失败"})
 				return
 			}
 			mylog.Logger.Info("订单已手动完成", zap.Any("order_id", order.OrderId))
 			// 异步回调
 			go cron.ProcessCallback(order)
-			ctx.JSON(200, gin.H{"code": 0, "message": "订单已手动完成"})
+			c.JSON(200, gin.H{"code": 0, "message": "订单已手动完成"})
 		})
 
 		// API密钥管理API
-		// 获取API密钥
+		// 获取波场和以太坊API密钥
 		admin.GET("/api/apikeys", func(c *gin.Context) {
 			var apiKey sdb.ApiKey
 			result := sdb.DB.First(&apiKey)

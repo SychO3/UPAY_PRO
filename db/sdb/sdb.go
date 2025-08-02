@@ -215,9 +215,9 @@ func GenerateSecretKey(length int) string {
 
 func GetSetting() Setting {
 	var setting Setting
-	result := DB.First(&setting)
+	DB.First(&setting)
 
-	if result.RowsAffected == 0 {
+	/* if result.RowsAffected == 0 {
 		mylog.Logger.Info("系统设置不存在，创建默认设置")
 		// 创建默认设置
 		defaultSetting := Setting{
@@ -241,7 +241,7 @@ func GetSetting() Setting {
 			return setting // 返回空设置
 		}
 		return defaultSetting
-	}
+	} */
 
 	return setting
 }
@@ -284,4 +284,14 @@ func GetApiKey() ApiKey {
 	var apikey ApiKey
 	DB.First(&apikey)
 	return apikey
+}
+
+func GetUserByUsername() string {
+	var user User
+	re := DB.First(&user)
+	if re.Error != nil {
+		mylog.Logger.Error("查询用户失败", zap.Error(re.Error))
+		return ""
+	}
+	return user.UserName
 }

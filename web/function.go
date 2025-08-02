@@ -31,8 +31,8 @@ import (
 
 // 自定义Claims结构
 type MyClaims struct {
-	UserID               int `json:"user_id"` // 自定义字段
-	jwt.RegisteredClaims     // 内嵌标准字段（如过期时间、签发者等）
+	UserName             string `json:"user_id"` // 自定义字段
+	jwt.RegisteredClaims        // 内嵌标准字段（如过期时间、签发者等）
 }
 
 var (
@@ -47,7 +47,7 @@ func GenerateToken() string {
 
 	// 2. 创建Claims（数据载体）
 	claims := MyClaims{
-		UserID: 123, // 自定义数据
+		UserName: sdb.GetUserByUsername(), // 自定义数据，让这个字段变得有意义，方便后续验证
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(time.Now().Add(24 * time.Hour)), // 1小时后过期
 			Issuer:    "my-server",                                        // 签发者标识
@@ -114,7 +114,7 @@ func JWTAuthMiddleware() gin.HandlerFunc {
 
 		}
 		// 验证cookie
-		_, err = ParseToken(cookie)
+		claims, err := ParseToken(cookie)
 		if err != nil {
 			c.Redirect(302, "/login")
 			/* 	c.JSON(http.StatusOK, gin.H{
@@ -126,7 +126,18 @@ func JWTAuthMiddleware() gin.HandlerFunc {
 			return
 
 		}
+		// 2. 验证用户，是否和数据库里一致
+		if claims.UserName != sdb.GetUserByUsername() {
+			c.Redirect(302, "/login")
+			/* 	c.JSON(http.StatusOK, gin.H{
+				"code": -1,
+				"msg":  "未登录",
+			}) */
 
+			c.Abort()
+			return
+		}
+		// 3. 身份验证通过
 		c.Next()
 
 	}
@@ -338,12 +349,16 @@ func CreateTransaction(c *gin.Context) {
 
 		ActualAmount_Token := fmt.Sprintf("%s_%f", Token, ActualAmount)
 
-		// 获取 Redis 中当前金额
+		// 检查Redis中是否有该金额
 		currentAmount := getRedisAmount(ActualAmount_Token)
 
-		// 如果钱包地址没有被占用，设置 Redis 值并退出循环
-		if currentAmount == "" {
-			rdb.RDB.Set(context.Background(), ActualAmount_Token, ActualAmount, sdb.GetSetting().ExpirationDate)
+		// 如果钱包地址没有被占用，getRedisAmount 返回 false
+		if currentAmount == false {
+			err := rdb.RDB.Set(context.Background(), ActualAmount_Token, ActualAmount, sdb.GetSetting().ExpirationDate).Err()
+			if err != nil {
+				mylog.Logger.Error("设置 Redis 中金额时，操作过程发生错误", zap.Any("err", err))
+				continue
+			}
 			found = true
 			break
 		} else {
@@ -377,10 +392,10 @@ func CreateTransaction(c *gin.Context) {
 	result := sdb.DB.Create(&order)
 	if result.Error != nil {
 		c.JSON(500, gin.H{"code": 1, "message": "创建订单失败1"})
-		fmt.Println(result.Error)
+		mylog.Logger.Error("创建订单失败", zap.Any("err", result.Error))
 		return
 	}
-	mylog.Logger.Info("创建订单成功")
+	mylog.Logger.Info("创建订单成功", zap.Any("订单号", order.TradeId))
 	// 在队列中加入任务，延期执行函数，更新数据库中当前的订单的支付状态为已过期
 	mq.TaskOrderExpiration(order.TradeId, sdb.GetSetting().ExpirationDate)
 	// 返回响应的参数，格式为JSON
@@ -489,16 +504,36 @@ func CheckOrderStatus(c *gin.Context) {
 
 }
 
-type Node struct {
+/* type Node struct {
 	Address string
 }
 
 func (n Node) String() string {
 	return n.Address
-}
+} */
 
 // 获取 Redis 中金额
-func getRedisAmount(token string) string {
-	result := rdb.RDB.Get(context.Background(), token).Val()
-	return result
+func getRedisAmount(token string) bool {
+	// 通过 Exists 方法检查键是否存在
+	// result := rdb.RDB.Get(context.Background(), token).Val() 该方法不适合生成环境使用
+	exists, err := rdb.RDB.Exists(context.Background(), token).Result()
+
+	if err != nil {
+		mylog.Logger.Error("获取 Redis 中钱包地址的键值是否存时，操作过程发生错误", zap.Any("err", err))
+		return false
+	}
+	if exists == 1 {
+		// 键存在
+		return true
+
+	}
+	// 键不存在
+	return false
+
+	/* 返回值具体情况
+	   情况 exists 值 err 值 说明
+	   key 存在 1 nil 表示 key 存在
+	   key 不存在 0 nil 表示 key 不存在
+	   发生错误 0 非nil 如连接问题、命令错误等 */
+
 }

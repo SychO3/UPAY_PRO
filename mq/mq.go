@@ -20,6 +20,7 @@ func init() {
 	client := asynq.NewClient(asynq.RedisClientOpt{Addr: addr})
 	Client = client
 
+	// 启动异步任务服务器
 	go async_server_run()
 
 }
@@ -27,6 +28,7 @@ func init() {
 // QueueOrderExpiration 订单过期任务的队列名称
 const QueueOrderExpiration = "order:expiration"
 
+// TaskOrderExpiration 创建任务和任务加入对列
 func TaskOrderExpiration(payload string, expirationDuration time.Duration) {
 	task := asynq.NewTask(QueueOrderExpiration, []byte(payload)) // 转换为字节切片
 	// 将任务加入队列
@@ -37,8 +39,10 @@ func TaskOrderExpiration(payload string, expirationDuration time.Duration) {
 	mylog.Logger.Info("任务已加入队列:", zap.Any("info", info))
 }
 
+// 队列服务端
 func async_server_run() {
 	mux := asynq.NewServeMux()
+	// 注册处理函数，根据任务名称，调用不同的处理函数
 	mux.HandleFunc(QueueOrderExpiration, handleCheckStatusCodeTask)
 	// 获取redis地址
 	addr := fmt.Sprintf("%s:%d", sdb.GetSetting().Redishost, sdb.GetSetting().Redisport)
@@ -71,3 +75,5 @@ func handleCheckStatusCodeTask(ctx context.Context, t *asynq.Task) error {
 
 	return nil
 }
+
+//
