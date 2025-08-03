@@ -22,7 +22,7 @@
 
 2. 对参数进行字母排序
 
-3. 拼接密钥：`{sorted_params}&{secret_key}`
+3. 拼接密钥：`{sorted_params}{secret_key}`
    各个参数使用&连接，密钥在最后面直接拼接，不包含&
 
 4. 对拼接后的字符串进行 MD5 加密
