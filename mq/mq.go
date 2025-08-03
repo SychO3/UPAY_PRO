@@ -11,15 +11,23 @@ import (
 	"go.uber.org/zap"
 )
 
+// 客户端
 var Client *asynq.Client
+
+// 服务端
+var Mux *asynq.ServeMux
+
+// 任务管理器
+var Inspector *asynq.Inspector
 
 func init() {
 	// 获取redis地址
 	addr := fmt.Sprintf("%s:%d", sdb.GetSetting().Redishost, sdb.GetSetting().Redisport)
-
+	// 初始客户端
 	client := asynq.NewClient(asynq.RedisClientOpt{Addr: addr})
 	Client = client
-
+	// 初始化任务管理器
+	Inspector = asynq.NewInspector(asynq.RedisClientOpt{Addr: addr})
 	// 启动异步任务服务器
 	go async_server_run()
 
@@ -37,17 +45,25 @@ func TaskOrderExpiration(payload string, expirationDuration time.Duration) {
 		mylog.Logger.Info("任务加入失败:" + err.Error())
 	}
 	mylog.Logger.Info("任务已加入队列:", zap.Any("info", info))
+
+	// 把订单号和任务ID存在数据库中，方便使用
+	var tradeIdTaskID sdb.TradeIdTaskID
+	tradeIdTaskID.TradeId = payload
+	tradeIdTaskID.TaskID = info.ID
+	// 不存在就创建，存在就更新现有的记录
+	sdb.DB.Create(&tradeIdTaskID)
+
 }
 
 // 队列服务端
 func async_server_run() {
-	mux := asynq.NewServeMux()
+	Mux = asynq.NewServeMux()
 	// 注册处理函数，根据任务名称，调用不同的处理函数
-	mux.HandleFunc(QueueOrderExpiration, handleCheckStatusCodeTask)
+	Mux.HandleFunc(QueueOrderExpiration, handleCheckStatusCodeTask)
 	// 获取redis地址
 	addr := fmt.Sprintf("%s:%d", sdb.GetSetting().Redishost, sdb.GetSetting().Redisport)
 	server := asynq.NewServer(asynq.RedisClientOpt{Addr: addr}, asynq.Config{Concurrency: 10})
-	if err := server.Run(mux); err != nil {
+	if err := server.Run(Mux); err != nil {
 		mylog.Logger.Info("Error starting server:", zap.Any("err", err))
 	}
 }
@@ -73,7 +89,25 @@ func handleCheckStatusCodeTask(ctx context.Context, t *asynq.Task) error {
 		mylog.Logger.Info(fmt.Sprintf("订单%v已设置为过期", order.TradeId))
 	}
 
+	// 根据订单号查到记录，删除记录
+	var task sdb.TradeIdTaskID
+
+	re := sdb.DB.Where("trade_id = ?", payload).Delete(&task)
+	if re.Error != nil {
+		mylog.Logger.Info("删除数据库TradeIdTaskID中的任务记录失败", zap.Error(re.Error))
+		return re.Error
+	}
+
 	return nil
 }
 
-//
+// 终止任务
+func StopTask(taskID string) error {
+	// 从队列中删除任务
+	err := Inspector.DeleteTask("default", taskID)
+	if err != nil {
+		mylog.Logger.Info("删除任务失败")
+		return err
+	}
+	return nil
+}

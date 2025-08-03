@@ -280,10 +280,68 @@ func CreateTransaction(c *gin.Context) {
 		return
 	}
 
-	// 检查传入的商城交易订单号是否存在且状态为已过期
-	if sdb.GetOrderByOrderId(requestParams.OrderID).OrderId != "" && sdb.GetOrderByOrderId(requestParams.OrderID).Status == sdb.StatusExpired {
-		c.JSON(400, gin.H{"code": 1, "message": "订单已过期,请重新下单提交"})
+	// 根据传入的商店订单号查询到对应记录
+	order1 := sdb.GetOrderByOrderId(requestParams.OrderID)
+
+	// 检查传入的商城交易订单号是否存在且状态为未支付，说明用户可能是重复下单
+	if order1.Status == sdb.StatusWaitPay {
+		mylog.Logger.Info("订单已存在，该订单为重复请求，不在创建订单，重置过期时间，重定向到支付页面", zap.Any("order", order1.OrderId))
+		// 重新计算过期时间
+		order1.ExpirationTime = time.Now().Add(sdb.GetSetting().ExpirationDate).UnixMilli()
+
+		sdb.DB.Save(&order1)
+
+		ActualAmount_Token := fmt.Sprintf("%s_%f", order1.Token, order1.ActualAmount)
+
+		// 更新Redis中的钱包过期时间
+		err := rdb.RDB.Set(context.Background(), ActualAmount_Token, order1.ActualAmount, sdb.GetSetting().ExpirationDate).Err()
+		if err != nil {
+			mylog.Logger.Error("更新Redis中的钱包过期时间失败", zap.Error(err))
+			return
+		}
+		//先获取一下之前这个订单的任务ID
+
+		var task sdb.TradeIdTaskID
+
+		re := sdb.DB.Where("TradeId = ?", order1.TradeId).Last(&task)
+		if re.Error != nil {
+			mylog.Logger.Info("获取任务ID记录失败:", zap.Any("error", re.Error))
+			return
+		}
+		if re.RowsAffected == 0 {
+			mylog.Logger.Info("获取任务ID记录失败，订单不存在", zap.Any("error", re.Error))
+			return
+		}
+
+		//使用队列管理器删除任务
+
+		err = mq.StopTask(task.TaskID)
+		if err != nil {
+			mylog.Logger.Error("删除队列任务失败", zap.Error(err))
+			return
+		}
+		// 删除这条数据库库记录
+
+		re = sdb.DB.Delete(&task, task.ID)
+		if re.Error != nil {
+			mylog.Logger.Error("删除数据库任务记录失败", zap.Error(err))
+			return
+		}
+		if re.RowsAffected == 0 {
+			mylog.Logger.Error("删除数据库任务记录失败", zap.Error(err))
+			return
+		}
+
+		// 重新加入新的任务
+		mq.TaskOrderExpiration(order1.TradeId, sdb.GetSetting().ExpirationDate)
+
+		// 将网页重定向到订单支付页面
+		PaymentURL := fmt.Sprintf("%s%s%s", sdb.GetSetting().AppUrl, "/pay/checkout-counter/", order1.TradeId)
+
+		c.Redirect(302, PaymentURL)
+		c.Abort()
 		return
+
 	}
 	// 添加调试日志
 	mylog.Logger.Info("CreateTransaction - 接收到的Type参数", zap.String("type", requestParams.Type))
