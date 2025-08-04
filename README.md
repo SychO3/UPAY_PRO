@@ -48,10 +48,13 @@ YouTube：https://youtu.be/-jsk6_KKUy4
 独角数卡插件： 参考 [ 独角数卡插件对接文档](plugins/独角数卡/独角数卡对接文档.md)
 
 异次元发卡： 参考 [ 异次元发卡插件对接文档](plugins/异次元/异次元发卡对接文档.md)
+萌次元发卡： 参考 [ 萌次元发卡插件对接文档](plugins/萌次元/萌次元对接文档.md)
 
 v2boardpro 和 Xboard： 参考 [ v2boardpro 插件对接文档](plugins/v2boardpro)
 
 易支付：参考 [ 易支付插件对接文档](plugins/易支付)
+
+易支付源码可以在电报交流群里下载
 
 #### APIkey 申请(系统已经自带，高频交易用户请自行申请 APIkey，在后台替换即可)
 
