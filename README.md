@@ -54,7 +54,7 @@ v2boardpro 和 Xboard： 参考 [ v2boardpro 插件对接文档](plugins/v2board
 
 易支付：参考 [ 易支付插件对接文档](plugins/易支付)
 
-易支付源码可以在电报交流群里下载
+[易支付源码下载](plugins/易支付/epay_release_48891.zip)
 
 #### APIkey 申请(系统已经自带，高频交易用户请自行申请 APIkey，在后台替换即可)
 
