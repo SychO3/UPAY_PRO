@@ -14,6 +14,7 @@ import (
 	"sort"
 	"strings"
 	"time"
+	Autoprice "upay_pro/AutoPrice"
 	"upay_pro/BSC_USD"
 	"upay_pro/ERC20_USDT"
 	"upay_pro/USDC_ArbitrumOne"
@@ -175,6 +176,59 @@ func (j UsdtCheckJob) Run() {
 
 }
 
+// 自动汇率定时任务
+
+type AutoRate struct{}
+
+func (a AutoRate) Run() {
+
+	var wallets []sdb.WalletAddress
+
+	sdb.DB.Where("AutoRate = ?", true).Find(&wallets)
+
+	for _, wallet := range wallets {
+		// 币种
+		C := ""
+		// 如果order.Currency包含了"USDT"，那么C就等于"USDT"
+		switch {
+		case strings.Contains(wallet.Currency, "USDT"):
+			C = "USDT"
+		case strings.Contains(wallet.Currency, "USDC"):
+			C = "USDC"
+		case strings.Contains(wallet.Currency, "TRX"):
+			C = "TRX"
+		default:
+			mylog.Logger.Error("当前币种将自动设置默认汇率：10，请检查是否错误", zap.String("币种", wallet.Currency))
+			wallet.Rate = 10
+			sdb.DB.Save(&wallet)
+			continue // 跳过API调用，直接处理下一个钱包
+		}
+		price, err := Autoprice.Start(C)
+		if err != nil {
+			mylog.Logger.Error("获取自动汇率失败，将设置默认汇率，USDT:7,USDC:7,TRX:2.5", zap.Error(err))
+			//将设置默认汇率
+			// 优化后的switch语句
+			switch C {
+			case "USDT", "USDC":
+				wallet.Rate = 7
+			case "TRX":
+				wallet.Rate = 2.5
+			default:
+				wallet.Rate = 10
+			}
+		} else {
+			wallet.Rate = price
+		}
+
+		re := sdb.DB.Save(&wallet)
+		if re.Error != nil {
+			mylog.Logger.Error("自动汇率更新失败", zap.Error(re.Error))
+		}
+		mylog.Logger.Info("自动汇率更新成功", zap.String("币种", wallet.Currency), zap.Float64("汇率", wallet.Rate))
+	}
+
+}
+
 // Start 启动定时任务
 // 初始化并启动定时任务调度器，包括USDT支付检查和过期订单处理
 func Start() {
@@ -196,6 +250,12 @@ func Start() {
 	   	} */
 	// mylog.Logger.Info("订单清理任务已完成")
 	// 启动 Cron 调度器
+
+	_, err = c.AddJob("@every 30m", AutoRate{})
+	if err != nil {
+		mylog.Logger.Info("自动汇率任务添加失败")
+	}
+
 	c.Start()
 
 	// 保持主程序运行，确保任务执行

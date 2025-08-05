@@ -336,10 +336,25 @@ func CreateTransaction(c *gin.Context) {
 		mq.TaskOrderExpiration(order1.TradeId, sdb.GetSetting().ExpirationDate)
 
 		// 将网页重定向到订单支付页面
-		PaymentURL := fmt.Sprintf("%s%s%s", sdb.GetSetting().AppUrl, "/pay/checkout-counter/", order1.TradeId)
+		// PaymentURL := fmt.Sprintf("%s%s%s", sdb.GetSetting().AppUrl, "/pay/checkout-counter/", order1.TradeId)
 
-		c.Redirect(302, PaymentURL)
-		c.Abort()
+		/* c.Redirect(302, PaymentURL)
+		c.Abort() */
+		// 准备返回订单信息的数据
+		orderInfo := dto.Response{
+			StatusCode: http.StatusOK,
+			Message:    "success",
+			Data: dto.Data{
+				TradeID:        order1.TradeId,
+				OrderID:        order1.OrderId,
+				Amount:         order1.Amount,
+				ActualAmount:   order1.ActualAmount,
+				Token:          order1.Token,
+				ExpirationTime: order1.ExpirationTime,
+				PaymentURL:     fmt.Sprintf("%s%s%s", sdb.GetSetting().AppUrl, "/pay/checkout-counter/", order1.TradeId),
+			},
+		}
+		c.JSON(http.StatusOK, orderInfo)
 		return
 
 	}

@@ -92,7 +92,7 @@ func handleCheckStatusCodeTask(ctx context.Context, t *asynq.Task) error {
 	// 根据订单号查到记录，删除记录
 	var task sdb.TradeIdTaskID
 
-	re := sdb.DB.Where("trade_id = ?", payload).Delete(&task)
+	re := sdb.DB.Where("TradeId = ?", payload).Delete(&task)
 	if re.Error != nil {
 		mylog.Logger.Info("删除数据库TradeIdTaskID中的任务记录失败", zap.Error(re.Error))
 		return re.Error

@@ -80,7 +80,18 @@ type WalletAddress struct {
 	Token    string  // 钱包token
 	Status   int     // 1:启用 2:禁用
 	Rate     float64 // 汇率
+	AutoRate bool    `gorm:"column:AutoRate default:false" ` // 汇率是否自动维护
+
+	// - 0 ：表示 false ，即 禁用 自动汇率功能
+	// - 1 ：表示 true ，即 启用 自动汇率功能
 }
+
+// 汇率维护表
+/* type AutoRate struct {
+	gorm.Model
+	Currency string `gorm:"column:currency"`                // 币种
+	AutoRate bool   `gorm:"column:autoRate default:false" ` // 汇率是否自动维护
+} */
 
 type Setting struct {
 	gorm.Model
@@ -104,6 +115,15 @@ type ApiKey struct {
 	Tronscan  string
 	Trongrid  string
 	Etherscan string
+}
+
+// 创建一个单独的表用来存储订单号和队列ID
+
+type TradeIdTaskID struct {
+	gorm.Model
+	// 这里的订单号是系统订单号不是商户订单号
+	TradeId string `gorm:"column:TradeId"`
+	TaskID  string `gorm:"column:TaskID"`
 }
 
 func Start() {
@@ -189,6 +209,10 @@ func Start() {
 			mylog.Logger.Info("APIKEY表默认设置创建成功")
 		}
 	}
+	// 迁移订单号和队列ID表
+	DB.AutoMigrate(&TradeIdTaskID{})
+	// 迁移汇率维护表
+	// DB.AutoMigrate(&AutoRate{})
 
 }
 
@@ -276,7 +300,7 @@ func (n WalletAddress) String() string {
 
 func GetOrderByOrderId(orderId string) Orders {
 	var order Orders
-	DB.Where("order_id = ?", orderId).First(&order)
+	DB.Where("order_id = ?", orderId).Last(&order)
 	return order
 }
 

@@ -4,7 +4,9 @@ import (
 	"fmt"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
+	Autoprice "upay_pro/AutoPrice"
 	"upay_pro/db/sdb"
 	"upay_pro/mylog"
 
@@ -275,24 +277,71 @@ func Start() {
 			}
 
 			if wallet.Rate <= 0 {
+
 				c.JSON(400, gin.H{"code": 1, "message": "汇率必须大于0"})
 				return
 			}
-			// 查询数据库中的钱包记录
-			var existingWallet sdb.WalletAddress
-			// 检查输入的币种的汇率是否存在，如果存在验证输入的汇率和数据库中的汇率是否一致，如果能找到，说明已经存在了，返回错误要求为汇率必须输入为一致；
-			// 这里使用Last是为了获取最新的一条记录，因为如果有两条记录，说明之前有过修改，所以需要验证最新的一条记录的汇率是否一致
-			if err := sdb.DB.Where("currency = ? ", wallet.Currency).Last(&existingWallet).Error; err == nil {
 
-				fmt.Println("existingWallet.Rate:", existingWallet.Rate)
-				fmt.Println("wallet.Rate:", wallet.Rate)
+			// // 创建汇率维护表
+			// var autoprice sdb.AutoRate
 
-				if wallet.Rate != existingWallet.Rate {
-					c.JSON(400, gin.H{"code": 1, "message": fmt.Sprintf("每一个币种的汇率必须一致，你输入的钱包汇率配置错误，请把汇率设置为%v", existingWallet.Rate)})
-					return
+			// autoprice.Currency = wallet.Currency
 
+			if wallet.AutoRate == true {
+				mylog.Logger.Info("自动汇率已启用", zap.String("币种", wallet.Currency))
+				// 自动汇率是否启用
+				wallet.AutoRate = true
+				// 设置钱包地址表里面的汇率字段
+				// 币种
+				C := ""
+				// 如果order.Currency包含了"USDT"，那么C就等于"USDT"
+				switch {
+				case strings.Contains(wallet.Currency, "USDT"):
+					C = "USDT"
+				case strings.Contains(wallet.Currency, "USDC"):
+					C = "USDC"
+				case strings.Contains(wallet.Currency, "TRX"):
+					C = "TRX"
+				default:
+					mylog.Logger.Error("当前币种将自动设置默认汇率：10，请检查是否错误", zap.String("币种", wallet.Currency))
+				}
+				price, err := Autoprice.Start(C)
+				if err != nil {
+					mylog.Logger.Error("获取自动汇率失败，将设置默认汇率，USDT:7,USDC:7,TRX:2.5", zap.Error(err))
+					//将设置默认汇率
+					// 优化后的switch语句
+					switch C {
+					case "USDT", "USDC":
+						wallet.Rate = 7
+					case "TRX":
+						wallet.Rate = 2.5
+					default:
+						wallet.Rate = 10
+					}
+				} else {
+					wallet.Rate = price
 				}
 
+			} else {
+				wallet.AutoRate = false
+			}
+			// 查询数据库中的钱包记录
+			var existingWallet sdb.WalletAddress
+			if wallet.AutoRate == false {
+				// 检查输入的币种的汇率是否存在，如果存在验证输入的汇率和数据库中的汇率是否一致，如果能找到，说明已经存在了，返回错误要求为汇率必须输入为一致；
+				// 这里使用Last是为了获取最新的一条记录，因为如果有两条记录，说明之前有过修改，所以需要验证最新的一条记录的汇率是否一致
+				if err := sdb.DB.Where("currency = ? ", wallet.Currency).Last(&existingWallet).Error; err == nil {
+
+					/* fmt.Println("existingWallet.Rate:", existingWallet.Rate)
+					fmt.Println("wallet.Rate:", wallet.Rate) */
+
+					if wallet.Rate != existingWallet.Rate {
+						c.JSON(400, gin.H{"code": 1, "message": fmt.Sprintf("每一个币种的汇率必须一致，你输入的钱包汇率配置错误，请把汇率设置为%v", existingWallet.Rate)})
+						return
+
+					}
+
+				}
 			}
 
 			// 检查是否已经存在了该币种和地址都存在的记录，如果存在，返回错误，提示钱包地址在该币种下已经存在
@@ -301,33 +350,6 @@ func Start() {
 				return
 			}
 
-			/*	if wallet.Currency == "USDT-TRC20" || wallet.Currency == "TRX" {
-					var existingWallets []sdb.WalletAddress
-					if err := sdb.DB.Where("token = ?", wallet.Token).Find(&existingWallets).Error; err != nil {
-						mylog.Logger.Info("添加钱包地址时，查询钱包地址失败", zap.Any("err", err))
-					}
-					mylog.Logger.Info("钱包数量:", zap.Any("existingWallets", len(existingWallets)))
-
-					if len(existingWallets) >= 2 {
-						c.JSON(400, gin.H{"code": 1, "message": "钱包地址数量已经在USDT-TRC20币种和TRX中超过了2个,请更换钱包地址"})
-						return
-					}
-
-					// 如果是USDT-TRC20或者TRX，则检查是否已经存在了该币种的钱包地址记录
-				}   else {
-					var existingWallets []sdb.WalletAddress
-					if err := sdb.DB.Where("token = ?", wallet.Token).Find(&existingWallets).Error; err != nil {
-						mylog.Logger.Info("添加钱包地址时，查询钱包地址失败", zap.Any("err", err))
-					}
-					mylog.Logger.Info("钱包数量:", zap.Any("existingWallets", len(existingWallets)))
-
-					if len(existingWallets) >= 3 {
-						c.JSON(400, gin.H{"code": 1, "message": "钱包地址数量已经在USDT-TRC20币种和TRX中超过了3个,请更换钱包地址"})
-						return
-					}
-				} */
-			// 检查钱包地址是否已存在
-
 			// 创建钱包地址
 			if err := sdb.DB.Create(&wallet).Error; err != nil {
 				c.JSON(500, gin.H{"code": 1, "message": "创建失败"})
@@ -335,6 +357,7 @@ func Start() {
 			}
 
 			c.JSON(200, gin.H{"code": 0, "message": "添加成功", "data": wallet})
+
 		})
 
 		// 编辑钱包地址
@@ -357,6 +380,45 @@ func Start() {
 				return
 			}
 
+			if wallet.AutoRate == true {
+				mylog.Logger.Info("自动汇率已启用", zap.String("币种", wallet.Currency))
+				// 自动汇率是否启用
+				wallet.AutoRate = true
+				// 设置钱包地址表里面的汇率字段
+				// 币种
+				C := ""
+				// 如果order.Currency包含了"USDT"，那么C就等于"USDT"
+				switch {
+				case strings.Contains(wallet.Currency, "USDT"):
+					C = "USDT"
+				case strings.Contains(wallet.Currency, "USDC"):
+					C = "USDC"
+				case strings.Contains(wallet.Currency, "TRX"):
+					C = "TRX"
+				default:
+					mylog.Logger.Error("当前币种将自动设置默认汇率：10，请检查是否错误", zap.String("币种", wallet.Currency))
+				}
+				price, err := Autoprice.Start(C)
+				if err != nil {
+					mylog.Logger.Error("获取自动汇率失败，将设置默认汇率，USDT:7,USDC:7,TRX:2.5", zap.Error(err))
+					//将设置默认汇率
+					// 优化后的switch语句
+					switch C {
+					case "USDT", "USDC":
+						wallet.Rate = 7
+					case "TRX":
+						wallet.Rate = 2.5
+					default:
+						wallet.Rate = 10
+					}
+				} else {
+					wallet.Rate = price
+				}
+
+			} else {
+				wallet.AutoRate = false
+			}
+
 			/* 	// 检查钱包地址是否已存在（排除当前记录）
 			var existingWallet sdb.WalletAddress
 			if err := sdb.DB.Where("token = ? AND id != ?", wallet.Token, walletId).First(&existingWallet).Error; err == nil {
@@ -370,6 +432,7 @@ func Start() {
 				"Token":    wallet.Token,
 				"Rate":     wallet.Rate,
 				"Status":   wallet.Status,
+				"AutoRate": wallet.AutoRate,
 			})
 
 			if result.Error != nil {
@@ -383,6 +446,7 @@ func Start() {
 			}
 
 			c.JSON(200, gin.H{"code": 0, "message": "更新成功"})
+
 		})
 
 		// 删除钱包地址
@@ -402,6 +466,7 @@ func Start() {
 			}
 
 			c.JSON(200, gin.H{"code": 0, "message": "删除成功"})
+
 		})
 
 		// 系统设置管理API

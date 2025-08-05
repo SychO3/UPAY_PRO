@@ -1578,6 +1578,7 @@
                 <th>钱包地址</th>
                 <th>汇率</th>
                 <th>状态</th>
+                <th>自动汇率</th>
                 <th>创建时间</th>
                 <th>操作</th>
               </tr>
@@ -1996,6 +1997,13 @@
             </div>
           </div>
           <div class="form-group">
+            <label for="AutoRate">自动汇率:</label>
+            <select id="AutoRate" name="AutoRate" class="form-control" required>
+              <option value="false">禁用</option>
+              <option value="true">启用</option>
+            </select>
+          </div>
+          <div class="form-group">
             <button type="submit" class="btn btn-success">添加</button>
             <button
               type="button"
@@ -2077,6 +2085,18 @@
                 <option value="2">禁用</option>
               </select>
             </div>
+          </div>
+          <div class="form-group">
+            <label for="editAutoRate">自动汇率:</label>
+            <select
+              id="editAutoRate"
+              name="AutoRate"
+              class="form-control"
+              required
+            >
+              <option value="false">禁用</option>
+              <option value="true">启用</option>
+            </select>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-success">保存</button>
@@ -2482,6 +2502,11 @@
               const statusClass =
                 wallet.Status === 1 ? "status-enabled" : "status-disabled";
 
+              const AutoRateText = wallet.AutoRate ? "启用" : "禁用";
+              const AutoRateClass = wallet.AutoRate
+                ? "status-enabled"
+                : "status-disabled";
+
               const row = document.createElement("tr");
               row.innerHTML = `
                             <td>${wallet.ID}</td>
@@ -2489,6 +2514,7 @@
                             <td class="font-mono">${wallet.Token}</td>
                             <td>${wallet.Rate.toFixed(4)}</td>
                             <td><span class="status-badge ${statusClass}">${statusText}</span></td>
+                            <td><span class="status-badge ${AutoRateClass}">${AutoRateText}</span></td>
                             <td>${new Date(
                               wallet.CreatedAt
                             ).toLocaleString()}</td>
@@ -2497,7 +2523,7 @@
                                   wallet.ID
                                 }, '${wallet.Currency}', '${wallet.Token}', ${
                 wallet.Rate
-              }, ${wallet.Status})">编辑</button>
+              }, ${wallet.Status}, ${wallet.AutoRate})">编辑</button>
                                 <button class="btn btn-danger" onclick="deleteWallet(${
                                   wallet.ID
                                 })">删除</button>
@@ -2632,12 +2658,22 @@
       }
 
       // 显示编辑钱包地址模态框
-      function showEditWalletModal(walletId, currency, token, rate, status) {
+      function showEditWalletModal(
+        walletId,
+        currency,
+        token,
+        rate,
+        status,
+        AutoRate
+      ) {
         document.getElementById("editWalletId").value = walletId;
         document.getElementById("editCurrency").value = currency;
         document.getElementById("editToken").value = token;
         document.getElementById("editRate").value = rate;
         document.getElementById("editStatus").value = status;
+        document.getElementById("editAutoRate").value = AutoRate
+          ? "true"
+          : "false";
         document.getElementById("editWalletModal").style.display = "block";
       }
 
@@ -2719,6 +2755,7 @@
             token: formData.get("token"),
             rate: parseFloat(formData.get("rate")),
             status: parseInt(formData.get("status")),
+            AutoRate: formData.get("AutoRate") === "true",
           };
 
           try {
@@ -2765,6 +2802,7 @@
             token: formData.get("token"),
             rate: parseFloat(formData.get("rate")),
             status: parseInt(formData.get("status")),
+            AutoRate: formData.get("AutoRate") === "true",
           };
 
           try {
