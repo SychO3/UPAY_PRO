@@ -715,6 +715,14 @@ func Start() {
 			c.JSON(200, gin.H{"code": 0, "message": "保存成功"})
 		})
 
+		// 退出登录路由
+		admin.POST("/logout", func(c *gin.Context) {
+			// 清除cookie
+			c.SetCookie("token", "", -1, "/", "", false, true)
+			// 跳转到登录页
+			c.JSON(200, gin.H{"code": 0, "message": "退出成功"})
+		})
+
 	}
 
 	// 定义订单路由组

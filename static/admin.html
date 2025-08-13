@@ -2878,11 +2878,24 @@
           "退出后需要重新登录。"
         );
         if (confirmed) {
-          // 清除cookie
+          /*  // 清除cookie
           document.cookie =
             "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
           // 跳转到登录页
-          window.location.href = "/login";
+          window.location.href = "/login"; */
+          // 通过后端接口清除cookie
+          fetch("/admin/logout", {
+            method: "POST",
+            credentials: "same-origin",
+          })
+            .then(() => {
+              // 跳转到登录页
+              window.location.href = "/login";
+            })
+            .catch(() => {
+              // 如果请求失败也跳转到登录页
+              window.location.href = "/login";
+            });
         }
       }
 
