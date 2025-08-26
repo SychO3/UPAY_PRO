@@ -24,10 +24,18 @@ func init() {
 	// 获取redis地址
 	addr := fmt.Sprintf("%s:%d", sdb.GetSetting().Redishost, sdb.GetSetting().Redisport)
 	// 初始客户端
-	client := asynq.NewClient(asynq.RedisClientOpt{Addr: addr})
+	client := asynq.NewClient(asynq.RedisClientOpt{
+		Addr:     addr,
+		Password: sdb.GetSetting().Redispasswd,
+		DB:       sdb.GetSetting().Redisdb,
+	})
 	Client = client
 	// 初始化任务管理器
-	Inspector = asynq.NewInspector(asynq.RedisClientOpt{Addr: addr})
+	Inspector = asynq.NewInspector(asynq.RedisClientOpt{
+		Addr:     addr,
+		Password: sdb.GetSetting().Redispasswd,
+		DB:       sdb.GetSetting().Redisdb,
+	})
 	// 启动异步任务服务器
 	go async_server_run()
 
@@ -62,7 +70,11 @@ func async_server_run() {
 	Mux.HandleFunc(QueueOrderExpiration, handleCheckStatusCodeTask)
 	// 获取redis地址
 	addr := fmt.Sprintf("%s:%d", sdb.GetSetting().Redishost, sdb.GetSetting().Redisport)
-	server := asynq.NewServer(asynq.RedisClientOpt{Addr: addr}, asynq.Config{Concurrency: 10})
+	server := asynq.NewServer(asynq.RedisClientOpt{
+		Addr:     addr,
+		Password: sdb.GetSetting().Redispasswd,
+		DB:       sdb.GetSetting().Redisdb,
+	}, asynq.Config{Concurrency: 10})
 	if err := server.Run(Mux); err != nil {
 		mylog.Logger.Info("Error starting server:", zap.Any("err", err))
 	}
