@@ -5,6 +5,8 @@ require_once __DIR__ . '/../../../init.php';
 require_once __DIR__ . '/../../../includes/gatewayfunctions.php';
 require_once __DIR__ . '/../../../includes/invoicefunctions.php';
 
+use WHMCS\Database\Capsule;
+
 // 获取回调数据
 $payload = json_decode(file_get_contents("php://input"), true);
 
@@ -55,6 +57,17 @@ if (isset($payload["status"]) && $payload["status"] == 2) {
             $transactionId = $payload['trade_id'];
             $paymentAmount = $payload['amount'];
             
+            // 获取货币转换配置
+            $convertto = $gatewayParams['convertto'];
+            
+            if ($convertto) {
+                // 获取用户ID 和 用户使用的货币ID
+                $data = Capsule::table("tblinvoices")->where("id", $invoiceId)->first();
+                $userid = $data->userid;
+                $currency = getCurrency($userid);
+                $paymentAmount = convertCurrency($payload['amount'], $convertto, $currency["id"]);
+            }
+            
             /**
              * Validate Callback Invoice ID.
              *
@@ -96,6 +109,7 @@ if (isset($payload["status"]) && $payload["status"] == 2) {
             exit();
         } catch (Exception $e) {
             // 记录错误到WHMCS日志
+            $gatewayName = $gatewayParams['name'];
             logTransaction($gatewayName, $payload, "Error: " . $e->getMessage());
             echo 'success'; // 即使处理失败也返回success，因为支付本身是成功的
             exit();
