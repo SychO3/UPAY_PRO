@@ -60,7 +60,7 @@ WHMCS 插件： 参考 [ WHMCS 插件对接文档](plugins/WHMCS插件/配置教
 
 WHMCS 开心版：[WHMCS 开心版](https://whmcsfull.com/)
 
-智简魔方：参考 [智简魔方帮助文档](plugins/智简魔方/README.md)
+智简魔方 插件：参考 [智简魔方帮助文档](plugins/智简魔方/README.md)
 
 魔方开心版: [魔方开心版 GitHub 地址](https://github.com/aazooo/zjmf)
 
