@@ -100,7 +100,7 @@ func Start(order sdb.Orders) bool {
 
 	// 验证交易条件
 	if latestTx.Hash != "" &&
-		latestTx.TokenSymbol == "USDT" &&
+		latestTx.TokenSymbol == "USDT0" &&
 		timeStampMs > order.StartTime &&
 		timeStampMs < order.ExpirationTime &&
 		amount == order.ActualAmount && // 使用浮点数比较
