@@ -80,7 +80,7 @@ type WalletAddress struct {
 	Token    string  // 钱包token
 	Status   int     // 1:启用 2:禁用
 	Rate     float64 // 汇率
-	AutoRate bool    `gorm:"column:AutoRate default:false" ` // 汇率是否自动维护
+	AutoRate bool    `gorm:"column:AutoRate;default:false"` // 汇率是否自动维护
 
 	// - 0 ：表示 false ，即 禁用 自动汇率功能
 	// - 1 ：表示 true ，即 启用 自动汇率功能

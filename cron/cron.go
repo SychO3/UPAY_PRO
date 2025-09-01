@@ -185,7 +185,7 @@ func (a AutoRate) Run() {
 	var wallets []sdb.WalletAddress
 
 	sdb.DB.Where("AutoRate = ?", true).Find(&wallets)
-
+	mylog.Logger.Info("开始执行自动汇率任务", zap.Int("需要更新的地址数量", len(wallets)))
 	for _, wallet := range wallets {
 		// 币种
 		C := ""
