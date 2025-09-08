@@ -241,6 +241,7 @@ func Start() {
 	// 每 2 秒执行一次 UsdtRateJob 任务
 	_, err := c.AddJob("@every 2s", UsdtCheckJob{})
 	if err != nil {
+
 		mylog.Logger.Info("未支付订单检测任务添加失败")
 	}
 	// 每天凌晨3点执行过期订单清理任务
@@ -251,7 +252,7 @@ func Start() {
 	// mylog.Logger.Info("订单清理任务已完成")
 	// 启动 Cron 调度器
 
-	_, err = c.AddJob("@every 30m", AutoRate{})
+	_, err = c.AddJob("@every 10m", AutoRate{})
 	if err != nil {
 		mylog.Logger.Info("自动汇率任务添加失败")
 	}
