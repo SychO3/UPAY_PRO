@@ -4,6 +4,7 @@ import (
 	"encoding/json" // 导入 JSON 编码/解码包
 	"fmt"           // 导入 fmt 包用于格式化输出
 	"io"            // 导入 io 包用于读取响应体
+	"strings"
 	"time"
 
 	// 导入 log 包用于记录日志
@@ -136,7 +137,7 @@ func GetTransactions(order sdb.Orders) bool {
 
 		amount := formatAmount(response.TokenTransfers[0].Quant)
 
-		if amount == order.ActualAmount && response.TokenTransfers[0].ToAddress == order.Token && response.TokenTransfers[0].TokenInfo.TokenAbbr == "USDT" && response.TokenTransfers[0].TransactionID != "" {
+		if amount == order.ActualAmount && strings.EqualFold(response.TokenTransfers[0].ToAddress, order.Token) && response.TokenTransfers[0].TokenInfo.TokenAbbr == "USDT" && response.TokenTransfers[0].TransactionID != "" {
 			// 如果满足条件，则说明已经查到转账记录，并且金额和数据库转换后的金额，则就可以更新数据库中
 			order.BlockTransactionId = response.TokenTransfers[0].TransactionID
 			order.Status = sdb.StatusPaySuccess

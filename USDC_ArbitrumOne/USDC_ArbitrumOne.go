@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 	"time"
 	"upay_pro/db/sdb"
 	"upay_pro/mylog"
@@ -126,7 +127,7 @@ func Start(order sdb.Orders) bool {
 		// 格式化金额数字
 		amount := formatAmount(apiResponse.Result[0].Value)
 
-		if timeStamp > order.StartTime && timeStamp < order.ExpirationTime && amount == order.ActualAmount && apiResponse.Result[0].Hash != "" && apiResponse.Result[0].TokenSymbol == "USDC" && apiResponse.Result[0].To == order.Token {
+		if timeStamp > order.StartTime && timeStamp < order.ExpirationTime && amount == order.ActualAmount && apiResponse.Result[0].Hash != "" && apiResponse.Result[0].TokenSymbol == "USDC" && strings.EqualFold(apiResponse.Result[0].To, order.Token) {
 			order.BlockTransactionId = apiResponse.Result[0].Hash
 			order.Status = sdb.StatusPaySuccess
 			// 更新数据库订单记录

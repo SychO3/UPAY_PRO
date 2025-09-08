@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 	"time"
 	"upay_pro/db/sdb"
 	"upay_pro/mylog"
@@ -75,7 +76,7 @@ func NewDefaultConfig() *APIConfig {
 		Page:            "1",
 		Offset:          "1",
 		Sort:            "desc",
-		// ProxyURL:        "http://127.0.0.1:7890", // 默认本机代理
+		//ProxyURL:        "http://127.0.0.1:7897", // 默认本机代理
 	}
 }
 
@@ -135,7 +136,8 @@ func fetchBSCUSDTransactions(config *APIConfig) (*APIResponse, error) {
 }
 
 func Start(order sdb.Orders) bool {
-	// fmt.Println("正在获取BSC-USD交易数据...")
+
+	mylog.Logger.Info("正在获取BSC-USD交易数据...")
 
 	// 创建配置
 	config := NewDefaultConfig()
@@ -152,7 +154,13 @@ func Start(order sdb.Orders) bool {
 		mylog.Logger.Error("查询BSC-USDT交易失败", zap.Error(err))
 		return false
 	}
+
+	mylog.Logger.Info("BSC-USD 交易数据获取成功", zap.Any("data", data))
+
 	if data.Status == "1" && len(data.Result) > 0 {
+
+		mylog.Logger.Info("BSC-USD 已经找到了最新一条交易记录，正在验证是否是本次交易记录...")
+
 		// 将记录中的时间由秒转为毫秒时间戳
 		timeStamp, err := strconv.ParseInt(data.Result[0].TimeStamp, 10, 64)
 		if err != nil {
@@ -168,9 +176,44 @@ func Start(order sdb.Orders) bool {
 			return false
 		}
 
-		if data.Result[0].Hash != "" && data.Result[0].TokenSymbol == "BSC-USD" && timeStampMs > order.StartTime && timeStampMs < order.ExpirationTime && amount == order.ActualAmount && data.Result[0].To == order.Token {
-			// 如果在指定时间内，并且金额正确，并且交易Hash不为空，则说明已经入账成功，可以更新数据库
+		/* if data.Result[0].Hash != "" {
+			mylog.Logger.Info("BSC-USD 交易记录Hash不为空", zap.String("hash", data.Result[0].Hash))
+		} else {
+			mylog.Logger.Info("BSC-USD 交易记录Hash为空")
+			return false
+		}
 
+		if data.Result[0].TokenSymbol == "BSC-USD" {
+			mylog.Logger.Info("BSC-USD 交易记录TokenSymbol为BSC-USD")
+		} else {
+			mylog.Logger.Info("BSC-USD 交易记录TokenSymbol不为BSC-USD")
+			return false
+		}
+
+		if timeStampMs > order.StartTime && timeStampMs < order.ExpirationTime {
+			mylog.Logger.Info("BSC-USD 交易记录时间戳在订单时间范围内", zap.Int64("timeStampMs", timeStampMs), zap.Any("StartTime", order.StartTime), zap.Any("ExpirationTime", order.ExpirationTime))
+		} else {
+			mylog.Logger.Info("BSC-USD 交易记录时间戳不在订单时间范围内", zap.Int64("timeStampMs", timeStampMs), zap.Any("StartTime", order.StartTime), zap.Any("ExpirationTime", order.ExpirationTime))
+			return false
+		}
+
+		if amount == order.ActualAmount {
+			mylog.Logger.Info("BSC-USD 交易记录金额正确", zap.Any("amount", amount), zap.Any("order.ActualAmount", order.ActualAmount))
+		} else {
+			mylog.Logger.Info("BSC-USD 交易记录金额不正确", zap.Any("amount", amount), zap.Any("order.ActualAmount", order.ActualAmount))
+			return false
+		}
+		// 不区分大小写比较字符串
+		if strings.EqualFold(data.Result[0].To, order.Token) {
+			mylog.Logger.Info("BSC-USD 交易记录To地址正确", zap.String("To", data.Result[0].To), zap.String("order.Token", order.Token))
+		} else {
+			mylog.Logger.Info("BSC-USD 交易记录To地址不正确", zap.String("To", data.Result[0].To), zap.String("order.Token", order.Token))
+			return false
+		} */
+
+		if data.Result[0].Hash != "" && data.Result[0].TokenSymbol == "BSC-USD" && timeStampMs > order.StartTime && timeStampMs < order.ExpirationTime && amount == order.ActualAmount && strings.EqualFold(data.Result[0].To, order.Token) {
+			// 如果在指定时间内，并且金额正确，并且交易Hash不为空，则说明已经入账成功，可以更新数据库
+			mylog.Logger.Info("BSC-USD 交易记录符合本次交易验证，接下来更新数据库")
 			order.BlockTransactionId = data.Result[0].Hash
 			order.Status = sdb.StatusPaySuccess
 			// 更新数据库订单记录
@@ -181,6 +224,8 @@ func Start(order sdb.Orders) bool {
 			}
 			mylog.Logger.Error("USDT_BSC 订单入账失败", zap.Error(re.Error))
 			return false
+		} else {
+			mylog.Logger.Info("BSC-USD 交易记录不符合本次交易验证")
 		}
 		return false
 

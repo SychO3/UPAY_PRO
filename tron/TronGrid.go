@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"strings"
 	"time"
 	"upay_pro/db/sdb"
 	"upay_pro/mylog"
@@ -114,7 +115,7 @@ func GetTransactionsGrid(order sdb.Orders) bool {
 		// 金额转换
 		amount := formatAmount(apiResponse.Data[0].Value)
 
-		if amount == order.ActualAmount && apiResponse.Data[0].TransactionID != "" && apiResponse.Data[0].TokenInfo.Symbol == "USDT" && apiResponse.Data[0].To == order.Token {
+		if amount == order.ActualAmount && apiResponse.Data[0].TransactionID != "" && apiResponse.Data[0].TokenInfo.Symbol == "USDT" && strings.EqualFold(apiResponse.Data[0].To, order.Token) {
 
 			// 符合要求就保存到数据库
 			order.BlockTransactionId = apiResponse.Data[0].TransactionID

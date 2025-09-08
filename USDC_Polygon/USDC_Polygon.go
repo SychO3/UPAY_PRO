@@ -8,6 +8,7 @@ import (
 	"math"
 	"net/http"
 	"strconv"
+	"strings"
 	"time"
 	"upay_pro/db/sdb"
 	"upay_pro/mylog"
@@ -105,7 +106,7 @@ func Start(order sdb.Orders) bool {
 		timeStampMs > order.StartTime &&
 		timeStampMs < order.ExpirationTime &&
 		amount == order.ActualAmount && // 使用浮点数比较
-		latestTx.To == walletAddress {
+		strings.EqualFold(latestTx.To, walletAddress) {
 
 		// 如果在指定时间内，并且金额正确，并且交易Hash不为空，则说明已经入账成功，可以更新数据库
 

@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 	"time"
 	"upay_pro/db/sdb"
 	"upay_pro/mylog"
@@ -145,7 +146,7 @@ func Start(order sdb.Orders) bool {
 
 	// 符合条件就更新数据库
 
-	if etherscanResp.Result[0].To == order.Token && timeStampMs > order.StartTime && timeStampMs < order.ExpirationTime && amount == order.ActualAmount && etherscanResp.Result[0].Hash != "" && etherscanResp.Result[0].TokenSymbol == "USDT" {
+	if strings.EqualFold(etherscanResp.Result[0].To, order.Token) && timeStampMs > order.StartTime && timeStampMs < order.ExpirationTime && amount == order.ActualAmount && etherscanResp.Result[0].Hash != "" && etherscanResp.Result[0].TokenSymbol == "USDT" {
 		order.BlockTransactionId = etherscanResp.Result[0].Hash
 		order.Status = sdb.StatusPaySuccess
 		// 更新数据库订单记录

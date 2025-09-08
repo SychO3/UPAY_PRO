@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 	"time"
 	"upay_pro/db/sdb"
 	"upay_pro/mylog"
@@ -168,7 +169,7 @@ func Start(order sdb.Orders) bool {
 			return false
 		}
 
-		if data.Result[0].Hash != "" && data.Result[0].TokenSymbol == "USDC" && timeStampMs > order.StartTime && timeStampMs < order.ExpirationTime && amount == order.ActualAmount && data.Result[0].To == order.Token {
+		if data.Result[0].Hash != "" && data.Result[0].TokenSymbol == "USDC" && timeStampMs > order.StartTime && timeStampMs < order.ExpirationTime && amount == order.ActualAmount && strings.EqualFold(data.Result[0].To, order.Token) {
 			// 如果在指定时间内，并且金额正确，并且交易Hash不为空，则说明已经入账成功，可以更新数据库
 
 			order.BlockTransactionId = data.Result[0].Hash
