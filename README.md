@@ -74,6 +74,8 @@ WHMCS 开心版：[WHMCS 开心版](https://whmcsfull.com/)
 
 ### Docker 傻瓜操作
 
+amd64 架构的机器，请使用以下命令拉取镜像：
+
 ```bash
 docker run -d \
   --name upay_pro \
@@ -82,6 +84,18 @@ docker run -d \
   -v upay_db:/app/DBS \
   --restart always \
 wangergou111/upay:latest
+```
+
+arm64 架构的机器，请使用以下命令拉取镜像：
+
+```bash
+docker run -d \
+  --name upay_pro \
+  -p 8090:8090 \
+  -v upay_logs:/app/logs \
+  -v upay_db:/app/DBS \
+  --restart always \
+wangergou111/upay:latest-arm64
 ```
 
 默认日志挂载路径为：
