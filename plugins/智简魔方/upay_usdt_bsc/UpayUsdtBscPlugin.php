@@ -41,8 +41,10 @@ class UpayUsdtBscPlugin extends \app\admin\lib\Plugin
         }
         
         // 直接跳转到支付页面，而不是显示中间页面
-        header("Location: " . $payData["payment_url"]);
-        exit();
+        // header("Location: " . $payData["payment_url"]);
+        // exit();
+         // 返回跳转链接而不是直接跳转
+        return ['type' => 'jump', 'data' => $payData["payment_url"]];
     }
     
     private function filterPay($order_no, $amount)
